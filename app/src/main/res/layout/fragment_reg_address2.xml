@@ -1,0 +1,97 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.farmerapp.Fragments.RegPhoto">
+
+
+    <RelativeLayout
+        android:layout_width="309dp"
+        android:layout_height="364dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginRight="54dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="293dp"
+        android:background="@drawable/reglayout">
+
+        <ImageView
+            android:layout_width="309dp"
+            android:layout_height="236dp"
+            android:background="@drawable/reg_gradient"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="17dp"
+            android:layout_marginBottom="153dp"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:text="Address"/>
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="19dp"
+            android:layout_height="16dp"
+            android:background="@drawable/baseline_keyboard_backspace_white_18dp"
+            android:layout_marginLeft="16.5dp"
+            android:layout_marginRight="273.4dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="323.5dp"/>
+
+        <EditText
+            android:id="@+id/Pin"
+            android:layout_width="256dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginTop="56dp"
+            android:layout_marginRight="27dp"
+            android:layout_marginBottom="260dp"
+            android:background="@drawable/textgradient"
+            android:gravity="center"
+            android:hint="Pin"
+            android:textColorHint="#ffffff" />
+
+        <EditText
+            android:id="@+id/City"
+            android:layout_width="256dp"
+            android:layout_height="48dp"
+            android:hint="City"
+            android:gravity="center"
+            android:textColorHint="#ffffff"
+            android:layout_marginTop="116dp"
+            android:layout_marginBottom="200dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="27dp"
+            android:background="@drawable/textgradient"/>
+
+        <EditText
+            android:id="@+id/State"
+            android:layout_width="256dp"
+            android:layout_height="48dp"
+            android:hint="State"
+            android:gravity="center"
+            android:textColorHint="#ffffff"
+            android:layout_marginTop="175dp"
+            android:layout_marginBottom="141dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="27dp"
+            android:background="@drawable/textgradient"/>
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="Next"
+            android:textColor="#ffffff"
+            android:background="@drawable/roundbutton"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="95dp"
+            android:layout_marginLeft="94dp"
+            android:layout_marginTop="296dp"/>
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>

@@ -1,0 +1,71 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:Button="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.farmerapp.Fragments.RegPhoto">
+
+
+    <RelativeLayout
+        android:layout_width="309dp"
+        android:layout_height="364dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginRight="54dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="293dp"
+        android:background="@drawable/reglayout">
+
+
+        <ImageView
+            android:layout_width="309dp"
+            android:layout_height="145dp"
+            android:background="@drawable/reg_gradient"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Profile Photo"
+            android:textSize="23sp"
+            android:textColor="#ffffff"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="318dp"
+            />
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="146dp"
+            android:layout_height="146dp"
+            android:layout_marginTop="65dp"
+            android:layout_marginBottom="153dp"
+            android:layout_marginLeft="81dp"
+            android:layout_marginRight="81dp"
+            android:background="@drawable/profile"/>
+
+
+        <Button
+            android:id="@+id/upload"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:layout_marginLeft="175dp"
+            android:layout_marginTop="181dp"
+            android:background="@drawable/baseline_add_black_18dp"
+            android:layout_marginRight="95dp"
+            android:layout_marginBottom="160dp" />
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="Next"
+            android:textColor="#ffffff"
+            android:background="@drawable/roundbutton"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="95dp"
+            android:layout_marginLeft="94dp"
+            android:layout_marginTop="296dp"/>
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>

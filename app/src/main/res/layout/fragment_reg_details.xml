@@ -1,0 +1,84 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.farmerapp.Fragments.RegPhoto">
+
+
+    <RelativeLayout
+        android:layout_width="309dp"
+        android:layout_height="364dp"
+        android:layout_marginLeft="53dp"
+        android:layout_marginRight="54dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="293dp"
+        android:background="@drawable/reglayout">
+
+        <ImageView
+            android:layout_width="309dp"
+            android:layout_height="63dp"
+            android:background="@drawable/reg_gradient"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="15dp"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:text="Details"/>
+        
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="19dp"
+            android:layout_height="16dp"
+            android:background="@drawable/baseline_keyboard_backspace_white_18dp"
+            android:layout_marginLeft="16.5dp"
+            android:layout_marginRight="273.4dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="323.5dp"/>
+
+        <EditText
+            android:id="@+id/Name"
+            android:layout_width="256dp"
+            android:layout_height="48dp"
+            android:hint="Name"
+            android:gravity="center"
+            android:textColorHint="#c7c7c7"
+            android:layout_marginTop="119dp"
+            android:layout_marginBottom="197dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="27dp"
+            android:background="@drawable/reglayout"/>
+
+        <EditText
+            android:id="@+id/Phone"
+            android:layout_width="256dp"
+            android:layout_height="48dp"
+            android:hint="Phone Number (Alternate)"
+            android:gravity="center"
+            android:textColorHint="#c7c7c7"
+            android:layout_marginTop="188dp"
+            android:layout_marginBottom="128dp"
+            android:layout_marginLeft="26dp"
+            android:layout_marginRight="27dp"
+            android:background="@drawable/reglayout"/>
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="120dp"
+            android:layout_height="48dp"
+            android:text="Next"
+            android:textColor="#ffffff"
+            android:background="@drawable/roundbutton"
+            android:layout_marginBottom="20dp"
+            android:layout_marginRight="95dp"
+            android:layout_marginLeft="94dp"
+            android:layout_marginTop="296dp"/>
+
+
+    </RelativeLayout>
+
+
+</FrameLayout>
