@@ -89,6 +89,8 @@ public class RegisterDetailsFragment extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                RegisterDetailsActivity.details.setName(name.getText().toString());
+                RegisterDetailsActivity.details.setMob(alternatePhone.getText().toString());
                 ((RegisterDetailsActivity)getActivity()).scrollPager(2);
             }
         });

@@ -14,16 +14,19 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.example.farmerapp.Adapters.RegisterDetailsAdapter;
+import com.example.farmerapp.Data.FarmerDetails;
 import com.example.farmerapp.R;
 import com.example.farmerapp.ViewPager.RegistrationViewPager;
 
 public class RegisterDetailsActivity extends AppCompatActivity {
     RegisterDetailsAdapter mAdapter;
     static RegistrationViewPager vPager;
+    public static FarmerDetails details;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_details);
+        details = new FarmerDetails("");
         vPager = findViewById(R.id.regTabs);
         vPager.disableScroll(true);
         mAdapter = new RegisterDetailsAdapter(getSupportFragmentManager());

@@ -3,6 +3,7 @@ package com.example.farmerapp.Fragments;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,8 @@ import com.bumptech.glide.Glide;
 import com.example.farmerapp.Activities.RegisterDetailsActivity;
 import com.example.farmerapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.io.FileNotFoundException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -76,6 +80,15 @@ public class RegisterPhotoFragment extends Fragment {
                 Glide.with(getActivity()).load(image).into(profileImage);
                 next.setEnabled(true);
                 next.setAlpha(1);
+                Bitmap photo = null;
+                try {
+                    photo = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), image);
+                }
+                catch (Exception e){
+                    e.printStackTrace();
+                }
+
+                RegisterDetailsActivity.details.setProfilephoto(photo);
                 //moveToNext
             }
         }

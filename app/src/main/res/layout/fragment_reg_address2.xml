@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#ffffff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.farmerapp.Fragments.RegisterPhotoFragment">
     <androidx.cardview.widget.CardView
         android:layout_width="309dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@color/white"
+        android:background="#ffffff"
         app:cardCornerRadius="30dp"
         app:cardElevation="4dp">
 
@@ -51,8 +52,10 @@
                 android:layout_height="48dp"
                 android:layout_marginHorizontal="25dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/textgradient"
                 android:gravity="center"
+                android:dropDownSelector="#ffffff"
+                android:spinnerMode="dropdown"
+                android:foregroundGravity="center"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,10 +65,12 @@
                 android:id="@+id/state"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
+                android:dropDownSelector="#ffffff"
                 android:layout_marginHorizontal="25dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/textgradient"
                 android:gravity="center"
+                android:spinnerMode="dropdown"
+                android:foregroundGravity="center"
                 android:textColorHint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -74,6 +79,7 @@
 
             <EditText
                 android:id="@+id/pin"
+                android:textColor="#ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginHorizontal="25dp"
