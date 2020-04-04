@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
         CheckInternet checkInternet=new CheckInternet();
         if(checkInternet.isConnected(this)) {
             viewModel.generateOTP(phoneEditText.getText().toString());
+            finish();
             goToOTPActivity();
         }
         else

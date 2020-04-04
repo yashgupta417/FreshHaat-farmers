@@ -99,6 +99,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
             public void onChanged(Integer result) {
                 if(result==1){
                     Toast.makeText(VerifyOTPActivity.this, "Verified", Toast.LENGTH_SHORT).show();
+                    finish();
                     goToSignUpActivity();
 
                 }else if(result==-1){
