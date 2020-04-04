@@ -1,7 +1,6 @@
 package com.example.farmerapp.RetrofitClient;
 
 import com.example.farmerapp.API.OTPApi;
-import com.example.farmerapp.API.UserApi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

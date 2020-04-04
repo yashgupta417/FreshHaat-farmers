@@ -42,6 +42,8 @@
             android:background="@drawable/reglayout"
             android:gravity="center"
             android:hint="Phone Number(Alternative)"
+            android:inputType="phone"
+            android:maxLength="10"
             android:textSize="13sp"
             android:textColorHint="#c7c7c7"
             android:layout_marginHorizontal="25dp"
@@ -97,13 +99,15 @@
             android:text="Next"
             android:textColor="@color/white"
             android:background="@drawable/roundbutton"
+            android:enabled="false"
+            android:alpha="0.3"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/phone"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="30dp"/>
 
 

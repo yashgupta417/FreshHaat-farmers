@@ -1,6 +1,6 @@
 package com.example.farmerapp.RetrofitClient;
 
-import com.example.farmerapp.API.UserApi;
+import com.example.farmerapp.API.FarmerApi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -10,10 +10,10 @@ import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class UserClient {
+public class FarmerClient {
     public Retrofit retrofit;
-    public UserApi userApi;
-    public UserClient() {
+    public FarmerApi api;
+    public FarmerClient() {
         Gson gson= new GsonBuilder().serializeNulls().create();
         HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor();
         loggingInterceptor.level(HttpLoggingInterceptor.Level.BODY);
@@ -28,7 +28,7 @@ public class UserClient {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();
-        userApi=retrofit.create(UserApi.class);
+        api=retrofit.create(FarmerApi.class);
     }
 
 }
