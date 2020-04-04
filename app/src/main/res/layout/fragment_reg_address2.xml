@@ -45,7 +45,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/address_gradient" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/city"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -53,14 +53,12 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/textgradient"
                 android:gravity="center"
-                android:hint="City"
-                android:textColorHint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pin" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/state"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
@@ -68,7 +66,6 @@
                 android:layout_marginTop="15dp"
                 android:background="@drawable/textgradient"
                 android:gravity="center"
-                android:hint="State"
                 android:textColorHint="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

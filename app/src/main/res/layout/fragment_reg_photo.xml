@@ -81,17 +81,16 @@
             app:layout_constraintVertical_bias="0.0" />
         <ImageView
             android:id="@+id/upload"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginStart="16dp"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:background="@drawable/round_white_back"
             android:src="@drawable/ic_add"
             app:layout_constraintBottom_toBottomOf="@id/photo"
             app:layout_constraintEnd_toEndOf="@+id/photo"
-            app:layout_constraintHorizontal_bias="0.85"
+            app:layout_constraintHorizontal_bias="0.9"
             app:layout_constraintStart_toStartOf="@id/photo"
             app:layout_constraintTop_toTopOf="@id/photo"
-            app:layout_constraintVertical_bias="0.85" />
+            app:layout_constraintVertical_bias="0.9" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
