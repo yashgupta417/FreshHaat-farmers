@@ -1,133 +1,166 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="com.example.farmerapp.Fragments.RegPhoto">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.farmerapp.Fragments.RegisterPhotoFragment">
 
 
-    <RelativeLayout
+    <androidx.cardview.widget.CardView
         android:layout_width="309dp"
-        android:layout_height="364dp"
-        android:layout_marginLeft="53dp"
-        android:layout_marginTop="200dp"
-        android:layout_marginRight="54dp"
-        android:layout_marginBottom="293dp"
-        android:background="@drawable/reglayout">
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/white"
+        app:cardCornerRadius="30dp"
+        app:cardElevation="4dp">
 
-        <ImageView
-            android:layout_width="309dp"
-            android:layout_height="63dp"
-            android:background="@drawable/reg_gradient" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="15dp"
-            android:text="Address"
-            android:textColor="#ffffff"
-            android:textSize="18sp" />
+            <EditText
+                android:id="@+id/address_1"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/reglayout"
+                android:gravity="center"
+                android:hint="Address Line 1"
+                android:textSize="13sp"
+                android:textColorHint="#c7c7c7"
+                android:layout_marginHorizontal="25dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/or"
+                android:layout_marginTop="10dp"/>
+            <EditText
+                android:id="@+id/address_2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/reglayout"
+                android:gravity="center"
+                android:hint="Address Line 2"
+                android:textSize="13sp"
+                android:textColorHint="#c7c7c7"
+                android:layout_marginHorizontal="25dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address_1"
+                android:layout_marginTop="15dp"/>
+            <EditText
+                android:id="@+id/landmark"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/reglayout"
+                android:gravity="center"
+                android:hint="Landmark (Optional)"
+                android:textSize="13sp"
+                android:textColorHint="#c7c7c7"
+                android:layout_marginHorizontal="25dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/address_2"
+                android:layout_marginTop="15dp"/>
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_width="19dp"
-            android:layout_height="16dp"
-            android:layout_marginLeft="16.5dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="273.4dp"
-            android:layout_marginBottom="323.5dp"
-            android:background="@drawable/baseline_keyboard_backspace_white_18dp" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="22dp"
-            android:layout_marginLeft="93dp"
-            android:layout_marginTop="82dp"
-            android:layout_marginRight="92.2dp"
-            android:layout_marginBottom="260dp"
-            android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/location"
-                android:layout_gravity="center"
-                android:layout_width="wrap_content"
-                android:layout_height="14.3dp"
-                android:background="@drawable/baseline_location_on_black_18dp"/>
+                android:id="@+id/address_gradient"
+                android:layout_width="match_parent"
+                android:layout_height="63dp"
+                android:background="@drawable/reg_gradient"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
             <TextView
-                android:layout_width="102dp"
-                android:layout_height="22dp"
-                android:text="Your Location"
-                android:textColor="#0eb095"
-                android:textSize="15sp" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Address"
+                android:textColor="#ffffff"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="@id/address_gradient"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/address_gradient"
+                app:layout_constraintVertical_bias="0.5" />
+            <ImageView
+                android:id="@+id/back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_arrow_back"
+                app:layout_constraintBottom_toBottomOf="@id/address_gradient"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/address_gradient"
+                app:layout_constraintVertical_bias="0.5" />
+            <Button
+                android:id="@+id/next"
+                android:layout_width="120dp"
+                android:layout_height="48dp"
+                android:text="Next"
+                android:textColor="@color/white"
+                android:background="@drawable/roundbutton"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/landmark"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"/>
 
-        </LinearLayout>
+            <LinearLayout
+                android:id="@+id/location_ll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/address_gradient"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                android:layout_marginTop="5dp">
 
-        <TextView
-            style="PierSans-Light"
-            android:layout_width="16dp"
-            android:layout_height="20dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="109dp"
-            android:layout_marginBottom="135dp"
-            android:text="Or"
-            android:textColor="#a3a3a3"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/Add1"
-            android:layout_width="256dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="140dp"
-            android:layout_marginRight="27dp"
-            android:layout_marginBottom="185dp"
-            android:background="@drawable/reglayout"
-            android:gravity="center"
-            android:hint="Address Line 1"
-            android:textColorHint="#c7c7c7" />
-
-        <EditText
-            android:id="@+id/Place"
-            android:layout_width="256dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="190dp"
-            android:layout_marginRight="27dp"
-            android:layout_marginBottom="135dp"
-            android:background="@drawable/reglayout"
-            android:gravity="center"
-            android:hint="Place"
-            android:textColorHint="#c7c7c7" />
-
-        <EditText
-            android:id="@+id/Landmark"
-            android:layout_width="256dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="26dp"
-            android:layout_marginTop="240dp"
-            android:layout_marginRight="27dp"
-            android:layout_marginBottom="85dp"
-            android:background="@drawable/reglayout"
-            android:gravity="center"
-            android:hint="Landmark (Optional)"
-            android:textColorHint="#c7c7c7" />
-
-        <Button
-            android:id="@+id/next"
-            android:layout_width="120dp"
-            android:layout_height="48dp"
-            android:layout_marginLeft="94dp"
-            android:layout_marginTop="296dp"
-            android:layout_marginRight="95dp"
-            android:layout_marginBottom="20dp"
-            android:background="@drawable/roundbutton"
-            android:text="Next"
-            android:textColor="#ffffff" />
-
-
-    </RelativeLayout>
-
-
+                <ImageView
+                    android:id="@+id/location"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/ic_location" />
+                <TextView
+                    android:layout_width="102dp"
+                    android:layout_height="22dp"
+                    android:text="Your Location"
+                    android:textColor="#0eb095"
+                    android:textSize="15sp"
+                    android:layout_marginLeft="5dp"/>
+            </LinearLayout>
+            <TextView
+                android:id="@+id/or"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Or"
+                android:textColor="@color/grey"
+                app:layout_constraintTop_toBottomOf="@id/location_ll"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintHorizontal_bias="0.5" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 </FrameLayout>

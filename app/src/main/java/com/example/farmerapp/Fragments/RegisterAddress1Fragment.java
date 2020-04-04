@@ -10,8 +10,8 @@ import android.view.ViewGroup;
 
 import com.example.farmerapp.R;
 
-public class RegDetails extends Fragment {
-    public RegDetails() {
+public class RegisterAddress1Fragment extends Fragment {
+    public RegisterAddress1Fragment() {
         // Required empty public constructor
     }
 
@@ -20,6 +20,6 @@ public class RegDetails extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reg_details, container, false);
+        return inflater.inflate(R.layout.fragment_reg_address1, container, false);
     }
 }

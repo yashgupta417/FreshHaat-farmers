@@ -5,25 +5,22 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
 
-import com.example.farmerapp.Adapters.RegSwipeAdapter;
+import com.example.farmerapp.Adapters.RegisterDetailsAdapter;
 import com.example.farmerapp.R;
 
 public class RegisterDetailsActivity extends AppCompatActivity {
-    RegSwipeAdapter mAdapter;
+    RegisterDetailsAdapter mAdapter;
     static ViewPager vPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup);
-
+        setContentView(R.layout.activity_register_details);
         vPager = findViewById(R.id.regTabs);
-        //vPager.setCurrentItem(0);
+        mAdapter = new RegisterDetailsAdapter(getSupportFragmentManager());
         vPager.setAdapter(mAdapter);
-        mAdapter = new RegSwipeAdapter(getSupportFragmentManager());
-
     }
 
-    public static void scrollPager(int index){
+    public static void scrollPager(int index) {
         vPager.setCurrentItem(index);
     }
 }

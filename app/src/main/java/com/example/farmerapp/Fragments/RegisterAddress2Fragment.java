@@ -13,17 +13,13 @@ import com.example.farmerapp.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RegAddress2 extends Fragment {
+public class RegisterAddress2Fragment extends Fragment {
 
-    public RegAddress2() {
+    public RegisterAddress2Fragment() {
         // Required empty public constructor
     }
-
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         return inflater.inflate(R.layout.fragment_reg_address2, container, false);
     }
 }
