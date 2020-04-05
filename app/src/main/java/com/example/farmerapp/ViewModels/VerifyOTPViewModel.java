@@ -51,5 +51,7 @@ public class VerifyOTPViewModel extends AndroidViewModel {
     public LiveData<Integer> getOTPStatus(){
         return repository.getOTPStatus();
     }
-
+    public void getUser(){
+        repository.getUser();
+    }
 }

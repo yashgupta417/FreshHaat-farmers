@@ -18,6 +18,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.provider.Settings;
 import android.text.Editable;
@@ -37,11 +38,14 @@ import android.widget.Toast;
 import com.example.farmerapp.Activities.RegisterDetailsActivity;
 import com.example.farmerapp.R;
 import com.example.farmerapp.Utils.LocationUtil;
+import com.example.farmerapp.ViewModels.RegisterDetailsViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
+
+import static com.example.farmerapp.Activities.RegisterDetailsActivity.viewModel;
 
 public class RegisterAddress1Fragment extends Fragment {
 
@@ -145,7 +149,7 @@ public class RegisterAddress1Fragment extends Fragment {
             next.setEnabled(true);
             next.setAlpha(1);
             String address=address1.getText().toString()+" "+address2.getText().toString()+" "+landmark.getText().toString();
-            RegisterDetailsActivity.farmer.setAddress(address);
+            viewModel.farmer.setAddress(address);
         } else {
             next.setEnabled(false);
             next.setAlpha(0.3f);

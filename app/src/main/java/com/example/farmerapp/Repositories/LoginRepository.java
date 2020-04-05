@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.farmerapp.Retrofit.Verification;
-import com.example.farmerapp.RetrofitClient.OTPClient;
+import com.example.farmerapp.RetrofitClient.UserClient;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -26,7 +26,7 @@ public class LoginRepository {
     }
     public void generateOTP(String mobileNumber){
         verification.setValue(0);
-        Call<ResponseBody> call=new OTPClient().otpApi.generateOTP(new Verification(mobileNumber));
+        Call<ResponseBody> call=new UserClient().userApi.generateOTP(new Verification(mobileNumber));
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

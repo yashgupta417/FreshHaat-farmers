@@ -3,9 +3,12 @@ package com.example.farmerapp.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,10 +23,13 @@ import android.widget.Toast;
 import com.example.farmerapp.Activities.RegisterDetailsActivity;
 import com.example.farmerapp.Adapters.SpinnerAdapter;
 import com.example.farmerapp.R;
+import com.example.farmerapp.ViewModels.RegisterDetailsViewModel;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import static com.example.farmerapp.Activities.RegisterDetailsActivity.viewModel;
 
 public class RegisterAddress2Fragment extends Fragment implements AdapterView.OnItemSelectedListener {
     public RegisterAddress2Fragment() {
@@ -67,7 +73,7 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Register User
+                viewModel.registerFarmerDetails();
             }
         });
     }
@@ -79,7 +85,7 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
                 if (item.equals("City")) {
                     isCityOk = false;
                 } else {
-                    RegisterDetailsActivity.farmer.setCity(item);
+                    viewModel.farmer.setCity(item);
                     isCityOk = true;
                 }
                 updateNextButtonStatus();
@@ -88,7 +94,7 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
                     isStateOk=false;
             }
             else {
-                RegisterDetailsActivity.farmer.setState(item);
+                viewModel.farmer.setState(item);
                 isStateOk=true;
             }
             updateNextButtonStatus();
@@ -128,10 +134,11 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
         if(isStateOk && isCityOk && isPincodeOk){
             next.setEnabled(true);
             next.setAlpha(1f);
-            RegisterDetailsActivity.farmer.setPin(pincode.getText().toString());//city and state are already saved
+            viewModel.farmer.setPin(pincode.getText().toString());//city and state are already saved
         }else{
             next.setEnabled(false);
             next.setAlpha(0.3f);
         }
     }
+
 }

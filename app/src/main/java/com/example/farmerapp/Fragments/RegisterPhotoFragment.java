@@ -11,6 +11,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.provider.MediaStore;
 import android.view.LayoutInflater;
@@ -22,6 +23,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.example.farmerapp.Activities.RegisterDetailsActivity;
 import com.example.farmerapp.R;
+import com.example.farmerapp.ViewModels.RegisterDetailsViewModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.FileNotFoundException;
@@ -29,6 +31,7 @@ import java.io.FileNotFoundException;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 import static android.app.Activity.RESULT_OK;
+import static com.example.farmerapp.Activities.RegisterDetailsActivity.viewModel;
 
 public class RegisterPhotoFragment extends Fragment {
     public RegisterPhotoFragment() {
@@ -37,6 +40,7 @@ public class RegisterPhotoFragment extends Fragment {
     ImageView chooseImageButton;
     CircleImageView profileImage;
     Button next;
+    Uri image;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=  inflater.inflate(R.layout.fragment_reg_photo, container, false);
@@ -55,10 +59,13 @@ public class RegisterPhotoFragment extends Fragment {
                 ((RegisterDetailsActivity)getActivity()).scrollPager(1);
             }
         });
+        //Small hack!but should not be needed...
+        if(viewModel.image!=null){
+            updateUI(image);
+        }
         return v;
-
     }
-    Uri image;
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -72,16 +79,18 @@ public class RegisterPhotoFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if(requestCode==1 && resultCode==RESULT_OK && data!=null){
             image=data.getData();
             if(image!=null){
-                Glide.with(getActivity()).load(image).into(profileImage);
-                next.setEnabled(true);
-                next.setAlpha(1);
-                RegisterDetailsActivity.image=image;
+                viewModel.image=image;
+                updateUI(image);
             }
         }
+    }
+    public void updateUI(Uri image){
+        Glide.with(getActivity()).load(image).into(profileImage);
+        next.setEnabled(true);
+        next.setAlpha(1);
     }
     public void chooseImage(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

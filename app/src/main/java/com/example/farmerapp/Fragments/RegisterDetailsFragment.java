@@ -3,6 +3,7 @@ package com.example.farmerapp.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -15,6 +16,9 @@ import android.widget.ImageView;
 
 import com.example.farmerapp.Activities.RegisterDetailsActivity;
 import com.example.farmerapp.R;
+import com.example.farmerapp.ViewModels.RegisterDetailsViewModel;
+
+import static com.example.farmerapp.Activities.RegisterDetailsActivity.viewModel;
 
 public class RegisterDetailsFragment extends Fragment {
     public RegisterDetailsFragment() {
@@ -89,8 +93,8 @@ public class RegisterDetailsFragment extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                RegisterDetailsActivity.farmer.setName(name.getText().toString());
-                RegisterDetailsActivity.farmer.setAlternateMob(alternatePhone.getText().toString());
+                viewModel.farmer.setName(name.getText().toString());
+                viewModel.farmer.setAlternateMob(alternatePhone.getText().toString());
                 ((RegisterDetailsActivity)getActivity()).scrollPager(2);
             }
         });
