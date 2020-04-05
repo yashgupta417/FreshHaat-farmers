@@ -75,16 +75,16 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
-        if(view.getId()==R.id.city) {
-                if (item == "City") {
+        if(parent.getId()==R.id.city) {
+                if (item.equals("City")) {
                     isCityOk = false;
                 } else {
                     RegisterDetailsActivity.farmer.setCity(item);
                     isCityOk = true;
                 }
                 updateNextButtonStatus();
-        }else if(view.getId()==R.id.state){
-            if(item=="State") {
+        }else if(parent.getId()==R.id.state){
+            if(item.equals("State")) {
                     isStateOk=false;
             }
             else {

@@ -23,24 +23,30 @@ public class SpinnerAdapter extends ArrayAdapter<String> {
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        return initView(position, convertView, parent);
+    public View getView(int position, @Nullable View view, @NonNull ViewGroup parent) {
+        if (view == null) {
+            view= LayoutInflater.from(getContext()).inflate(R.layout.custom_spinner, parent, false);
+        }
+        String place=getItem(position);
+        TextView textView = (TextView) view.findViewById(R.id.selcted_place);
+        if(textView!=null)
+            textView.setText(place);
+        return view;
     }
 
 
     @Override
-    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        return initView(position, convertView, parent);
-
-    }
-    private View initView(int position, View view, ViewGroup parent) {
+    public View getDropDownView(int position, @Nullable View view, @NonNull ViewGroup parent) {
         if (view == null) {
-            view= LayoutInflater.from(getContext()).inflate(R.layout.spinner_item, parent, false);
+            view= LayoutInflater.from(getContext()).inflate(R.layout.spinner_row, parent, false);
         }
         String place=getItem(position);
-        TextView textView = (TextView) view.findViewById(R.id.textView);
-        textView.setText(place);
+        TextView textView = (TextView) view.findViewById(R.id.place_textview);
+        if(textView!=null)
+            textView.setText(place);
         return view;
+
     }
+
 
 }
