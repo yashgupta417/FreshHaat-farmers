@@ -4,12 +4,15 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -28,28 +31,28 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
     }
     ImageView back;
     Button next;
-    Spinner city,state;
+    Spinner citySpinner,stateSpinner;
     SpinnerAdapter stateAdapter,cityAdapter;
-
+    EditText pincode;
+    boolean isPincodeOk=false,isCityOk=false,isStateOk=false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_reg_address2, container, false);
         back=v.findViewById(R.id.back);
         next=v.findViewById(R.id.next);
-        state = v.findViewById(R.id.state);
-        city = v.findViewById(R.id.city);
+        stateSpinner = v.findViewById(R.id.state);
+        citySpinner = v.findViewById(R.id.city);
+        pincode=v.findViewById(R.id.pin);
         addButtonClickListeners();
+        addTextListener();
 
         stateAdapter = new SpinnerAdapter(getContext(), new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.india_states))));
-
-        state.setAdapter(stateAdapter);
-        state.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        state.setOnItemSelectedListener(this);
+        stateSpinner.setAdapter(stateAdapter);
+        stateSpinner.setOnItemSelectedListener(this);
 
         cityAdapter = new SpinnerAdapter(getContext(), new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.indian_cities))));
-        city.setAdapter(cityAdapter);
-        state.setGravity(View.TEXT_ALIGNMENT_CENTER);
-        city.setOnItemSelectedListener(this);
+        citySpinner.setAdapter(cityAdapter);
+        citySpinner.setOnItemSelectedListener(this);
 
         return v;
 
@@ -64,7 +67,7 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Upload Details", Toast.LENGTH_SHORT).show();
+                //Register User
             }
         });
     }
@@ -72,9 +75,23 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
-        switch (view.getId()){
-            case R.id.city:RegisterDetailsActivity.details.setCity(item);break;
-            case R.id.state:RegisterDetailsActivity.details.setState(item);break;
+        if(view.getId()==R.id.city) {
+                if (item == "City") {
+                    isCityOk = false;
+                } else {
+                    RegisterDetailsActivity.farmer.setCity(item);
+                    isCityOk = true;
+                }
+                updateNextButtonStatus();
+        }else if(view.getId()==R.id.state){
+            if(item=="State") {
+                    isStateOk=false;
+            }
+            else {
+                RegisterDetailsActivity.farmer.setState(item);
+                isStateOk=true;
+            }
+            updateNextButtonStatus();
         }
 
     }
@@ -82,5 +99,39 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
 
+    }
+    public void addTextListener() {
+        pincode.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (s.length()==6) {
+                    isPincodeOk = true;
+                } else {
+                    isPincodeOk = false;
+                }
+                updateNextButtonStatus();
+            }
+        });
+    }
+
+    public void updateNextButtonStatus(){
+        if(isStateOk && isCityOk && isPincodeOk){
+            next.setEnabled(true);
+            next.setAlpha(1f);
+            RegisterDetailsActivity.farmer.setPin(pincode.getText().toString());//city and state are already saved
+        }else{
+            next.setEnabled(false);
+            next.setAlpha(0.3f);
+        }
     }
 }

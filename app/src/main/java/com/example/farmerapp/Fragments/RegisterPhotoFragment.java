@@ -75,21 +75,11 @@ public class RegisterPhotoFragment extends Fragment {
 
         if(requestCode==1 && resultCode==RESULT_OK && data!=null){
             image=data.getData();
-
             if(image!=null){
                 Glide.with(getActivity()).load(image).into(profileImage);
                 next.setEnabled(true);
                 next.setAlpha(1);
-                Bitmap photo = null;
-                try {
-                    photo = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), image);
-                }
-                catch (Exception e){
-                    e.printStackTrace();
-                }
-
-                RegisterDetailsActivity.details.setProfilephoto(photo);
-                //moveToNext
+                RegisterDetailsActivity.image=image;
             }
         }
     }

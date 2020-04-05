@@ -30,7 +30,6 @@
             android:name=".Activities.LoginActivity"
             android:screenOrientation="portrait">
 
-
         </activity>
     </application>
 
