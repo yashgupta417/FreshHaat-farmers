@@ -26,6 +26,9 @@ public class Verification {
     @SerializedName("verified")
     @Expose
     private Boolean verified;
+    @SerializedName("new_user")
+    @Expose
+    private Boolean new_user;
 
 
 
@@ -76,5 +79,13 @@ public class Verification {
 
     public void setOtp(String otp) {
         this.otp = otp;
+    }
+
+    public Boolean getNew_user() {
+        return new_user;
+    }
+
+    public void setNew_user(Boolean new_user) {
+        this.new_user = new_user;
     }
 }

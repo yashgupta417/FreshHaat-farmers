@@ -20,4 +20,5 @@ public class LoginViewModel extends AndroidViewModel {
     public LiveData<Integer> getOTPStatus(){
         return loginRepository.getOTPStatus();
     }
+
 }

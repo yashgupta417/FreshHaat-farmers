@@ -2,13 +2,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="#ffffff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.farmerapp.Fragments.RegisterPhotoFragment">
     <androidx.cardview.widget.CardView
         android:layout_width="309dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@color/white"
+        android:background="#ffffff"
         app:cardCornerRadius="30dp"
         app:cardElevation="4dp">
 
@@ -34,6 +35,8 @@
                 android:background="@drawable/roundbutton"
                 android:text="Next"
                 android:textColor="@color/white"
+                android:enabled="false"
+                android:alpha="0.3"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
@@ -43,31 +46,25 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/address_gradient" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/city"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginHorizontal="25dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/textgradient"
-                android:gravity="center"
-                android:hint="City"
-                android:textColorHint="@color/white"
+                android:background="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pin" />
 
-            <EditText
+            <Spinner
                 android:id="@+id/state"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginHorizontal="25dp"
                 android:layout_marginTop="15dp"
-                android:background="@drawable/textgradient"
-                android:gravity="center"
-                android:hint="State"
-                android:textColorHint="@color/white"
+                android:background="@android:color/transparent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -75,14 +72,17 @@
 
             <EditText
                 android:id="@+id/pin"
+                android:textColor="#ffffff"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginHorizontal="25dp"
                 android:layout_marginTop="20dp"
-                android:background="@drawable/textgradient"
                 android:gravity="center"
                 android:hint="Pin"
-                android:textColorHint="@color/white"
+                android:inputType="phone"
+                android:background="@drawable/textgradient"
+                android:maxLength="6"
+                android:textColorHint="#99FFFFFF"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"

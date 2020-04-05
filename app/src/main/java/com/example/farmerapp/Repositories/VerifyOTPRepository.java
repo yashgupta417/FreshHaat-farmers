@@ -1,13 +1,14 @@
 package com.example.farmerapp.Repositories;
 
 import android.app.Application;
+import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.farmerapp.API.OTPApi;
 import com.example.farmerapp.Retrofit.Verification;
-import com.example.farmerapp.RetrofitClient.OTPClient;
+import com.example.farmerapp.RetrofitClient.UserClient;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -16,11 +17,9 @@ import retrofit2.Response;
 
 public class VerifyOTPRepository {
     Application application;
-    OTPClient otpClient;
     MutableLiveData<Integer> result;
     public VerifyOTPRepository(Application application) {
         this.application=application;
-        otpClient=new OTPClient();
         result=new MutableLiveData<Integer>();
         verification=new MutableLiveData<Integer>();
     }
@@ -31,12 +30,13 @@ public class VerifyOTPRepository {
         result.setValue(0);
         Verification request=new Verification(mobileNumber);
         request.setOtp(otp);
-        Call<Verification> call=otpClient.otpApi.verifyOTP(request);
+        Call<Verification> call=new UserClient().userApi.verifyOTP(request);
         call.enqueue(new Callback<Verification>() {
             @Override
             public void onResponse(Call<Verification> call, Response<Verification> response) {
                 if(response.isSuccessful() && response.body().getVerified()){
                     result.setValue(1);
+                    //getUser();
                     return;
                 }else{
                     result.setValue(-1);
@@ -55,7 +55,7 @@ public class VerifyOTPRepository {
     }
     public void generateOTP(String mobileNumber){
         verification.setValue(0);
-        Call<ResponseBody> call=new OTPClient().otpApi.generateOTP(new Verification(mobileNumber));
+        Call<ResponseBody> call=new UserClient().userApi.generateOTP(new Verification(mobileNumber));
         call.enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -68,6 +68,27 @@ public class VerifyOTPRepository {
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 verification.setValue(-1);
+            }
+        });
+    }
+
+    public void getUser(){
+        Call<Verification> call=new UserClient().userApi.getUser();
+        call.enqueue(new Callback<Verification>() {
+            @Override
+            public void onResponse(Call<Verification> call, Response<Verification> response) {
+                if(response.isSuccessful()){
+                    Log.i("******",response.body().getId());
+                    Toast.makeText(application, response.body().getId(), Toast.LENGTH_SHORT).show();
+
+                    return;
+                }
+                Log.i("******","error");
+            }
+
+            @Override
+            public void onFailure(Call<Verification> call, Throwable t) {
+                Log.i("******",t.getLocalizedMessage());
             }
         });
     }

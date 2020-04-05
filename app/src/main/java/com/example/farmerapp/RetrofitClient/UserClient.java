@@ -5,6 +5,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -28,7 +29,6 @@ public class UserClient {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();
-        userApi=retrofit.create(UserApi.class);
+        userApi =retrofit.create(UserApi.class);
     }
-
 }

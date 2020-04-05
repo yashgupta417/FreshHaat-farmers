@@ -1,21 +1,19 @@
 package com.example.farmerapp.RetrofitClient;
 
-import com.example.farmerapp.API.OTPApi;
-import com.example.farmerapp.API.UserApi;
+import com.example.farmerapp.API.FarmerApi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.util.concurrent.TimeUnit;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class OTPClient {
+public class FarmerClient {
     public Retrofit retrofit;
-    public OTPApi otpApi;
-    public OTPClient() {
+    public FarmerApi api;
+    public FarmerClient() {
         Gson gson= new GsonBuilder().serializeNulls().create();
         HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor();
         loggingInterceptor.level(HttpLoggingInterceptor.Level.BODY);
@@ -30,6 +28,7 @@ public class OTPClient {
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(okHttpClient)
                 .build();
-        otpApi=retrofit.create(OTPApi.class);
+        api=retrofit.create(FarmerApi.class);
     }
+
 }
