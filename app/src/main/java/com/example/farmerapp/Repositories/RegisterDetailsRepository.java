@@ -9,11 +9,11 @@ import android.widget.Toast;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.example.farmerapp.Activities.RegisterDetailsActivity;
+import com.example.farmerapp.API.FarmerApi;
+import com.example.farmerapp.API.UserApi;
 import com.example.farmerapp.Retrofit.Farmer;
 import com.example.farmerapp.Retrofit.Image;
-import com.example.farmerapp.RetrofitClient.FarmerClient;
-import com.google.android.material.snackbar.Snackbar;
+import com.example.farmerapp.RetrofitClient.RetrofitClient;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,7 +62,7 @@ public class RegisterDetailsRepository {
         final RequestBody requestBody = RequestBody.create(compressimagefile, MediaType.parse("multipart/form-data"));
         MultipartBody.Part imagePart = MultipartBody.Part.createFormData("image", file.getName(), requestBody);
 
-        Call<Image> call=new FarmerClient().api.uploadDP(imagePart);
+        Call<Image> call=RetrofitClient.getInstance(application).create(FarmerApi.class).uploadDP(imagePart);
         call.enqueue(new Callback<Image>() {
             @Override
             public void onResponse(Call<Image> call, Response<Image> response) {
@@ -82,7 +82,7 @@ public class RegisterDetailsRepository {
         });
     }
     private void uploadStep2(Farmer farmer){
-        Call<Farmer> call=new FarmerClient().api.registerFarmerDetails(farmer);
+        Call<Farmer> call=RetrofitClient.getInstance(application).create(FarmerApi.class).registerFarmerDetails(farmer);
         call.enqueue(new Callback<Farmer>() {
             @Override
             public void onResponse(Call<Farmer> call, Response<Farmer> response) {
