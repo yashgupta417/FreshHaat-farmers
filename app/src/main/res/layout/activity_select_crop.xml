@@ -5,13 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:id="@+id/parent"
     tools:context=".Activities.SelectCropActivity">
 
     <ImageView
         android:id="@+id/register_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitStart"
+        android:layout_height="155dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/header_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,6 +20,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select Crops"
+        android:textColor="@color/colorPrimary"
+        android:textSize="33sp"
+        app:layout_constraintBottom_toBottomOf="@+id/register_header"
+        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintLeft_toLeftOf="@id/register_header"
+        app:layout_constraintRight_toRightOf="@id/register_header"
+        app:layout_constraintTop_toTopOf="@id/register_header"
+        app:layout_constraintVertical_bias="0.736" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/crop_recylcer_view"
@@ -34,11 +48,44 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/load"
-        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.5"/>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1"
+        android:layout_marginBottom="30dp">
+        <Button
+            android:id="@+id/next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/roundbutton"
+            android:text="Next"
+            android:alpha="0.3"
+            android:onClick="nextWork"
+            android:enabled="false"
+            android:visibility="invisible"
+            android:textColor="@color/white" />
+        <TextView
+            android:id="@+id/skip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Skip"
+            android:enabled="false"
+            android:visibility="invisible"
+            android:textColor="@color/grey"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="20dp"/>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

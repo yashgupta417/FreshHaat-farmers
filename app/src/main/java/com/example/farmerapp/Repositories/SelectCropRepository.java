@@ -5,9 +5,11 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.farmerapp.API.FarmerApi;
 import com.example.farmerapp.API.ProductApi;
 import com.example.farmerapp.Activities.SelectCropActivity;
 import com.example.farmerapp.Retrofit.Crop;
+import com.example.farmerapp.Retrofit.Farmer;
 import com.example.farmerapp.RetrofitClient.RetrofitClient;
 
 import java.util.List;
@@ -20,9 +22,11 @@ import retrofit2.Retrofit;
 public class SelectCropRepository {
     Application application;
     MutableLiveData<List<Crop>> crops;
+    MutableLiveData<Integer> uploadStatus;
     public SelectCropRepository(Application application) {
         this.application=application;
         crops=new MutableLiveData<List<Crop>>();
+        uploadStatus=new MutableLiveData<Integer>();
     }
     public LiveData<List<Crop>> getCrops(){
         Call<List<Crop>> call= RetrofitClient.getInstance(application).create(ProductApi.class).getCrops();
@@ -40,5 +44,27 @@ public class SelectCropRepository {
             }
         });
         return crops;
+    }
+
+    public LiveData<Integer> postSelectedCrops(Farmer farmer){
+        uploadStatus.setValue(0);
+        Call<Farmer> call=RetrofitClient.getInstance(application).create(FarmerApi.class).registerFarmerDetails(farmer);
+        call.enqueue(new Callback<Farmer>() {
+            @Override
+            public void onResponse(Call<Farmer> call, Response<Farmer> response) {
+                if(response.isSuccessful()){
+                    uploadStatus.setValue(1);
+                    return;
+                }
+                uploadStatus.setValue(-1);
+
+            }
+
+            @Override
+            public void onFailure(Call<Farmer> call, Throwable t) {
+                    uploadStatus.setValue(-1);
+            }
+        });
+        return uploadStatus;
     }
 }

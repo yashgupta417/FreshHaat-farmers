@@ -8,7 +8,9 @@ import androidx.lifecycle.LiveData;
 
 import com.example.farmerapp.Repositories.SelectCropRepository;
 import com.example.farmerapp.Retrofit.Crop;
+import com.example.farmerapp.Retrofit.Farmer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SelectCropViewModel extends AndroidViewModel {
@@ -19,5 +21,11 @@ public class SelectCropViewModel extends AndroidViewModel {
     }
     public LiveData<List<Crop>> getCrops(){
         return repository.getCrops();
+    }
+
+    public LiveData<Integer> postSelectedCrops(ArrayList<String> crops){
+        Farmer farmer=new Farmer();
+        farmer.setCrops(crops);
+        return repository.postSelectedCrops(farmer);
     }
 }
