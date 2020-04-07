@@ -1,6 +1,8 @@
 package com.example.farmerapp.Repositories;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -29,9 +31,11 @@ import retrofit2.Response;
 public class RegisterDetailsRepository {
     Application application;
     MutableLiveData<Integer> uploadStatus;
+    SharedPreferences preferences;
     public RegisterDetailsRepository(Application application) {
         this.application = application;
         uploadStatus=new MutableLiveData<Integer>();
+        preferences=application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
     }
     private String getRealPathFromURI(Uri uri) {
         Cursor cursor = application.getContentResolver().query(uri, null, null, null, null);
@@ -88,6 +92,7 @@ public class RegisterDetailsRepository {
             public void onResponse(Call<Farmer> call, Response<Farmer> response) {
                 if(response.isSuccessful()){
                     Toast.makeText(application, "Details uploaded", Toast.LENGTH_SHORT).show();
+                    preferences.edit().putBoolean("is_registration_done",true).apply();
                     uploadStatus.setValue(1);
                 }
                 uploadStatus.setValue(-1);

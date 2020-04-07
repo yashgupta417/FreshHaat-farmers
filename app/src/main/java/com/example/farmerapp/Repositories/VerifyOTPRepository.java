@@ -1,6 +1,8 @@
 package com.example.farmerapp.Repositories;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -19,10 +21,12 @@ import retrofit2.Response;
 public class VerifyOTPRepository {
     Application application;
     MutableLiveData<Integer> result;
+    SharedPreferences preferences;
     public VerifyOTPRepository(Application application) {
         this.application=application;
         result=new MutableLiveData<Integer>();
         verification=new MutableLiveData<Integer>();
+        preferences=application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
     }
     public LiveData<Integer> checkResult(){
         return result;
@@ -37,6 +41,7 @@ public class VerifyOTPRepository {
             public void onResponse(Call<Verification> call, Response<Verification> response) {
                 if(response.isSuccessful() && response.body().getVerified()){
                     result.setValue(1);
+                    preferences.edit().putBoolean("is_logged_in",true).apply();
                     //getUser();
                     return;
                 }else{

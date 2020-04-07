@@ -20,45 +20,30 @@ import com.example.farmerapp.ViewModels.RegisterDetailsViewModel;
 import com.example.farmerapp.ViewPager.RegistrationViewPager;
 import com.google.android.material.snackbar.Snackbar;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class RegisterDetailsActivity extends AppCompatActivity {
     RegisterDetailsAdapter mAdapter;
     public static RegistrationViewPager vPager;
     public static ConstraintLayout parent;
     public static RegisterDetailsViewModel viewModel;
+    public static GifImageView load;
     //we can't register farmer details when image is uploading because we need imageURL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register_details);
+        load=findViewById(R.id.load);
         parent=findViewById(R.id.registration_parent);
         vPager = findViewById(R.id.regTabs);
         vPager.disableScroll(true);
         mAdapter = new RegisterDetailsAdapter(getSupportFragmentManager());
         viewModel= ViewModelProviders.of(this).get(RegisterDetailsViewModel.class);
         vPager.setAdapter(mAdapter);
-        checkifUploadDone();
     }
 
     public static void scrollPager(int index) {
         vPager.setCurrentItem(index,true);
     }
 
-    public void checkifUploadDone(){
-        viewModel.getUploadStatus().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                if(integer==-1)
-                    showErrorSnackBar();
-                else if(integer==1){
-                    Intent intent=new Intent(getApplicationContext(),SelectCropActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-            }
-        });
-    }
-    public void showErrorSnackBar(){
-        Snackbar snackbar=Snackbar.make(RegisterDetailsActivity.parent,"Something Went wrong",Snackbar.LENGTH_SHORT);
-        snackbar.show();
-    }
 }

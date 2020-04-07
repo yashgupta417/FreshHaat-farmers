@@ -1,5 +1,6 @@
 package com.example.farmerapp.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -21,9 +22,11 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.farmerapp.Activities.RegisterDetailsActivity;
+import com.example.farmerapp.Activities.SelectCropActivity;
 import com.example.farmerapp.Adapters.SpinnerAdapter;
 import com.example.farmerapp.R;
 import com.example.farmerapp.ViewModels.RegisterDetailsViewModel;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -74,10 +77,39 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
             @Override
             public void onClick(View v) {
                 viewModel.registerFarmerDetails();
+                updateUI(false,0.3f,View.VISIBLE);
+                checkifUploadDone();
             }
         });
     }
 
+    public void checkifUploadDone(){
+        viewModel.getUploadStatus().observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(integer==-1) {
+                    showErrorSnackBar();
+                    updateUI(true,1f,View.INVISIBLE);
+                }
+                else if(integer==1){
+                    Intent intent=new Intent(getActivity(), SelectCropActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+            }
+        });
+    }
+    public void updateUI(Boolean bool,Float alpha,int i){
+        next.setEnabled(bool);
+        next.setAlpha(alpha);
+        back.setEnabled(bool);
+        back.setAlpha(alpha);
+        RegisterDetailsActivity.load.setVisibility(i);
+    }
+    public void showErrorSnackBar(){
+        Snackbar snackbar=Snackbar.make(RegisterDetailsActivity.parent,"Something Went wrong",Snackbar.LENGTH_SHORT);
+        snackbar.show();
+    }
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
@@ -99,7 +131,6 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
             }
             updateNextButtonStatus();
         }
-
     }
 
     @Override
