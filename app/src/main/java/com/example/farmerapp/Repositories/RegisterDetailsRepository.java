@@ -73,7 +73,7 @@ public class RegisterDetailsRepository {
                 if(response.isSuccessful()){
                     Image imageResponse=response.body();
                     farmer.setProfilePhoto(imageResponse.getImgurl());
-                    Toast.makeText(application, "Image uploaded", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(application, "Image uploaded", Toast.LENGTH_SHORT).show();
                     uploadStep2(farmer);
                     return;
                 }
@@ -91,7 +91,7 @@ public class RegisterDetailsRepository {
             @Override
             public void onResponse(Call<Farmer> call, Response<Farmer> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(application, "Details uploaded", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(application, "Details uploaded", Toast.LENGTH_SHORT).show();
                     preferences.edit().putBoolean("is_registration_done",true).apply();
                     uploadStatus.setValue(1);
                 }

@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.farmerapp.Adapters.CropAdapter;
 import com.example.farmerapp.R;
@@ -78,12 +79,15 @@ public class SelectCropActivity extends AppCompatActivity {
                 if(adapter.selected.get(position)){
                     selectedCrops.add(crop);
                 }else{
-                    selectedCrops.remove(crop);
+                    for(int i=0;i<selectedCrops.size();i++){
+                        if(selectedCrops.get(i).getId().equals(crop.getId()))
+                            selectedCrops.remove(i);
+                    }
                 }
                 if(selectedCrops.size()>0){
                     updateUI(true,1f,true,true);
                 }else{
-                    updateUI(false,0f,true,true);
+                    updateUI(false,0.3f,true,true);
                 }
             }
         });

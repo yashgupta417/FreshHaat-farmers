@@ -79,14 +79,14 @@ public class CropAdapter extends RecyclerView.Adapter<CropAdapter.CropViewHolder
     public void onBindViewHolder(@NonNull CropViewHolder holder, int position) {
         Crop crop=crops.get(position);
         if(selected.get(position)){
-            holder.cropImage.setBorderColor(context.getResources().getColor(R.color.blue));
-            holder.cropImage.setBorderWidth(5);
+            holder.cropImage.setBorderColor(context.getResources().getColor(R.color.blueLight));
+            holder.cropImage.setBorderWidth(6);
             holder.cropName.setTextColor(context.getResources().getColor(R.color.black));
             holder.cropName.setTypeface(null,Typeface.BOLD);
             holder.tick.setVisibility(View.VISIBLE);
         }else{
             holder.cropImage.setBorderColor(context.getResources().getColor(R.color.grey));
-            holder.cropImage.setBorderWidth(1);
+            holder.cropImage.setBorderWidth(2);
             holder.cropName.setTextColor(context.getResources().getColor(R.color.black));
             holder.cropName.setTypeface(null,Typeface.NORMAL);
            holder.tick.setVisibility(View.INVISIBLE);

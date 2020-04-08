@@ -10,4 +10,10 @@ import retrofit2.http.GET;
 public interface ProductApi {
     @GET("api/farmerproducts")
     Call<List<Crop>> getCrops();
+
+    @GET("api/farmerproducts/vegetables")
+    Call<List<Crop>> getVegetables();
+
+    @GET("api/farmerproducts/fruits")
+    Call<List<Crop>> getFruits();
 }

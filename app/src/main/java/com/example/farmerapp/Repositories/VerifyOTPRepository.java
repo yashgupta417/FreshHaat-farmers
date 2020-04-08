@@ -40,9 +40,9 @@ public class VerifyOTPRepository {
             @Override
             public void onResponse(Call<Verification> call, Response<Verification> response) {
                 if(response.isSuccessful() && response.body().getVerified()){
-                    result.setValue(1);
-                    preferences.edit().putBoolean("is_logged_in",true).apply();
-                    //getUser();
+                    //result.setValue(1);
+                    //preferences.edit().putBoolean("is_logged_in",true).apply();
+                    getUser();
                     return;
                 }else{
                     result.setValue(-1);
@@ -84,9 +84,8 @@ public class VerifyOTPRepository {
             @Override
             public void onResponse(Call<Verification> call, Response<Verification> response) {
                 if(response.isSuccessful()){
-                    Log.i("******",response.body().getId());
-                    Toast.makeText(application, response.body().getId(), Toast.LENGTH_SHORT).show();
-
+                    result.setValue(1);
+                    preferences.edit().putBoolean("is_logged_in",true).apply();
                     return;
                 }
                 Log.i("******","error");

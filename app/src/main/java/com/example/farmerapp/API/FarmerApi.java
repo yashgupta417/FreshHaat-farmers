@@ -16,6 +16,9 @@ public interface FarmerApi {
     @POST("api/user/farmer")
     Call<Farmer> registerFarmerDetails(@Body Farmer farmer);
 
+    @GET("api/user/farmer")
+    Call<Farmer> getFarmer();
+
     @Multipart
     @POST("image/upload")
     Call<Image> uploadDP(@Part MultipartBody.Part image);
