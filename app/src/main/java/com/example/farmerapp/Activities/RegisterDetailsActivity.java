@@ -2,6 +2,7 @@ package com.example.farmerapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -23,7 +24,7 @@ import com.google.android.material.snackbar.Snackbar;
 import pl.droidsonroids.gif.GifImageView;
 
 public class RegisterDetailsActivity extends AppCompatActivity {
-    RegisterDetailsAdapter mAdapter;
+    RegisterDetailsAdapter adapter;
     public static RegistrationViewPager vPager;
     public static ConstraintLayout parent;
     public static RegisterDetailsViewModel viewModel;
@@ -37,9 +38,10 @@ public class RegisterDetailsActivity extends AppCompatActivity {
         parent=findViewById(R.id.registration_parent);
         vPager = findViewById(R.id.regTabs);
         vPager.disableScroll(true);
-        mAdapter = new RegisterDetailsAdapter(getSupportFragmentManager());
+        adapter = new RegisterDetailsAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        vPager.setAdapter(adapter);
+
         viewModel= ViewModelProviders.of(this).get(RegisterDetailsViewModel.class);
-        vPager.setAdapter(mAdapter);
     }
 
     public static void scrollPager(int index) {

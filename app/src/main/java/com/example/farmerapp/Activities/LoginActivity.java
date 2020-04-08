@@ -6,12 +6,14 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -25,23 +27,29 @@ import com.google.android.material.snackbar.Snackbar;
 public class LoginActivity extends AppCompatActivity {
     LoginViewModel viewModel;
     EditText phoneEditText;
+    Button loginButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         viewModel= ViewModelProviders.of(this).get(LoginViewModel.class);
         phoneEditText=findViewById(R.id.phone);
+        loginButton=findViewById(R.id.login);
         buttonEnabling();
     }
     public void login(View view){
+        updateUI(false,0.3f);
+        hideKeyboard();
         CheckInternet checkInternet=new CheckInternet();
         if(checkInternet.isConnected(this)) {
             viewModel.generateOTP(phoneEditText.getText().toString());
             finish();
             goToOTPActivity();
         }
-        else
+        else {
             showNetworkError();
+            updateUI(true,1f);
+        }
     }
     public void showNetworkError(){
         ConstraintLayout parent=findViewById(R.id.parent_login);
@@ -54,7 +62,6 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
     public void buttonEnabling(){
-        Button loginButton=findViewById(R.id.login);
         phoneEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -69,13 +76,22 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if(s.toString().length()==10){
-                    loginButton.setEnabled(true);
-                    loginButton.setAlpha(1);
+                    updateUI(true,1f);
                 }else{
-                    loginButton.setEnabled(false);
-                    loginButton.setAlpha(0.3f);
+                    updateUI(false,0.3f);
                 }
             }
         });
+    }
+    public void updateUI(Boolean bool,Float alpha){
+        loginButton.setEnabled(bool);
+        loginButton.setAlpha(alpha);
+    }
+    public void hideKeyboard(){
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

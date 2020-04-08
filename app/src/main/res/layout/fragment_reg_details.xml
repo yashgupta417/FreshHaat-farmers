@@ -1,17 +1,17 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#ffffff"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.example.farmerapp.Fragments.RegisterPhotoFragment">
+    tools:context="com.example.farmerapp.Fragments.RegistrationFragments.RegisterDetailsFragment">
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="309dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="#ffffff"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:layout_marginHorizontal="50dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="4dp">
 
@@ -22,13 +22,15 @@
         <EditText
             android:id="@+id/name"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/reglayout"
-            android:gravity="center"
             android:hint="Name"
-            android:textSize="13sp"
-            android:textColor="#000000"
-            android:textColorHint="#c7c7c7"
+            android:textSize="16sp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/grey"
+            android:maxLines="1"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="25dp"
             android:layout_marginHorizontal="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -36,19 +38,21 @@
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/details_gradient"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="40dp"/>
         <EditText
             android:id="@+id/phone"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/reglayout"
-            android:gravity="center"
-            android:hint="Phone Number(Alternative)"
+            android:paddingHorizontal="25dp"
+            android:paddingVertical="10dp"
+            android:hint="Alternative Mobile No."
             android:inputType="phone"
             android:maxLength="10"
-            android:textColor="#000000"
-            android:textSize="13sp"
-            android:textColorHint="#c7c7c7"
+            android:maxLines="1"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textColorHint="@color/grey"
             android:layout_marginHorizontal="25dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -97,21 +101,22 @@
             app:layout_constraintVertical_bias="0.5" />
         <Button
             android:id="@+id/next"
-            android:layout_width="120dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Next"
             android:textColor="@color/white"
             android:background="@drawable/roundbutton"
             android:enabled="false"
             android:alpha="0.3"
+            android:paddingHorizontal="30dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/phone"
-            android:layout_marginTop="40dp"
-            android:layout_marginBottom="30dp"/>
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

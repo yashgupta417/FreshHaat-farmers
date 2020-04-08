@@ -2,15 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="#ffffff"
-    tools:context="com.example.farmerapp.Fragments.RegisterPhotoFragment">
+    android:layout_height="match_parent"
+    tools:context="com.example.farmerapp.Fragments.RegistrationFragments.RegisterPhotoFragment">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="309dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:background="#ffffff"
+        android:layout_gravity="center"
+        android:background="@color/white"
+        android:layout_marginHorizontal="50dp"
         app:cardCornerRadius="30dp"
         app:cardElevation="4dp">
 
@@ -31,11 +31,12 @@
 
         <Button
             android:id="@+id/next"
-            android:layout_width="120dp"
-            android:layout_height="48dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Next"
+            android:paddingHorizontal="30dp"
             android:textColor="@color/white"
-            android:layout_marginTop="70dp"
+            android:layout_marginTop="40dp"
             android:layout_marginBottom="30dp"
             android:background="@drawable/roundbutton"
             android:enabled="false"

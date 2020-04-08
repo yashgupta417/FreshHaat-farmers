@@ -13,7 +13,7 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
-        <activity android:name=".Activities.HomeActivity"></activity>
+        <activity android:name=".Activities.MainActivity"></activity>
         <activity
             android:name=".Activities.SplashActivity" android:theme="@style/AppTheme" >
             <intent-filter>

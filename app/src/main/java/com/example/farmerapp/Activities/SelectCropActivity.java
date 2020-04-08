@@ -95,7 +95,7 @@ public class SelectCropActivity extends AppCompatActivity {
             public void onChanged(Integer integer) {
                 if(integer==1){
                     updateLocally();
-                    Intent intent=new Intent(getApplicationContext(),HomeActivity.class);
+                    Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent);
                     finish();
                 }else if(integer==-1){
@@ -107,7 +107,7 @@ public class SelectCropActivity extends AppCompatActivity {
         });
     }
     public void skipWork(View view){
-        Intent intent=new Intent(getApplicationContext(),HomeActivity.class);
+        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);
         finish();
     }

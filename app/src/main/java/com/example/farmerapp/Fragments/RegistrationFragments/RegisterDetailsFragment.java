@@ -1,4 +1,4 @@
-package com.example.farmerapp.Fragments;
+package com.example.farmerapp.Fragments.RegistrationFragments;
 
 import android.os.Bundle;
 
@@ -100,7 +100,7 @@ public class RegisterDetailsFragment extends Fragment {
         });
     }
     public void updateNextButtonStatus(){
-        if(isnameok && isphoneok){
+        if(isnameok){
             next.setEnabled(true);
             next.setAlpha(1f);
         }else{

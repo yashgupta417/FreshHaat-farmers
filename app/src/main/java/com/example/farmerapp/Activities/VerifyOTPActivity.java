@@ -5,9 +5,11 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,6 +29,8 @@ public class VerifyOTPActivity extends AppCompatActivity {
     String mobileNumber;
     String otp;
     TextView otpTimer,resendOtp;
+    Button verifyButton;
+    ConstraintLayout parent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +39,8 @@ public class VerifyOTPActivity extends AppCompatActivity {
         mobileNumber =getIntent().getStringExtra("mobileNumber");
         otpTimer=findViewById(R.id.otp_timer);
         resendOtp=findViewById(R.id.resend_otp);
+        verifyButton=findViewById(R.id.verify);
+        parent=findViewById(R.id.verify_otp_parent);
 
         OTPSetup otpSetup=new OTPSetup(this);
         otpSetup.setup();
@@ -42,7 +48,11 @@ public class VerifyOTPActivity extends AppCompatActivity {
             @Override
             public void onChanged(String s) {
                 otp=s;
-                verifyButtonEnabling();
+                if(otp.length()==5){
+                    updateUI(true,1f);
+                }else{
+                    updateUI(false,0.3f);
+                }
             }
         });
         viewModel.startTimer();
@@ -78,32 +88,25 @@ public class VerifyOTPActivity extends AppCompatActivity {
             showNetworkError();
     }
     public void showNetworkError(){
-        ConstraintLayout parent=findViewById(R.id.verify_otp_parent);
         Snackbar snackbar=Snackbar.make(parent,"No Internet Connection",Snackbar.LENGTH_SHORT);
         snackbar.show();
     }
-    public void verifyButtonEnabling(){
-        Button verifyButton=findViewById(R.id.verify);
-        if(otp.length()==5){
-            verifyButton.setEnabled(true);
-            verifyButton.setAlpha(1);
-        }else{
-            verifyButton.setEnabled(false);
-            verifyButton.setAlpha(0.3f);
-        }
+    public void updateUI(Boolean bool,Float alpha){
+        verifyButton.setEnabled(bool);
+        verifyButton.setAlpha(alpha);
     }
     public void verify(View view){
+        updateUI(false,0.3f);
+        hideKeyboard();
         viewModel.verifyOTP(mobileNumber,otp);
         viewModel.checkResult().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer result) {
                 if(result==1){
-                    Toast.makeText(VerifyOTPActivity.this, "Verified", Toast.LENGTH_SHORT).show();
-                    finish();
                     goToSignUpActivity();
-
                 }else if(result==-1){
                     Toast.makeText(VerifyOTPActivity.this, "Wrong OTP", Toast.LENGTH_SHORT).show();
+                    updateUI(true,1f);
                 }
             }
         });
@@ -111,5 +114,13 @@ public class VerifyOTPActivity extends AppCompatActivity {
     public void goToSignUpActivity(){
         Intent intent=new Intent(getApplicationContext(), RegisterDetailsActivity.class);
         startActivity(intent);
+        finish();
+    }
+    public void hideKeyboard(){
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

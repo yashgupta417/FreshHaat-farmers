@@ -9,8 +9,8 @@
     <ImageView
         android:id="@+id/register_header"
         android:layout_width="match_parent"
-        android:layout_height="155dp"
-        android:scaleType="centerCrop"
+        android:layout_height="120dp"
+        android:scaleType="fitXY"
         android:src="@drawable/header_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -19,28 +19,28 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
+    <ImageView
+         android:id="@+id/register_footer"
+         android:layout_width="match_parent"
+         android:layout_height="120dp"
+         android:scaleType="fitXY"
+         android:src="@drawable/footer_2"
+         app:layout_constraintBottom_toBottomOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintHorizontal_bias="0.5"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintTop_toTopOf="parent"
+         app:layout_constraintVertical_bias="1" />
     <com.example.farmerapp.ViewPager.RegistrationViewPager
         android:id="@+id/regTabs"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/register_footer"
+        app:layout_constraintBottom_toTopOf="@id/register_footer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/register_header" />
 
-    <ImageView
-        android:id="@+id/register_footer"
-        android:layout_width="match_parent"
-        android:layout_height="155dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/footer_2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1" />
     <pl.droidsonroids.gif.GifImageView
         android:id="@+id/load"
         android:layout_width="40dp"

@@ -1,4 +1,4 @@
-package com.example.farmerapp.Fragments;
+package com.example.farmerapp.Fragments.RegistrationFragments;
 
 import android.content.Intent;
 import android.os.Bundle;

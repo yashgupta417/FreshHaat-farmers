@@ -1,4 +1,4 @@
-package com.example.farmerapp.Fragments;
+package com.example.farmerapp.Fragments.RegistrationFragments;
 
 import android.Manifest;
 import android.content.Intent;

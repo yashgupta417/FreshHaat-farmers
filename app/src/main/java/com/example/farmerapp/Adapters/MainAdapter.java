@@ -6,13 +6,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.farmerapp.Fragments.RegistrationFragments.RegisterAddress1Fragment;
-import com.example.farmerapp.Fragments.RegistrationFragments.RegisterAddress2Fragment;
-import com.example.farmerapp.Fragments.RegistrationFragments.RegisterDetailsFragment;
-import com.example.farmerapp.Fragments.RegistrationFragments.RegisterPhotoFragment;
+import com.example.farmerapp.Fragments.MainFragments.HomeFragment;
+import com.example.farmerapp.Fragments.MainFragments.PaymentFragment;
+import com.example.farmerapp.Fragments.MainFragments.RequestFragment;
 
-public class RegisterDetailsAdapter extends FragmentStatePagerAdapter {
-    public RegisterDetailsAdapter(@NonNull FragmentManager fm, int behavior) {
+
+public class MainAdapter extends FragmentStatePagerAdapter {
+    public MainAdapter(@NonNull FragmentManager fm, int behavior) {
         super(fm, behavior);
     }
 
@@ -21,19 +21,17 @@ public class RegisterDetailsAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         Fragment fragment = new Fragment();
         switch(position){
-            case 0: fragment = new RegisterPhotoFragment();break;
-            case 1: fragment = new RegisterDetailsFragment();break;
-            case 2: fragment = new RegisterAddress1Fragment();break;
-            case 3: fragment = new RegisterAddress2Fragment();break;
+            case 0: fragment = new HomeFragment();break;
+            case 1: fragment = new RequestFragment();break;
+            case 2: fragment = new PaymentFragment();break;
         }
         return fragment;
     }
 
     @Override
     public int getCount() {
-        return 4;
+        return 3;
     }
-
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
@@ -44,8 +42,6 @@ public class RegisterDetailsAdapter extends FragmentStatePagerAdapter {
                 return "Fragment 2";
             case 2:
                 return "Fragment 3";
-            case 3:
-                return "Fragment 4";
         }
         return null;
     }
