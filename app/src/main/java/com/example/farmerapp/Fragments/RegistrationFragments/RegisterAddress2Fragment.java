@@ -1,5 +1,6 @@
 package com.example.farmerapp.Fragments.RegistrationFragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,8 +12,10 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -79,6 +82,20 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
                 viewModel.registerFarmerDetails();
                 updateUI(false,0.3f,View.VISIBLE);
                 checkifUploadDone();
+            }
+        });
+        citySpinner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard();
+                return false;
+            }
+        });
+        stateSpinner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard();
+                return false;
             }
         });
     }
@@ -169,6 +186,13 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
         }else{
             next.setEnabled(false);
             next.setAlpha(0.3f);
+        }
+    }
+    public void hideKeyboard(){
+        View view = getActivity().getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 
