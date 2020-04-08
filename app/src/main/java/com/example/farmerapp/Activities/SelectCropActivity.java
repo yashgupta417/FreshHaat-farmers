@@ -32,15 +32,16 @@ public class SelectCropActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     SelectCropViewModel viewModel;
     GifImageView load;
-    ArrayList<String> selectedCrops;
+    ArrayList<Crop> selectedCrops;
     Button next;
     TextView skip;
     ConstraintLayout parent;
+    CropAdapter adapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_crop);
-        selectedCrops=new ArrayList<String>();
+        selectedCrops=new ArrayList<Crop>();
         load=findViewById(R.id.load);
         next=findViewById(R.id.next);
         skip=findViewById(R.id.skip);
@@ -63,29 +64,32 @@ public class SelectCropActivity extends AppCompatActivity {
     }
     public void setAdapter(List<Crop> crops){
         load.setVisibility(View.GONE);
-        CropAdapter adapter=new CropAdapter((ArrayList<Crop>) crops,getApplication());
+        adapter=new CropAdapter((ArrayList<Crop>) crops,getApplication());
         recyclerView.setAdapter(adapter);
         adapter.setOnItemClickListener(new CropAdapter.onItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                if(!recyclerView.isEnabled())
+                    return;
                 adapter.selected.set(position,!adapter.selected.get(position));
                 adapter.notifyItemChanged(position);
+                Crop crop=new Crop();
+                crop.setId(adapter.crops.get(position).get_id());
                 if(adapter.selected.get(position)){
-                    selectedCrops.add(adapter.crops.get(position).get_id());
+                    selectedCrops.add(crop);
                 }else{
-                    selectedCrops.remove(adapter.crops.get(position).get_id());
+                    selectedCrops.remove(crop);
                 }
                 if(selectedCrops.size()>0){
-                    next.setEnabled(true);
-                    next.setAlpha(1f);
+                    updateUI(true,1f,true,true);
                 }else{
-                    next.setEnabled(false);
-                    next.setAlpha(0.3f);
+                    updateUI(false,0f,true,true);
                 }
             }
         });
     }
     public void nextWork(View view){
+        updateUI(false,0.3f,false,false);
         viewModel.postSelectedCrops(selectedCrops).observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
@@ -97,17 +101,24 @@ public class SelectCropActivity extends AppCompatActivity {
                 }else if(integer==-1){
                     Snackbar snackbar=Snackbar.make(parent,"No Internet Connection",Snackbar.LENGTH_SHORT);
                     snackbar.show();
+                    updateUI(true,1f,true,true);
                 }
             }
         });
     }
-    public void skipWork(){
+    public void skipWork(View view){
         Intent intent=new Intent(getApplicationContext(),HomeActivity.class);
         startActivity(intent);
         finish();
     }
     public void updateLocally(){
         SharedPreferences sharedPreferences=getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-        sharedPreferences.edit().putBoolean("crops_selected",true);
+        sharedPreferences.edit().putBoolean("crops_selected",true).apply();
+    }
+    public void updateUI(Boolean nextBool,Float nextAlpha,Boolean skipBool,Boolean recyclerViewBool){
+        next.setEnabled(nextBool);
+        next.setAlpha(nextAlpha);
+        skip.setEnabled(skipBool);
+        recyclerView.setEnabled(recyclerViewBool);
     }
 }

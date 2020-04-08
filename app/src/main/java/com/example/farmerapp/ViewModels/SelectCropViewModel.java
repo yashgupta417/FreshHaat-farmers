@@ -23,7 +23,7 @@ public class SelectCropViewModel extends AndroidViewModel {
         return repository.getCrops();
     }
 
-    public LiveData<Integer> postSelectedCrops(ArrayList<String> crops){
+    public LiveData<Integer> postSelectedCrops(ArrayList<Crop> crops){
         Farmer farmer=new Farmer();
         farmer.setCrops(crops);
         return repository.postSelectedCrops(farmer);

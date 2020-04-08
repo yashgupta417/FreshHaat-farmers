@@ -9,8 +9,8 @@
     <ImageView
         android:id="@+id/register_header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitStart"
+        android:layout_height="155dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/header_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -32,8 +32,8 @@
     <ImageView
         android:id="@+id/register_footer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scaleType="fitEnd"
+        android:layout_height="155dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/footer_2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

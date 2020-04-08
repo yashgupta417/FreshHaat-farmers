@@ -80,6 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Skip"
+            android:onClick="skipWork"
             android:enabled="false"
             android:visibility="invisible"
             android:textColor="@color/grey"

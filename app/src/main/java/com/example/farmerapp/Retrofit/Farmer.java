@@ -32,7 +32,7 @@ public class Farmer {
     private String state;
     @SerializedName("crops")
     @Expose
-    private ArrayList<String> crops;
+    private ArrayList<Crop> crops;
 
     public Farmer() {
     }
@@ -93,13 +93,6 @@ public class Farmer {
         this.state = state;
     }
 
-    public ArrayList<String> getCrops() {
-        return crops;
-    }
-
-    public void setCrops(ArrayList<String> crops) {
-        this.crops = crops;
-    }
 
     public String getName() {
         return name;
@@ -107,5 +100,13 @@ public class Farmer {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public ArrayList<Crop> getCrops() {
+        return crops;
+    }
+
+    public void setCrops(ArrayList<Crop> crops) {
+        this.crops = crops;
     }
 }

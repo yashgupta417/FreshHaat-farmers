@@ -1,6 +1,7 @@
 package com.example.farmerapp.Repositories;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -53,11 +54,11 @@ public class SelectCropRepository {
             @Override
             public void onResponse(Call<Farmer> call, Response<Farmer> response) {
                 if(response.isSuccessful()){
+                    Toast.makeText(application, "Done", Toast.LENGTH_SHORT).show();
                     uploadStatus.setValue(1);
                     return;
                 }
                 uploadStatus.setValue(-1);
-
             }
 
             @Override
