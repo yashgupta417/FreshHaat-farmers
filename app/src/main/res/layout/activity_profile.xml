@@ -38,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
+                android:id="@+id/gradient"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:src="@drawable/gradient"
@@ -59,15 +60,26 @@
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
-
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintTop_toBottomOf="@id/gradient"
+                app:layout_constraintLeft_toRightOf="@id/image"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintHorizontal_bias="1.0"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"/>
             <LinearLayout
+                android:id="@+id/ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingHorizontal="25dp"
                 android:paddingVertical="10dp"
                 android:layout_marginTop="10dp"
-                android:layout_marginBottom="30dp"
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintTop_toBottomOf="@id/image"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -165,7 +177,7 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="100"
+                        android:layout_weight="20"
                         android:text="8488998888 (Alternate No.)"
                         android:maxLines="1"
                         android:inputType="phone"
@@ -175,8 +187,8 @@
                         android:paddingHorizontal="25dp"
                         android:background="@drawable/boundary_grey_back"/>
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_edit"
                         android:layout_marginLeft="15dp"
                         android:layout_gravity="center_vertical"
@@ -196,7 +208,7 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="100"
+                        android:layout_weight="20"
                         android:text="XXXXXXXX (Optional)"
                         android:maxLines="1"
                         android:textSize="15sp"
@@ -205,8 +217,8 @@
                         android:paddingHorizontal="25dp"
                         android:background="@drawable/boundary_grey_back"/>
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_edit"
                         android:layout_marginLeft="15dp"
                         android:layout_gravity="center_vertical"
@@ -226,7 +238,7 @@
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="100"
+                        android:layout_weight="20"
                         android:text="Address"
                         android:gravity="start"
                         android:minLines="3"
@@ -236,14 +248,27 @@
                         android:paddingHorizontal="25dp"
                         android:background="@drawable/boundary_grey_back"/>
                     <ImageView
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_edit"
                         android:layout_marginLeft="15dp"
                         android:layout_gravity="top"
                         android:layout_weight="1"/>
                 </LinearLayout>
             </LinearLayout>
+            <Button
+                android:id="@+id/save_changes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Save Changes"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/gradient"
+                app:layout_constraintTop_toBottomOf="@id/ll"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 
