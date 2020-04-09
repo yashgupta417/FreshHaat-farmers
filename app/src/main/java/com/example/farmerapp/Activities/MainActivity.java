@@ -14,6 +14,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.farmerapp.Adapters.MainAdapter;
@@ -21,6 +22,8 @@ import com.example.farmerapp.R;
 import com.example.farmerapp.ViewModels.MainViewModel;
 import com.example.farmerapp.ViewPager.MainViewPager;
 import com.google.android.material.navigation.NavigationView;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     DrawerLayout drawer;
@@ -41,7 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.setNavigationItemSelectedListener(this);
 
         setUpDrawer();
-
+        activateNavigationHeader();
         viewModel= ViewModelProviders.of(this).get(MainViewModel.class);
 
     }
@@ -67,7 +70,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
+    public void activateNavigationHeader(){
+        View v=navigationView.getHeaderView(0);
+        CircleImageView imageView=v.findViewById(R.id.image);
+        imageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getApplicationContext(),ProfileActivity.class);
+                startActivity(intent);
+               // drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+    }
 
     @Override
     public void onBackPressed() {
