@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.example.farmerapp.Activities.RegisterDetailsActivity;
@@ -41,12 +42,14 @@ public class RegisterPhotoFragment extends Fragment {
     CircleImageView profileImage;
     Button next;
     Uri image;
+    TextView skip;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=  inflater.inflate(R.layout.fragment_reg_photo, container, false);
         chooseImageButton=v.findViewById(R.id.upload);
         profileImage=v.findViewById(R.id.photo);
         next=v.findViewById(R.id.next);
+        skip=v.findViewById(R.id.skip);
         chooseImageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,9 +62,16 @@ public class RegisterPhotoFragment extends Fragment {
                 ((RegisterDetailsActivity)getActivity()).scrollPager(1);
             }
         });
+        skip.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((RegisterDetailsActivity)getActivity()).scrollPager(1);
+            }
+        });
+
         //Small hack!but should not be needed...
         if(viewModel.image!=null){
-            updateUI(image);
+            updateUI(viewModel.image,true,1f,false,0f);
         }
         return v;
     }
@@ -83,14 +93,16 @@ public class RegisterPhotoFragment extends Fragment {
             image=data.getData();
             if(image!=null){
                 viewModel.image=image;
-                updateUI(image);
+                updateUI(image,true,1f,false,0f);
             }
         }
     }
-    public void updateUI(Uri image){
+    public void updateUI(Uri image,Boolean nextBool,Float nextAlpha,Boolean skipBool,Float skipAlpha){
         Glide.with(getActivity()).load(image).into(profileImage);
-        next.setEnabled(true);
-        next.setAlpha(1);
+        next.setEnabled(nextBool);
+        next.setAlpha(nextAlpha);
+        skip.setAlpha(skipAlpha);
+        skip.setEnabled(skipBool);
     }
     public void chooseImage(){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

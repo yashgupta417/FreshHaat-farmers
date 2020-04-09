@@ -27,15 +27,11 @@ public class SplashActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences=getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
         Boolean isLoggedIn=sharedPreferences.getBoolean("is_logged_in",false);
         Boolean isRegistrationDone=sharedPreferences.getBoolean("is_registration_done",false);
-        Boolean cropsSelected=sharedPreferences.getBoolean("crops_selected",false);
         Intent intent;
         if(!isLoggedIn){
             intent=new Intent(getApplicationContext(),LoginActivity.class);
         }else if(!isRegistrationDone){
             intent=new Intent(getApplicationContext(),RegisterDetailsActivity.class);
-        }
-        else  if(!cropsSelected){
-            intent=new Intent(getApplicationContext(),SelectCropActivity.class);
         }
         else{
             intent=new Intent(getApplicationContext(),MainActivity.class);

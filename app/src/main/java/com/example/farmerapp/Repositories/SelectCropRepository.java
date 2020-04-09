@@ -54,7 +54,7 @@ public class SelectCropRepository {
             @Override
             public void onResponse(Call<Farmer> call, Response<Farmer> response) {
                 if(response.isSuccessful()){
-                    Toast.makeText(application, "Done", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(application, "W", Toast.LENGTH_SHORT).show();
                     uploadStatus.setValue(1);
                     return;
                 }

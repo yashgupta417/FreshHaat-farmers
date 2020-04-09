@@ -19,6 +19,6 @@ public interface UserApi {
     Call<User> getUser();
 
     @GET("api/user/logout")
-    Call<User> logout();
+    Call<ResponseBody> logout();
 
 }

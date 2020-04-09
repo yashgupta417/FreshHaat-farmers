@@ -40,8 +40,7 @@ public class LoginActivity extends AppCompatActivity {
     public void login(View view){
         updateUI(false,0.3f);
         hideKeyboard();
-        CheckInternet checkInternet=new CheckInternet();
-        if(checkInternet.isConnected(this)) {
+        if(CheckInternet.isConnected(this)) {
             viewModel.generateOTP(phoneEditText.getText().toString());
             finish();
             goToOTPActivity();

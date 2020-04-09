@@ -98,7 +98,6 @@ public class SelectCropActivity extends AppCompatActivity {
             @Override
             public void onChanged(Integer integer) {
                 if(integer==1){
-                    updateLocally();
                     Intent intent=new Intent(getApplicationContext(),MainActivity.class);
                     startActivity(intent);
                     finish();
@@ -114,10 +113,6 @@ public class SelectCropActivity extends AppCompatActivity {
         Intent intent=new Intent(getApplicationContext(),MainActivity.class);
         startActivity(intent);
         finish();
-    }
-    public void updateLocally(){
-        SharedPreferences sharedPreferences=getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-        sharedPreferences.edit().putBoolean("crops_selected",true).apply();
     }
     public void updateUI(Boolean nextBool,Float nextAlpha,Boolean skipBool,Boolean recyclerViewBool){
         next.setEnabled(nextBool);

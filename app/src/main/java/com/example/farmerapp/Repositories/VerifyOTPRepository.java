@@ -20,34 +20,35 @@ import retrofit2.Response;
 public class VerifyOTPRepository {
     Application application;
     SharedPreferences preferences;
+    public static int  NEW_USER=1;
+    public static int  OLD_USER=2;
     public VerifyOTPRepository(Application application) {
         this.application=application;
         preferences=application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
     }
+    MutableLiveData<Integer> verify;
     public LiveData<Integer> verifyOTP(String mobileNumber, String otp){
-        MutableLiveData<Integer> result=new MutableLiveData<Integer>();
-        User request=new User(mobileNumber);
+        verify=new MutableLiveData<Integer>();
+        User request=new User(mobileNumber);request.setStatus("farmer");
         request.setOtp(otp);
         Call<User> call=RetrofitClient.getInstance(application).create(UserApi.class).verifyOTP(request);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful() && response.body().getVerified()){
-                    result.setValue(1);
-                    preferences.edit().putBoolean("is_logged_in",true).apply();
-                    //getUser();
+                    getUser();
                     return;
                 }else{
-                    result.setValue(-1);
+                    verify.setValue(-1);
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                result.setValue(-1);
+                verify.setValue(-1);
             }
         });
-        return result;
+        return verify;
     }
 
     public LiveData<Integer> generateOTP(String mobileNumber){
@@ -77,7 +78,14 @@ public class VerifyOTPRepository {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful()){
-                    Log.i("*****","working");
+                    preferences.edit().putBoolean("is_logged_in",true).apply();
+                    User user=response.body();
+                    if(user.getNew_user()){
+                        verify.setValue(NEW_USER);//When Farmer Details are not submitted
+                    }else{
+                        verify.setValue(OLD_USER);
+                        preferences.edit().putBoolean("is_registration_done",true).apply();
+                    }
                     return;
                 }
                 Log.i("******","error");

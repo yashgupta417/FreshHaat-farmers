@@ -16,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.farmerapp.R;
+import com.example.farmerapp.Repositories.VerifyOTPRepository;
 import com.example.farmerapp.Utils.CheckInternet;
 import com.example.farmerapp.Utils.OTPSetup;
 import com.example.farmerapp.ViewModels.VerifyOTPViewModel;
@@ -78,8 +79,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
         otpTimer.setText(timeLeft);
     }
     public void resendOTP(View view){
-        CheckInternet checkInternet=new CheckInternet();
-        if(checkInternet.isConnected(this)) {
+        if(CheckInternet.isConnected(this)) {
             viewModel.regenerateOTP(mobileNumber);
             viewModel.startTimer();
         }
@@ -97,20 +97,29 @@ public class VerifyOTPActivity extends AppCompatActivity {
     public void verify(View view){
         updateUI(false,0.3f);
         hideKeyboard();
+        if(!CheckInternet.isConnected(this)) {
+            updateUI(true,1f);
+            showNetworkError();
+            return;
+        }
         viewModel.verifyOTP(mobileNumber,otp).observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer result) {
-                if(result==1){
-                    goToSignUpActivity();
-                }else if(result==-1){
+                if(result== VerifyOTPRepository.NEW_USER){
+                    goToActivity(RegisterDetailsActivity.class);
+                }
+                else if(result==VerifyOTPRepository.OLD_USER){
+                    goToActivity(MainActivity.class);
+                }
+                else if(result==-1){
                     Toast.makeText(VerifyOTPActivity.this, "Wrong OTP", Toast.LENGTH_SHORT).show();
                     updateUI(true,1f);
                 }
             }
         });
     }
-    public void goToSignUpActivity(){
-        Intent intent=new Intent(getApplicationContext(), RegisterDetailsActivity.class);
+    public void goToActivity(Class c){
+        Intent intent=new Intent(getApplicationContext(),c);
         startActivity(intent);
         finish();
     }
