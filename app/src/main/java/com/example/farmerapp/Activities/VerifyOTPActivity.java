@@ -55,8 +55,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 }
             }
         });
-        viewModel.startTimer();
-        viewModel.getTimeLeft().observe(this, new Observer<Long>() {
+        viewModel.startTimer().observe(this, new Observer<Long>() {
             @Override
             public void onChanged(Long milliLeft) {
                 if(milliLeft==0){
@@ -98,8 +97,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
     public void verify(View view){
         updateUI(false,0.3f);
         hideKeyboard();
-        viewModel.verifyOTP(mobileNumber,otp);
-        viewModel.checkResult().observe(this, new Observer<Integer>() {
+        viewModel.verifyOTP(mobileNumber,otp).observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer result) {
                 if(result==1){

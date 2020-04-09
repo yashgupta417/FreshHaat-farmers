@@ -12,5 +12,14 @@
         <item
             android:id="@+id/payments"
             android:title="Payments" />
+        <item
+            android:id="@+id/about"
+            android:title="About" />
+        <item
+            android:id="@+id/refer"
+            android:title="Refer" />
+        <item
+            android:id="@+id/logout"
+            android:title="Logout"/>
     </group>
 </menu>

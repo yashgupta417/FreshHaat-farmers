@@ -1,6 +1,6 @@
 package com.example.farmerapp.API;
 
-import com.example.farmerapp.Retrofit.Verification;
+import com.example.farmerapp.Retrofit.User;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -10,12 +10,15 @@ import retrofit2.http.POST;
 
 public interface UserApi {
     @POST("api/user/otp")
-    Call<ResponseBody> generateOTP(@Body Verification mobileNumber);
+    Call<ResponseBody> generateOTP(@Body User user);
 
     @POST("api/user/otp/verify")
-    Call<Verification> verifyOTP(@Body Verification request);
+    Call<User> verifyOTP(@Body User request);
 
     @GET("api/user/getUser")
-    Call<Verification> getUser();
+    Call<User> getUser();
+
+    @GET("api/user/logout")
+    Call<User> logout();
 
 }

@@ -13,7 +13,7 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
-        <activity android:name=".Activities.MainActivity"></activity>
+        <activity android:name=".Activities.MainActivity" android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activities.SplashActivity" android:theme="@style/AppTheme" >
             <intent-filter>
@@ -22,10 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.SelectCropActivity" />
-        <activity android:name=".Activities.RegisterDetailsActivity" />
-        <activity android:name=".Activities.VerifyOTPActivity" />
-        <activity android:name=".Activities.LoginActivity"></activity>
+        <activity android:name=".Activities.SelectCropActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.RegisterDetailsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".Activities.VerifyOTPActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".Activities.LoginActivity" android:screenOrientation="portrait"></activity>
     </application>
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />

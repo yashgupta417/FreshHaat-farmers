@@ -14,11 +14,9 @@ public class LoginViewModel extends AndroidViewModel {
         super(application);
         loginRepository=new LoginRepository(application);
     }
-    public void generateOTP(String mobileNumber){
-        loginRepository.generateOTP(mobileNumber);
+    public LiveData<Integer> generateOTP(String mobileNumber){
+        return loginRepository.generateOTP(mobileNumber);
     }
-    public LiveData<Integer> getOTPStatus(){
-        return loginRepository.getOTPStatus();
-    }
+
 
 }

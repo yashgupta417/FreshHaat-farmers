@@ -3,7 +3,7 @@ package com.example.farmerapp.Retrofit;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Verification {
+public class User {
 
     @SerializedName("_id")
     @Expose
@@ -32,7 +32,7 @@ public class Verification {
 
 
 
-    public Verification(String mob) {
+    public User(String mob) {
         this.mob = mob;
     }
 

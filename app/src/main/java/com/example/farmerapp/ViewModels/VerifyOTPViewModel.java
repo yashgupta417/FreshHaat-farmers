@@ -15,23 +15,17 @@ import java.util.Locale;
 public class VerifyOTPViewModel extends AndroidViewModel {
 
     VerifyOTPRepository repository;
-    MutableLiveData<Long> timeLeft;
+
     public VerifyOTPViewModel(@NonNull  Application application) {
         super(application);
         repository=new VerifyOTPRepository(application);
-        timeLeft=new MutableLiveData<Long>();
     }
-    public void verifyOTP(String mobileNumber,String otp){
-        repository.verifyOTP(mobileNumber,otp);
+    public LiveData<Integer> verifyOTP(String mobileNumber,String otp){
+        return  repository.verifyOTP(mobileNumber,otp);
     }
 
-    public LiveData<Integer> checkResult(){
-        return repository.checkResult();
-    }
-    public LiveData<Long> getTimeLeft(){
-        return timeLeft;
-    }
-    public void startTimer(){
+    public LiveData<Long> startTimer(){
+        MutableLiveData<Long> timeLeft=new MutableLiveData<Long>();
         long OTP_TIME_LIMIT=1000*120;
         CountDownTimer timer=new CountDownTimer(OTP_TIME_LIMIT,1000) {
             @Override
@@ -44,13 +38,13 @@ public class VerifyOTPViewModel extends AndroidViewModel {
                 timeLeft.setValue(0l);
             }
         }.start();
+
+        return timeLeft;
     }
-    public void regenerateOTP(String mobileNumber){
-        repository.generateOTP(mobileNumber);
+    public LiveData<Integer> regenerateOTP(String mobileNumber){
+       return repository.generateOTP(mobileNumber);
     }
-    public LiveData<Integer> getOTPStatus(){
-        return repository.getOTPStatus();
-    }
+
     public void getUser(){
         repository.getUser();
     }
