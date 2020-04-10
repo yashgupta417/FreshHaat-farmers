@@ -5,13 +5,10 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 
-import com.example.farmerapp.Activities.RegisterDetailsActivity;
 import com.example.farmerapp.Repositories.RegisterDetailsRepository;
-import com.example.farmerapp.Retrofit.Farmer;
+import com.example.farmerapp.Data.Farmer;
 
 
 public class RegisterDetailsViewModel extends AndroidViewModel {

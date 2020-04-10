@@ -6,15 +6,13 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.farmerapp.API.FarmerApi;
-import com.example.farmerapp.API.UserApi;
-import com.example.farmerapp.Retrofit.Farmer;
-import com.example.farmerapp.Retrofit.Image;
+import com.example.farmerapp.Data.Farmer;
+import com.example.farmerapp.Data.Image;
 import com.example.farmerapp.RetrofitClient.RetrofitClient;
 
 import java.io.File;

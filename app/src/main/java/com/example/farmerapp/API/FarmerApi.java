@@ -1,7 +1,7 @@
 package com.example.farmerapp.API;
 
-import com.example.farmerapp.Retrofit.Farmer;
-import com.example.farmerapp.Retrofit.Image;
+import com.example.farmerapp.Data.Farmer;
+import com.example.farmerapp.Data.Image;
 
 import okhttp3.MultipartBody;
 import retrofit2.Call;

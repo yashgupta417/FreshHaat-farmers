@@ -1,4 +1,4 @@
-package com.example.farmerapp.Retrofit;
+package com.example.farmerapp.Data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

@@ -1,6 +1,6 @@
 package com.example.farmerapp.API;
 
-import com.example.farmerapp.Retrofit.User;
+import com.example.farmerapp.Data.User;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;

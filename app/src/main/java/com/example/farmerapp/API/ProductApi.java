@@ -1,6 +1,6 @@
 package com.example.farmerapp.API;
 
-import com.example.farmerapp.Retrofit.Crop;
+import com.example.farmerapp.Data.Crop;
 
 import java.util.List;
 

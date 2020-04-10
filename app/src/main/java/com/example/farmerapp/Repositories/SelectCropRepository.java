@@ -1,16 +1,14 @@
 package com.example.farmerapp.Repositories;
 
 import android.app.Application;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.farmerapp.API.FarmerApi;
 import com.example.farmerapp.API.ProductApi;
-import com.example.farmerapp.Activities.SelectCropActivity;
-import com.example.farmerapp.Retrofit.Crop;
-import com.example.farmerapp.Retrofit.Farmer;
+import com.example.farmerapp.Data.Crop;
+import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.RetrofitClient.RetrofitClient;
 
 import java.util.List;
@@ -18,7 +16,6 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
 
 public class SelectCropRepository {
     Application application;

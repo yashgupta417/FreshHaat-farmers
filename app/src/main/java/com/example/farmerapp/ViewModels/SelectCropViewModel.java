@@ -7,8 +7,8 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.example.farmerapp.Repositories.SelectCropRepository;
-import com.example.farmerapp.Retrofit.Crop;
-import com.example.farmerapp.Retrofit.Farmer;
+import com.example.farmerapp.Data.Crop;
+import com.example.farmerapp.Data.Farmer;
 
 import java.util.ArrayList;
 import java.util.List;

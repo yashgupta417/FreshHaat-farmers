@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.farmerapp.API.UserApi;
-import com.example.farmerapp.Retrofit.User;
 import com.example.farmerapp.RetrofitClient.RetrofitClient;
 
 import okhttp3.ResponseBody;
