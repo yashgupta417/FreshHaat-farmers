@@ -33,7 +33,7 @@ public class LocationUtil{
     private static final long MIN_DISTANCE_FOR_UPDATE = 10;
     private static final long MIN_TIME_FOR_UPDATE = 1000 * 60 * 2;
     Application application;
-    public boolean has_permission=false;
+    private boolean has_permission=false;
     MutableLiveData<List<Address>> address;
     public LocationUtil(Application application) {
         this.application=application;

@@ -8,21 +8,32 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.lifecycle.LifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Application;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.location.Address;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.farmerapp.Adapters.MainAdapter;
 import com.example.farmerapp.R;
+import com.example.farmerapp.Utils.LocationUtil;
 import com.example.farmerapp.ViewModels.MainViewModel;
 import com.example.farmerapp.ViewPager.MainViewPager;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -33,6 +44,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MainAdapter adapter;
     MainViewModel viewModel;
     Toolbar toolbar;
+    public static TextView addressTextView;
+    public static ImageView locationSymbol;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +53,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         toolbar=findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
+
+        addressTextView=findViewById(R.id.address);
+        locationSymbol=findViewById(R.id.loc);
 
         drawer=findViewById(R.id.drawer);
         navigationView=findViewById(R.id.nav_view);
@@ -101,6 +117,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             @Override
             public void onChanged(Integer integer) {
                 if(integer==1){
+                    SharedPreferences preferences=getSharedPreferences(getPackageName(),Context.MODE_PRIVATE);
+                    preferences.edit().putBoolean(SplashActivity.IS_LOGGED_IN,false).apply();
+                    preferences.edit().putBoolean(SplashActivity.IS_REGISTRATION_DONE,false).apply();
                     goToHome();
                 }else if(integer==-1){
                     Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
@@ -112,5 +131,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public static void  showLocation(String locality,String subLocality){
+        addressTextView.setVisibility(View.VISIBLE);
+        locationSymbol.setVisibility(View.VISIBLE);
+        addressTextView.setText(locality+","+subLocality);
+    }
+    public static void hideLocation(){
+        addressTextView.setVisibility(View.INVISIBLE);
+        locationSymbol.setVisibility(View.INVISIBLE);
     }
 }

@@ -22,7 +22,31 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintVertical_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                    <TextView
+                        android:id="@+id/address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Location"
+                        android:textSize="16sp"
+                        android:textColor="@color/white"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/loc"
+                        android:layout_marginRight="10dp"/>
+                    <ImageView
+                        android:id="@+id/loc"
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_location_white"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"/>
+
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
         <com.example.farmerapp.ViewPager.MainViewPager
             android:id="@+id/view_pager"
             android:layout_width="match_parent"

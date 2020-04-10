@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.Repositories.MainRepository;
 
 public class MainViewModel extends AndroidViewModel {
@@ -16,5 +17,8 @@ public class MainViewModel extends AndroidViewModel {
     }
     public LiveData<Integer> logout(){
         return repository.logout();
+    }
+    public LiveData<Farmer> getFarmer(){
+        return repository.getFarmer();
     }
 }

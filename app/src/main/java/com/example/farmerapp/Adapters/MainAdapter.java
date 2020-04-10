@@ -20,10 +20,10 @@ public class MainAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
         Fragment fragment = new Fragment();
-        switch(position){
-            case 0: fragment = new HomeFragment();break;
-            case 1: fragment = new RequestFragment();break;
-            case 2: fragment = new PaymentFragment();break;
+        switch (position){
+            case 0:fragment=new HomeFragment();break;
+            case 1:fragment=new RequestFragment();break;
+            case 2:fragment=new PaymentFragment();break;
         }
         return fragment;
     }

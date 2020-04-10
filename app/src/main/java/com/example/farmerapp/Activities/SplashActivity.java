@@ -11,7 +11,8 @@ import android.os.Handler;
 import com.example.farmerapp.R;
 
 public class SplashActivity extends AppCompatActivity {
-
+    public static String IS_LOGGED_IN="is_logged_in";
+    public static String IS_REGISTRATION_DONE="is_registration_done";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +26,8 @@ public class SplashActivity extends AppCompatActivity {
     }
     public void enter(){
         SharedPreferences sharedPreferences=getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-        Boolean isLoggedIn=sharedPreferences.getBoolean("is_logged_in",false);
-        Boolean isRegistrationDone=sharedPreferences.getBoolean("is_registration_done",false);
+        Boolean isLoggedIn=sharedPreferences.getBoolean(IS_LOGGED_IN,false);
+        Boolean isRegistrationDone=sharedPreferences.getBoolean(IS_REGISTRATION_DONE,false);
         Intent intent;
         if(!isLoggedIn){
             intent=new Intent(getApplicationContext(),LoginActivity.class);
