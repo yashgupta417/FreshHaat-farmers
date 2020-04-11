@@ -91,6 +91,7 @@
                     app:cardCornerRadius="25dp"
                     app:cardElevation="4dp">
                     <RelativeLayout
+                        android:id="@+id/sell_vegetables"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <ImageView
@@ -116,6 +117,7 @@
                     app:cardCornerRadius="25dp"
                     app:cardElevation="4dp">
                     <RelativeLayout
+                        android:id="@+id/sell_fruits"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent">
                         <ImageView

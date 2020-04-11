@@ -1,5 +1,6 @@
 package com.example.farmerapp.Fragments.MainFragments;
 
+import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
 
@@ -13,8 +14,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.example.farmerapp.Activities.MainActivity;
+import com.example.farmerapp.Activities.SellActivity;
 import com.example.farmerapp.Adapters.SellCropAdapter;
 import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.R;
@@ -33,11 +36,13 @@ public class HomeFragment extends Fragment {
     SellCropAdapter adapter;
     MainViewModel viewModel;
     GifImageView load;
+    RelativeLayout sellFruitsRL,sellVegetablesRL;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView=v.findViewById(R.id.suggested_crops_recylerview);
         load=v.findViewById(R.id.load);
+        setClickListeners(v);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         recyclerView.setHasFixedSize(true);
         viewModel= ViewModelProviders.of(this).get(MainViewModel.class);
@@ -45,7 +50,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(Farmer farmer) {
                 load.setVisibility(View.GONE);
-                adapter=new SellCropAdapter(farmer.getCrops(),getContext());
+                adapter=new SellCropAdapter(farmer.getCrops(),getContext(),SellCropAdapter.NORMAL);
                 recyclerView.setAdapter(adapter);
             }
         });
@@ -64,5 +69,25 @@ public class HomeFragment extends Fragment {
                 }
             });
         }
+    }
+    public void setClickListeners(View v){
+     sellFruitsRL=v.findViewById(R.id.sell_fruits);
+     sellVegetablesRL=v.findViewById(R.id.sell_vegetables);
+     sellFruitsRL.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             Intent intent=new Intent(getActivity().getApplicationContext(), SellActivity.class);
+             intent.putExtra(MainActivity.PRODUCT_TYPE,MainActivity.FRUITS);
+             getActivity().startActivity(intent);
+         }
+     });
+     sellVegetablesRL.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             Intent intent=new Intent(getActivity().getApplicationContext(),SellActivity.class);
+             intent.putExtra(MainActivity.PRODUCT_TYPE,MainActivity.VEGETABLES);
+             getActivity().startActivity(intent);
+         }
+     });
     }
 }

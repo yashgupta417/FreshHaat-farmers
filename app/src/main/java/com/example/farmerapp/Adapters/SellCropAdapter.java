@@ -20,10 +20,14 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
     public ArrayList<Crop> crops;
     public Context context;
     private onItemClickListener mlistener;
+    public String type="type";
+    public static String GRID="grid";
+    public static String NORMAL="normal";
 
-    public SellCropAdapter(ArrayList<Crop> crops, Context context) {
+    public SellCropAdapter(ArrayList<Crop> crops, Context context,String type) {
         this.crops = crops;
         this.context = context;
+        this.type=type;
     }
 
     public interface onItemClickListener{
@@ -64,7 +68,12 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
     @NonNull
     @Override
     public SellCropViewModel onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v= LayoutInflater.from(parent.getContext()).inflate(R.layout.sell_crops_item_layout,parent,false);
+        View v;
+        if(type.equals(NORMAL)) {
+            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sell_crops_item_layout, parent, false);
+        }else{
+            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sell_crops_item_layout_grid, parent, false);
+        }
         SellCropViewModel myViewHolder=new SellCropViewModel(v,mlistener);
         return myViewHolder;
     }

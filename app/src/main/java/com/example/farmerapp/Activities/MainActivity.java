@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     Toolbar toolbar;
     public static TextView addressTextView;
     public static ImageView locationSymbol;
+    public static String FRUITS="fruits";
+    public static String VEGETABLES="vegetables";
+    public static String PRODUCT_TYPE="product_type";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,7 +114,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             super.onBackPressed();
         }
     }
-
     public void logout(){
         viewModel.logout().observe(this, new Observer<Integer>() {
             @Override
