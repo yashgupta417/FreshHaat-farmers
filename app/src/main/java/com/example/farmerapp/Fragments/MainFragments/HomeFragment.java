@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.example.farmerapp.Activities.CartActivity;
 import com.example.farmerapp.Activities.MainActivity;
 import com.example.farmerapp.Activities.SellActivity;
 import com.example.farmerapp.Adapters.SellCropAdapter;
@@ -26,6 +27,7 @@ import com.example.farmerapp.R;
 import com.example.farmerapp.Utils.LocalCart;
 import com.example.farmerapp.Utils.LocationUtil;
 import com.example.farmerapp.ViewModels.MainViewModel;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,11 +43,13 @@ public class HomeFragment extends Fragment {
     MainViewModel viewModel;
     GifImageView load;
     RelativeLayout sellFruitsRL,sellVegetablesRL;
+    FloatingActionButton cartButton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView=v.findViewById(R.id.suggested_crops_recylerview);
         load=v.findViewById(R.id.load);
+        cartButton=v.findViewById(R.id.cart);
         setClickListeners(v);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         recyclerView.setHasFixedSize(true);
@@ -60,8 +64,9 @@ public class HomeFragment extends Fragment {
         getLocation();
         return v;
     }
-    public void activateAdapter(ArrayList<Crop> crops){
-        adapter=new SellCropAdapter(crops,getContext(),SellCropAdapter.NORMAL);
+    public void activateAdapter(ArrayList<Crop> products){
+        products=LocalCart.syncQuantities(products,getActivity().getApplication());
+        adapter=new SellCropAdapter(products,getContext(),SellCropAdapter.NORMAL);
         recyclerView.setAdapter(adapter);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         adapter.setOnItemClickListener(new SellCropAdapter.onItemClickListener() {
@@ -118,6 +123,13 @@ public class HomeFragment extends Fragment {
          public void onClick(View v) {
              Intent intent=new Intent(getActivity().getApplicationContext(),SellActivity.class);
              intent.putExtra(MainActivity.PRODUCT_TYPE,MainActivity.VEGETABLES);
+             getActivity().startActivity(intent);
+         }
+     });
+     cartButton.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             Intent intent=new Intent(getActivity().getApplicationContext(), CartActivity.class);
              getActivity().startActivity(intent);
          }
      });

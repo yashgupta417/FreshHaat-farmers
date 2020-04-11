@@ -8,7 +8,9 @@ import android.util.Log;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.farmerapp.API.FarmerApi;
 import com.example.farmerapp.API.UserApi;
+import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.Data.User;
 import com.example.farmerapp.RetrofitClient.RetrofitClient;
 
@@ -42,8 +44,7 @@ public class VerifyOTPRepository {
                     if(user.getNew_user()){
                         verify.setValue(NEW_USER);//When Farmer Details are not submitted
                     }else{
-                        verify.setValue(OLD_USER);
-                        preferences.edit().putBoolean("is_registration_done",true).apply();
+                        getFarmer();
                     }
                     return;
                 }else{
@@ -97,5 +98,23 @@ public class VerifyOTPRepository {
             }
         });
     }
+    public void getFarmer(){
+        Call<Farmer> call=RetrofitClient.getInstance(application).create(FarmerApi.class).getFarmer();
+        call.enqueue(new Callback<Farmer>() {
+            @Override
+            public void onResponse(Call<Farmer> call, Response<Farmer> response) {
+                if(response.isSuccessful()){
+                    preferences.edit().putString("userId",response.body().getId()).apply();
+                    preferences.edit().putBoolean("is_registration_done",true).apply();
+                    verify.setValue(OLD_USER);
+                    return;
+                }
+            }
 
+            @Override
+            public void onFailure(Call<Farmer> call, Throwable t) {
+
+            }
+        });
+    }
 }

@@ -1,8 +1,6 @@
 package com.example.farmerapp.Adapters;
 
-import android.app.Application;
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,21 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.farmerapp.Data.Crop;
 import com.example.farmerapp.R;
-import com.example.farmerapp.Utils.LocalCart;
 
 import java.util.ArrayList;
 
-public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCropViewModel> {
+public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartItemViewHolder> {
     public ArrayList<Crop> crops;
     public Context context;
     private onItemClickListener mlistener;
-    public String type="type";
-    public static String GRID="grid";
-    public static String NORMAL="normal";
-    public SellCropAdapter(ArrayList<Crop> crops, Context context,String type) {
+
+    public CartItemAdapter(ArrayList<Crop> crops, Context context) {
         this.crops = crops;
         this.context = context;
-        this.type=type;
     }
 
     public interface onItemClickListener{
@@ -42,18 +36,18 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
         mlistener=listener;
     }
 
-    public static class SellCropViewModel extends RecyclerView.ViewHolder{
-        ImageView image,plus,minus;
-        TextView name,price,unit,count;
-        public SellCropViewModel(@NonNull View itemView,final onItemClickListener listener){
+    public static class CartItemViewHolder extends RecyclerView.ViewHolder{
+        ImageView plus,minus;
+        TextView name,price,unit,count,totalPrice;
+        public CartItemViewHolder(@NonNull View itemView,final onItemClickListener listener){
             super(itemView);
-            image=itemView.findViewById(R.id.image);
             name=itemView.findViewById(R.id.name);
             price=itemView.findViewById(R.id.price);
             plus=itemView.findViewById(R.id.plus);
             minus=itemView.findViewById(R.id.minus);
             unit=itemView.findViewById(R.id.unit);
             count=itemView.findViewById(R.id.count);
+            totalPrice=itemView.findViewById(R.id.total_price);
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
@@ -95,23 +89,15 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
 
     @NonNull
     @Override
-    public SellCropViewModel onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View v;
-        if(type.equals(NORMAL)) {
-            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sell_crops_item_layout, parent, false);
-        }else{
-            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.sell_crops_item_layout_grid, parent, false);
-        }
-        SellCropViewModel myViewHolder=new SellCropViewModel(v,mlistener);
+    public CartItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.cart_item_layout, parent, false);
+        CartItemViewHolder myViewHolder=new CartItemViewHolder(v,mlistener);
         return myViewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SellCropViewModel holder, int position) {
+    public void onBindViewHolder(@NonNull CartItemViewHolder holder, int position) {
         Crop crop=crops.get(position);
-        if(crop.getImage()!=null){
-            Glide.with(context).load(crop.getImage()).into(holder.image);
-        }
 
         holder.name.setText(crop.getName().substring(0,1).toUpperCase()+crop.getName().substring(1).toLowerCase());
         holder.price.setText(context.getResources().getString(R.string.Rs)+" "+Float.toString(crop.getPrice()));
@@ -126,6 +112,8 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
             holder.minus.setEnabled(false);
             holder.minus.setAlpha(0.3f);
         }
+        Float totalPrice=crop.getQuantity()*crop.getPrice();
+        holder.totalPrice.setText(Float.toString(totalPrice));
     }
     @Override
     public int getItemCount() {

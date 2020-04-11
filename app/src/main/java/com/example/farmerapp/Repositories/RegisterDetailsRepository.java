@@ -89,7 +89,7 @@ public class RegisterDetailsRepository {
             @Override
             public void onResponse(Call<Farmer> call, Response<Farmer> response) {
                 if(response.isSuccessful()){
-                    //Toast.makeText(application, "Details uploaded", Toast.LENGTH_SHORT).show();
+                    preferences.edit().putString("userId",response.body().getId()).apply();
                     preferences.edit().putBoolean("is_registration_done",true).apply();
                     uploadStatus.setValue(1);
                 }

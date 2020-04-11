@@ -19,13 +19,6 @@ public class Cart {
     public Cart() {
     }
 
-    public ArrayList<Crop> getCrops() {
-        return products;
-    }
-
-    public void setCrops(ArrayList<Crop> cart) {
-        this.products = products;
-    }
 
     public Float getTotalPrice() {
         return totalPrice;
@@ -41,5 +34,13 @@ public class Cart {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public ArrayList<Crop> getProducts() {
+        return products;
+    }
+
+    public void setProducts(ArrayList<Crop> products) {
+        this.products = products;
     }
 }
