@@ -22,26 +22,6 @@ public class MainRepository {
         this.application=application;
         farmer=new MutableLiveData<Farmer>();
     }
-    public LiveData<Integer> logout(){
-        MutableLiveData<Integer> requestStatus=new MutableLiveData<Integer>();
-        requestStatus.setValue(0);
-        Call<ResponseBody> call= RetrofitClient.getInstance(application).create(UserApi.class).logout();
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                if(response.code()==200){
-                    requestStatus.setValue(1);
-                    return;
-                }
-            }
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                requestStatus.setValue(-1);
-                Log.i("*********88",t.getLocalizedMessage());
-            }
-        });
-        return requestStatus;
-    }
     MutableLiveData<Farmer> farmer;
     public LiveData<Farmer> getFarmer(){
         Call<Farmer> call=RetrofitClient.getInstance(application).create(FarmerApi.class).getFarmer();

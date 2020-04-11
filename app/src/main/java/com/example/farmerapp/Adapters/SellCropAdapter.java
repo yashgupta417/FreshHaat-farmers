@@ -112,7 +112,7 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
         }
         holder.name.setText(crop.getName().substring(0,1).toUpperCase()+crop.getName().substring(1).toLowerCase());
         holder.price.setText(context.getResources().getString(R.string.Rs)+" "+Float.toString(crop.getPrice()));
-        holder.unit.setText("per "+crop.getUnit());
+        holder.unit.setText(" per "+crop.getUnit());
         if(crop.getQuantity()>0){
             holder.count.setText(Integer.toString(crop.getQuantity()));
             holder.count.setVisibility(View.VISIBLE);

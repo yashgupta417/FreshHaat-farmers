@@ -115,20 +115,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
     }
     public void logout(){
-        viewModel.logout().observe(this, new Observer<Integer>() {
-            @Override
-            public void onChanged(Integer integer) {
-                if(integer==1){
-                    SharedPreferences preferences=getSharedPreferences(getPackageName(),Context.MODE_PRIVATE);
-                    preferences.edit().putBoolean(SplashActivity.IS_LOGGED_IN,false).apply();
-                    preferences.edit().putBoolean(SplashActivity.IS_REGISTRATION_DONE,false).apply();
-                    preferences.edit().putString(SplashActivity.TOKEN,null).apply();
-                    goToHome();
-                }else if(integer==-1){
-                    Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        SharedPreferences preferences=getSharedPreferences(getPackageName(),Context.MODE_PRIVATE);
+        preferences.edit().putBoolean(SplashActivity.IS_LOGGED_IN,false).apply();
+        preferences.edit().putBoolean(SplashActivity.IS_REGISTRATION_DONE,false).apply();
+        preferences.edit().putString(SplashActivity.TOKEN,null).apply();
+        goToHome();
     }
     public void goToHome(){
         Intent intent=new Intent(getApplicationContext(),LoginActivity.class);

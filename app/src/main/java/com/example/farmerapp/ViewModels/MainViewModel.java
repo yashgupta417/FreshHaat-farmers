@@ -15,9 +15,6 @@ public class MainViewModel extends AndroidViewModel {
         super(application);
         repository=new MainRepository(application);
     }
-    public LiveData<Integer> logout(){
-        return repository.logout();
-    }
     public LiveData<Farmer> getFarmer(){
         return repository.getFarmer();
     }
