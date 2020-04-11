@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,11 +20,14 @@ import android.widget.RelativeLayout;
 import com.example.farmerapp.Activities.MainActivity;
 import com.example.farmerapp.Activities.SellActivity;
 import com.example.farmerapp.Adapters.SellCropAdapter;
+import com.example.farmerapp.Data.Crop;
 import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.R;
+import com.example.farmerapp.Utils.LocalCart;
 import com.example.farmerapp.Utils.LocationUtil;
 import com.example.farmerapp.ViewModels.MainViewModel;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -50,15 +54,16 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(Farmer farmer) {
                 load.setVisibility(View.GONE);
-                activateAdapter(farmer);
+                activateAdapter(farmer.getCrops());
             }
         });
         getLocation();
         return v;
     }
-    public void activateAdapter(Farmer farmer){
-        adapter=new SellCropAdapter(farmer.getCrops(),getContext(),SellCropAdapter.NORMAL);
+    public void activateAdapter(ArrayList<Crop> crops){
+        adapter=new SellCropAdapter(crops,getContext(),SellCropAdapter.NORMAL);
         recyclerView.setAdapter(adapter);
+        ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         adapter.setOnItemClickListener(new SellCropAdapter.onItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -67,12 +72,20 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onIncrementClick(int position) {
-                
+                Crop crop=adapter.getItem(position);
+                crop.setQuantity(crop.getQuantity()+1);
+                adapter.notifyItemChanged(position);
+                LocalCart.update(getActivity().getApplication(),crop.getId(),Integer.toString(crop.getQuantity()));
             }
 
             @Override
             public void onDecrementClick(int position) {
-
+                Crop crop=adapter.getItem(position);
+                if(crop.getQuantity()>0) {
+                    crop.setQuantity(crop.getQuantity() - 1);
+                    adapter.notifyItemChanged(position);
+                    LocalCart.update(getActivity().getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
+                }
             }
         });
     }

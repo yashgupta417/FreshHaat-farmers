@@ -108,4 +108,5 @@ public class CropAdapter extends RecyclerView.Adapter<CropAdapter.CropViewHolder
     public int getItemCount() {
         return crops.size();
     }
+
 }

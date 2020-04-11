@@ -36,7 +36,15 @@ public class VerifyOTPRepository {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful() && response.body().getVerified()){
-                    getUser();
+                    preferences.edit().putBoolean("is_logged_in",true).apply();
+                    User user=response.body();
+                    preferences.edit().putString("token",user.getToken()).apply();
+                    if(user.getNew_user()){
+                        verify.setValue(NEW_USER);//When Farmer Details are not submitted
+                    }else{
+                        verify.setValue(OLD_USER);
+                        preferences.edit().putBoolean("is_registration_done",true).apply();
+                    }
                     return;
                 }else{
                     verify.setValue(-1);
@@ -78,14 +86,6 @@ public class VerifyOTPRepository {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful()){
-                    preferences.edit().putBoolean("is_logged_in",true).apply();
-                    User user=response.body();
-                    if(user.getNew_user()){
-                        verify.setValue(NEW_USER);//When Farmer Details are not submitted
-                    }else{
-                        verify.setValue(OLD_USER);
-                        preferences.edit().putBoolean("is_registration_done",true).apply();
-                    }
                     return;
                 }
                 Log.i("******","error");

@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,7 +16,9 @@ import android.widget.TextView;
 
 import com.example.farmerapp.Adapters.SellCropAdapter;
 import com.example.farmerapp.Data.Crop;
+import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.R;
+import com.example.farmerapp.Utils.LocalCart;
 import com.example.farmerapp.ViewModels.SellViewModel;
 
 import java.util.ArrayList;
@@ -52,12 +55,38 @@ public class SellActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Crop> crops) {
                 load.setVisibility(View.GONE);
-                adapter=new SellCropAdapter((ArrayList<Crop>) crops,getApplication(),SellCropAdapter.GRID);
-                recyclerView.setAdapter(adapter);
+                activateAdapter((ArrayList<Crop>)crops);
             }
         });
 
+    }
+    public void activateAdapter(ArrayList<Crop> crops){
+        adapter=new SellCropAdapter(crops,this,SellCropAdapter.GRID);
+        recyclerView.setAdapter(adapter);
+        ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
+        adapter.setOnItemClickListener(new SellCropAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
 
+            }
 
+            @Override
+            public void onIncrementClick(int position) {
+                Crop crop=adapter.getItem(position);
+                crop.setQuantity(crop.getQuantity()+1);
+                adapter.notifyItemChanged(position);
+                LocalCart.update(getApplication(),crop.getId(),Integer.toString(crop.getQuantity()));
+            }
+
+            @Override
+            public void onDecrementClick(int position) {
+                Crop crop=adapter.getItem(position);
+                if(crop.getQuantity()>0) {
+                    crop.setQuantity(crop.getQuantity() - 1);
+                    adapter.notifyItemChanged(position);
+                    LocalCart.update(getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
+                }
+            }
+        });
     }
 }

@@ -14,15 +14,12 @@ public class User {
     @SerializedName("otp")
     @Expose
     private String otp;
-    @SerializedName("__v")
+    @SerializedName("token")
     @Expose
-    private Integer v;
+    private String token;
     @SerializedName("status")
     @Expose
     private String status;
-    @SerializedName("updatedAt")
-    @Expose
-    private String updatedAt;
     @SerializedName("verified")
     @Expose
     private Boolean verified;
@@ -48,23 +45,11 @@ public class User {
     public void setMob(String mob) {
         this.mob = mob;
     }
-    public Integer getV() {
-        return v;
-    }
-    public void setV(Integer v) {
-        this.v = v;
-    }
     public String getStatus() {
         return status;
     }
     public void setStatus(String status) {
         this.status = status;
-    }
-    public String getUpdatedAt() {
-        return updatedAt;
-    }
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
     }
     public Boolean getVerified() {
         return verified;
@@ -87,5 +72,13 @@ public class User {
 
     public void setNew_user(Boolean new_user) {
         this.new_user = new_user;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }

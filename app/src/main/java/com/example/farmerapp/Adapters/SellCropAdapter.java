@@ -42,7 +42,7 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
 
     public static class SellCropViewModel extends RecyclerView.ViewHolder{
         ImageView image,plus,minus;
-        TextView name,price,unit;
+        TextView name,price,unit,count;
         public SellCropViewModel(@NonNull View itemView,final onItemClickListener listener){
             super(itemView);
             image=itemView.findViewById(R.id.image);
@@ -51,6 +51,7 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
             plus=itemView.findViewById(R.id.plus);
             minus=itemView.findViewById(R.id.minus);
             unit=itemView.findViewById(R.id.unit);
+            count=itemView.findViewById(R.id.count);
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
@@ -112,6 +113,16 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
         holder.name.setText(crop.getName().substring(0,1).toUpperCase()+crop.getName().substring(1).toLowerCase());
         holder.price.setText(context.getResources().getString(R.string.Rs)+" "+Float.toString(crop.getPrice()));
         holder.unit.setText("per "+crop.getUnit());
+        if(crop.getQuantity()>0){
+            holder.count.setText(Integer.toString(crop.getQuantity()));
+            holder.count.setVisibility(View.VISIBLE);
+            holder.minus.setEnabled(true);
+            holder.minus.setAlpha(1f);
+        }else{
+            holder.count.setVisibility(View.INVISIBLE);
+            holder.minus.setEnabled(false);
+            holder.minus.setAlpha(0.3f);
+        }
     }
     @Override
     public int getItemCount() {
@@ -128,4 +139,7 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
         return position;
     }
 
+    public Crop getItem(int position){
+        return  crops.get(position);
+    }
 }

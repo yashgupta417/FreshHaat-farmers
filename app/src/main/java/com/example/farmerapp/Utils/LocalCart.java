@@ -12,7 +12,7 @@ import java.util.ArrayList;
 public class LocalCart {
     private static String PRODUCT_IDS="productIds";
     private static String QUANTITIES="quantities";
-    public static void update(Application application,String id,String quantity) throws IOException {
+    public static void update(Application application,String id,String quantity){
         SharedPreferences preferences=application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
         ArrayList<String> productIds=getProductIds(application);
         ArrayList<String> quantities=getQuantities_String(application);
@@ -26,24 +26,39 @@ public class LocalCart {
         if(Integer.parseInt(quantity)>0){
             productIds.add(id);
             quantities.add(quantity);
-            preferences.edit().putString(PRODUCT_IDS,ObjectSerializer.serialize(productIds)).apply();
-            preferences.edit().putString(QUANTITIES,ObjectSerializer.serialize(quantities)).apply();
+            try {
+                preferences.edit().putString(PRODUCT_IDS,ObjectSerializer.serialize(productIds)).apply();
+                preferences.edit().putString(QUANTITIES,ObjectSerializer.serialize(quantities)).apply();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
         }
     }
-    public static ArrayList<String> getProductIds(Application application) throws IOException {
+    public static ArrayList<String> getProductIds(Application application)  {
         SharedPreferences preferences=application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
-        ArrayList<String> productIds=(ArrayList<String>) ObjectSerializer.deserialize(preferences.getString(PRODUCT_IDS,
-                ObjectSerializer.serialize(new ArrayList<String>())));
+        ArrayList<String> productIds= null;
+        try {
+            productIds = (ArrayList<String>) ObjectSerializer.deserialize(preferences.getString(PRODUCT_IDS,
+                    ObjectSerializer.serialize(new ArrayList<String>())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return productIds;
     }
-    private static ArrayList<String> getQuantities_String(Application application) throws IOException {
+    private static ArrayList<String> getQuantities_String(Application application){
         SharedPreferences preferences=application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
-        ArrayList<String> quantities=(ArrayList<String>) ObjectSerializer.deserialize(preferences.getString(QUANTITIES,
-                ObjectSerializer.serialize(new ArrayList<String>())));
+        ArrayList<String> quantities= null;
+        try {
+            quantities = (ArrayList<String>) ObjectSerializer.deserialize(preferences.getString(QUANTITIES,
+                    ObjectSerializer.serialize(new ArrayList<String>())));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return quantities;
     }
 
-    public static ArrayList<Integer> getQuantities(Application application) throws IOException {
+    public static ArrayList<Integer> getQuantities(Application application){
         ArrayList<String> quantities_String=getQuantities_String(application);
         ArrayList<Integer> quantities=new ArrayList<Integer>();
         for(int i=0;i<quantities_String.size();i++){

@@ -42,7 +42,6 @@ public class LoginActivity extends AppCompatActivity {
         hideKeyboard();
         if(CheckInternet.isConnected(this)) {
             viewModel.generateOTP(phoneEditText.getText().toString());
-            finish();
             goToOTPActivity();
         }
         else {

@@ -22,6 +22,7 @@
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
     <LinearLayout
         android:id="@+id/ll_1"
         android:layout_width="wrap_content"
@@ -39,18 +40,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
-            android:text="Tomato"/>
+            android:text="Tomato"
+            android:textSize="16sp"/>
         <TextView
             android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:text="Tomato"/>
         <TextView
             android:id="@+id/unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:textSize="12sp"
             android:text="Tomato"/>
     </LinearLayout>
     <LinearLayout
@@ -67,16 +69,25 @@
         android:orientation="vertical">
         <ImageView
             android:id="@+id/plus"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@drawable/ic_add_40dp"
             android:background="@drawable/add_crop_back"
             android:layout_weight="1"/>
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:text="2"
+            android:textSize="10sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:background="@drawable/count_back"/>
         <ImageView
             android:id="@+id/minus"
-            android:layout_marginTop="10dp"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@drawable/ic_remove"
             android:background="@drawable/minus_crop_back"
             android:layout_weight="1"/>

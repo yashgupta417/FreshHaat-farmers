@@ -4,13 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Crop {
-    //id and _id are same things.With GET we are getting _id ,and for POST we do id=_id
-    @SerializedName("_id")
+    @SerializedName(value="productId",alternate = {"_id"})
     @Expose
-    private String _id;
-    @SerializedName("productId")
-    @Expose
-    private String productId;
+    private String id;
     @SerializedName("type")
     @Expose
     private String type;
@@ -32,13 +28,6 @@ public class Crop {
     public Crop() {
     }
 
-    public String get_id() {
-        return _id;
-    }
-
-    public void set_id(String _id) {
-        this._id = _id;
-    }
 
     public String getType() {
         return type;
@@ -80,13 +69,6 @@ public class Crop {
         this.unit = unit;
     }
 
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
 
     public Integer getQuantity() {
         return quantity;
@@ -94,5 +76,13 @@ public class Crop {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
