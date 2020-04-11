@@ -26,7 +26,7 @@
             android:layout_marginVertical="10dp"
             android:background="@drawable/searchbar_back"
             android:elevation="10dp"
-            app:defaultQueryHint="Search vegetables"
+            app:defaultQueryHint="Search"
             app:iconifiedByDefault="false"
             app:queryBackground="@drawable/searchbar_back" />
     </RelativeLayout>
@@ -36,17 +36,35 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@drawable/gradient"
+        app:contentInsetEnd="0dp"
+        app:contentInsetLeft="0dp"
+        app:contentInsetRight="0dp"
+        app:contentInsetStart="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.00">
-
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/ic_arrow_back_50dp" />
+            android:src="@drawable/ic_arrow_back_50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sell Products"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
@@ -60,4 +78,29 @@
         tools:layout_editor_absoluteY="242dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/serach_rl"/>
+    <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/load"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/load"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.5"/>
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/cart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_shopping_cart"
+        android:backgroundTint="@color/colorPrimary"
+        app:layout_constraintVertical_bias="1"
+        app:layout_constraintHorizontal_bias="1"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

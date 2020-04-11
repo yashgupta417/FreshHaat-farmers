@@ -4,13 +4,13 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Crop {
-    //Don't know what is diff between id and _id,ask backend for it.With GET we are getting _id ,and for POST we do id=_id and then post id
-    @SerializedName("id")
-    @Expose
-    private String id;
+    //id and _id are same things.With GET we are getting _id ,and for POST we do id=_id
     @SerializedName("_id")
     @Expose
     private String _id;
+    @SerializedName("productId")
+    @Expose
+    private String productId;
     @SerializedName("type")
     @Expose
     private String type;
@@ -26,6 +26,9 @@ public class Crop {
     @SerializedName("unit")
     @Expose
     private String unit;
+    @SerializedName("quantity")
+    @Expose
+    private Integer quantity;
     public Crop() {
     }
 
@@ -77,11 +80,19 @@ public class Crop {
         this.unit = unit;
     }
 
-    public String getId() {
-        return id;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }

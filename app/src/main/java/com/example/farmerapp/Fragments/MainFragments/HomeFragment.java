@@ -50,12 +50,31 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(Farmer farmer) {
                 load.setVisibility(View.GONE);
-                adapter=new SellCropAdapter(farmer.getCrops(),getContext(),SellCropAdapter.NORMAL);
-                recyclerView.setAdapter(adapter);
+                activateAdapter(farmer);
             }
         });
         getLocation();
         return v;
+    }
+    public void activateAdapter(Farmer farmer){
+        adapter=new SellCropAdapter(farmer.getCrops(),getContext(),SellCropAdapter.NORMAL);
+        recyclerView.setAdapter(adapter);
+        adapter.setOnItemClickListener(new SellCropAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+            }
+
+            @Override
+            public void onIncrementClick(int position) {
+                
+            }
+
+            @Override
+            public void onDecrementClick(int position) {
+
+            }
+        });
     }
     public void getLocation(){
         LocationUtil locationUtil=new LocationUtil(getActivity().getApplication());

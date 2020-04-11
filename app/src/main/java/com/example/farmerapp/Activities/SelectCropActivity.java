@@ -71,12 +71,12 @@ public class SelectCropActivity extends AppCompatActivity {
                 adapter.selected.set(position,!adapter.selected.get(position));
                 adapter.notifyItemChanged(position);
                 Crop crop=new Crop();
-                crop.setId(adapter.crops.get(position).get_id());
+                crop.setProductId(adapter.crops.get(position).get_id());
                 if(adapter.selected.get(position)){
                     selectedCrops.add(crop);
                 }else{
                     for(int i=0;i<selectedCrops.size();i++){
-                        if(selectedCrops.get(i).getId().equals(crop.getId()))
+                        if(selectedCrops.get(i).getProductId().equals(crop.getProductId()))
                             selectedCrops.remove(i);
                     }
                 }

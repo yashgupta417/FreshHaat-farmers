@@ -32,6 +32,8 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
 
     public interface onItemClickListener{
         void onItemClick(int position);
+        void onIncrementClick(int position);
+        void onDecrementClick(int position);
     }
 
     public void setOnItemClickListener(onItemClickListener listener){
@@ -60,6 +62,29 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
                     }
                 }
             });
+            plus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onIncrementClick(position);
+                        }
+                    }
+                }
+            });
+            minus.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onDecrementClick(position);
+                        }
+                    }
+                }
+            });
+
 
         }
     }
