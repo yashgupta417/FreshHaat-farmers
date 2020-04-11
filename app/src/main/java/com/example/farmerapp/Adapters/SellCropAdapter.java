@@ -36,7 +36,7 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
 
     public static class SellCropViewModel extends RecyclerView.ViewHolder{
         ImageView image,plus,minus;
-        TextView name,price;
+        TextView name,price,unit;
         public SellCropViewModel(@NonNull View itemView,final onItemClickListener listener){
             super(itemView);
             image=itemView.findViewById(R.id.image);
@@ -44,6 +44,7 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
             price=itemView.findViewById(R.id.price);
             plus=itemView.findViewById(R.id.plus);
             minus=itemView.findViewById(R.id.minus);
+            unit=itemView.findViewById(R.id.unit);
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
@@ -74,8 +75,9 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
         if(crop.getImage()!=null){
             Glide.with(context).load(crop.getImage()).into(holder.image);
         }
-        holder.name.setText(crop.getName());
-        holder.price.setText(Float.toString(crop.getPrice()));
+        holder.name.setText(crop.getName().substring(0,1).toUpperCase()+crop.getName().substring(1).toLowerCase());
+        holder.price.setText(context.getResources().getString(R.string.Rs)+" "+Float.toString(crop.getPrice()));
+        holder.unit.setText("per "+crop.getUnit());
     }
     @Override
     public int getItemCount() {
