@@ -113,7 +113,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
             holder.minus.setAlpha(0.3f);
         }
         Float totalPrice=crop.getQuantity()*crop.getPrice();
-        holder.totalPrice.setText(Float.toString(totalPrice));
+        holder.totalPrice.setText(context.getResources().getString(R.string.Rs)+" "+Float.toString(totalPrice));
     }
     @Override
     public int getItemCount() {

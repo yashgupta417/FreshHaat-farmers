@@ -18,12 +18,13 @@ import java.util.ArrayList;
 
 public class CartViewModel extends AndroidViewModel {
     CartRepository repository;
+    SharedPreferences preferences;
     public CartViewModel(@NonNull Application application) {
         super(application);
         repository=new CartRepository(application);
+        preferences=getApplication().getSharedPreferences(getApplication().getPackageName(), Context.MODE_PRIVATE);
     }
-    public LiveData<Cart> generateBill(){
-        SharedPreferences preferences=getApplication().getSharedPreferences(getApplication().getPackageName(), Context.MODE_PRIVATE);
+    public void generateBill(){
         String userId=preferences.getString("userId",null);
         ArrayList<String> productIds=LocalCart.getProductIds(getApplication());
         ArrayList<Integer> quantites=LocalCart.getQuantities(getApplication());
@@ -38,6 +39,9 @@ public class CartViewModel extends AndroidViewModel {
         Cart localCart=new Cart();
         localCart.setProducts(products);
         Log.i("*****size",Integer.toString(localCart.getProducts().size()));
-        return  repository.generateBill(localCart,userId);
+        repository.generateBill(localCart,userId);
+    }
+    public LiveData<Cart> getBill(){
+        return repository.getBill();
     }
 }

@@ -44,12 +44,14 @@ public class HomeFragment extends Fragment {
     GifImageView load;
     RelativeLayout sellFruitsRL,sellVegetablesRL;
     FloatingActionButton cartButton;
+    ArrayList<Crop> products;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView=v.findViewById(R.id.suggested_crops_recylerview);
         load=v.findViewById(R.id.load);
         cartButton=v.findViewById(R.id.cart);
+        products=new ArrayList<>();
         setClickListeners(v);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         recyclerView.setHasFixedSize(true);
@@ -58,13 +60,14 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(Farmer farmer) {
                 load.setVisibility(View.GONE);
-                activateAdapter(farmer.getCrops());
+                products=farmer.getCrops();
+                activateAdapter();
             }
         });
         getLocation();
         return v;
     }
-    public void activateAdapter(ArrayList<Crop> products){
+    public void activateAdapter(){
         products=LocalCart.syncQuantities(products,getActivity().getApplication());
         adapter=new SellCropAdapter(products,getContext(),SellCropAdapter.NORMAL);
         recyclerView.setAdapter(adapter);
@@ -94,6 +97,13 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        activateAdapter();
+    }
+
     public void getLocation(){
         LocationUtil locationUtil=new LocationUtil(getActivity().getApplication());
         if(locationUtil.isLocationEnabled(getActivity())){

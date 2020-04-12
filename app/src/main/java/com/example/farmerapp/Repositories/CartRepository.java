@@ -23,9 +23,12 @@ public class CartRepository {
         finalCart=new MutableLiveData<Cart>();
     }
     MutableLiveData<Cart> finalCart;
-    public LiveData<Cart> generateBill(Cart localCart,String userId){
-       // Log.i("*****size",Integer.toString(localCart.getCrops().size()));
-        Call<Cart> call= RetrofitClient.getInstance(application).create(CartApi.class).generateBill(localCart,userId);
+    public LiveData<Cart> getBill(){
+        return finalCart;
+    }
+    Call<Cart> call;
+    public void generateBill(Cart localCart,String userId){
+        call= RetrofitClient.getInstance(application).create(CartApi.class).generateBill(localCart,userId);
         call.enqueue(new Callback<Cart>() {
             @Override
             public void onResponse(Call<Cart> call, Response<Cart> response) {
@@ -41,6 +44,5 @@ public class CartRepository {
                 generateBill(localCart,userId);
             }
         });
-        return finalCart;
     }
 }

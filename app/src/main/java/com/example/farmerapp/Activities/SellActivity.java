@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
@@ -33,11 +34,13 @@ public class SellActivity extends AppCompatActivity {
     public Integer NO_OF_COLUMNS=2;
     TextView title;
     GifImageView load;
+    ArrayList<Crop> products;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sell);
         String productType=getIntent().getStringExtra(MainActivity.PRODUCT_TYPE);
+        products=new ArrayList<Crop>();
 
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -55,12 +58,13 @@ public class SellActivity extends AppCompatActivity {
             @Override
             public void onChanged(List<Crop> crops) {
                 load.setVisibility(View.GONE);
-                activateAdapter((ArrayList<Crop>)crops);
+                products=(ArrayList<Crop>) crops;
+                activateAdapter();
             }
         });
 
     }
-    public void activateAdapter(ArrayList<Crop> products){
+    public void activateAdapter(){
         products=LocalCart.syncQuantities(products,getApplication());
         adapter=new SellCropAdapter(products,this,SellCropAdapter.GRID);
         recyclerView.setAdapter(adapter);
@@ -89,5 +93,16 @@ public class SellActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        activateAdapter();
+    }
+
+    public void goToCartActivity(View v){
+        Intent intent=new Intent(getApplicationContext(),CartActivity.class);
+        startActivity(intent);
     }
 }
