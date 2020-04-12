@@ -11,6 +11,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.farmerapp.API.FarmerApi;
+import com.example.farmerapp.Activities.SplashActivity;
 import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.Data.Image;
 import com.example.farmerapp.RetrofitClient.RetrofitClient;
@@ -25,6 +26,9 @@ import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.farmerapp.Activities.SplashActivity.ADDRESS;
+import static com.example.farmerapp.Activities.SplashActivity.USER_ID;
 
 public class RegisterDetailsRepository {
     Application application;
@@ -89,8 +93,10 @@ public class RegisterDetailsRepository {
             @Override
             public void onResponse(Call<Farmer> call, Response<Farmer> response) {
                 if(response.isSuccessful()){
-                    preferences.edit().putString("userId",response.body().getId()).apply();
-                    preferences.edit().putBoolean("is_registration_done",true).apply();
+                    Farmer farmer=response.body();
+                    preferences.edit().putString(USER_ID,farmer.getId()).apply();
+                    preferences.edit().putString(ADDRESS,farmer.getAddress());
+                    preferences.edit().putBoolean(SplashActivity.IS_REGISTRATION_DONE,true).apply();
                     uploadStatus.setValue(1);
                 }
                 uploadStatus.setValue(-1);

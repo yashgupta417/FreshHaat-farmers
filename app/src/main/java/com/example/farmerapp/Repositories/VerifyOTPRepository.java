@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.farmerapp.API.FarmerApi;
 import com.example.farmerapp.API.UserApi;
+import com.example.farmerapp.Activities.SplashActivity;
 import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.Data.User;
 import com.example.farmerapp.RetrofitClient.RetrofitClient;
@@ -18,6 +19,12 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.example.farmerapp.Activities.SplashActivity.ADDRESS;
+import static com.example.farmerapp.Activities.SplashActivity.IS_LOGGED_IN;
+import static com.example.farmerapp.Activities.SplashActivity.MOBILE_NO;
+import static com.example.farmerapp.Activities.SplashActivity.TOKEN;
+import static com.example.farmerapp.Activities.SplashActivity.USER_ID;
 
 public class VerifyOTPRepository {
     Application application;
@@ -38,9 +45,10 @@ public class VerifyOTPRepository {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful() && response.body().getVerified()){
-                    preferences.edit().putBoolean("is_logged_in",true).apply();
+                    preferences.edit().putBoolean(IS_LOGGED_IN,true).apply();
                     User user=response.body();
-                    preferences.edit().putString("token",user.getToken()).apply();
+                    preferences.edit().putString(TOKEN,user.getToken()).apply();
+                    preferences.edit().putString(MOBILE_NO,user.getMob());
                     if(user.getNew_user()){
                         verify.setValue(NEW_USER);//When Farmer Details are not submitted
                     }else{
@@ -104,8 +112,10 @@ public class VerifyOTPRepository {
             @Override
             public void onResponse(Call<Farmer> call, Response<Farmer> response) {
                 if(response.isSuccessful()){
-                    preferences.edit().putString("userId",response.body().getId()).apply();
-                    preferences.edit().putBoolean("is_registration_done",true).apply();
+                    Farmer farmer=response.body();
+                    preferences.edit().putString(USER_ID,farmer.getId()).apply();
+                    preferences.edit().putString(ADDRESS,farmer.getAddress());
+                    preferences.edit().putBoolean(SplashActivity.IS_REGISTRATION_DONE,true).apply();
                     verify.setValue(OLD_USER);
                     return;
                 }
