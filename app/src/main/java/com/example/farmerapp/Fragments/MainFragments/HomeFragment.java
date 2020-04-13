@@ -64,6 +64,8 @@ public class HomeFragment extends Fragment {
                 activateAdapter();
             }
         });
+        MainActivity.showLocation();
+        MainActivity.setTitle("");
         getLocation();
         return v;
     }
@@ -112,7 +114,7 @@ public class HomeFragment extends Fragment {
                 public void onChanged(List<Address> addresses) {
                     String locality = addresses.get(0).getLocality();
                     String subLocality = addresses.get(0).getSubLocality();
-                    MainActivity.showLocation(locality,subLocality);
+                    MainActivity.setLocation(locality,subLocality);
                 }
             });
         }

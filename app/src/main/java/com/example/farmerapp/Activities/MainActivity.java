@@ -3,45 +3,33 @@ package com.example.farmerapp.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentStatePagerAdapter;
-import androidx.lifecycle.LifecycleObserver;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.Observer;
+import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.Address;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.farmerapp.Adapters.MainAdapter;
+import com.example.farmerapp.Fragments.MainFragments.HomeFragment;
+import com.example.farmerapp.Fragments.MainFragments.PaymentFragment;
+import com.example.farmerapp.Fragments.MainFragments.RequestFragment;
 import com.example.farmerapp.R;
-import com.example.farmerapp.Utils.LocationUtil;
 import com.example.farmerapp.ViewModels.MainViewModel;
-import com.example.farmerapp.ViewPager.MainViewPager;
 import com.google.android.material.navigation.NavigationView;
-
-import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     DrawerLayout drawer;
     NavigationView navigationView;
-    MainViewPager viewPager;
-    MainAdapter adapter;
     MainViewModel viewModel;
     Toolbar toolbar;
     public static TextView title;
@@ -64,8 +52,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer=findViewById(R.id.drawer);
         navigationView=findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigationView.getMenu().findItem(R.id.home).setChecked(true);
         title=findViewById(R.id.title);
-
         setUpDrawer();
         activateNavigationHeader();
         viewModel= ViewModelProviders.of(this).get(MainViewModel.class);
@@ -80,21 +68,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-
-        viewPager=findViewById(R.id.view_pager);
-        viewPager.disableScroll(true);
-        adapter=new MainAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
-        viewPager.setAdapter(adapter);
+        getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new HomeFragment()).commit();
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        Fragment fragment=null;
         switch (menuItem.getItemId()){
-            case R.id.home:viewPager.setCurrentItem(0,false);break;
-            case R.id.requests:viewPager.setCurrentItem(1,false);break;
-            case R.id.payments:viewPager.setCurrentItem(2,false);break;
+            case R.id.home:fragment=new HomeFragment();break;
+            case R.id.requests:fragment=new RequestFragment();break;
+            case R.id.payments:fragment=new PaymentFragment();break;
             case R.id.logout:logout();break;
         }
+        if(fragment!=null)
+            getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,fragment).commit();
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -115,9 +102,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+            return;
         }
+        if(navigationView.getMenu().findItem(R.id.home).isChecked()) {
+            getSupportFragmentManager().popBackStack();
+            super.onBackPressed();
+        }else{
+            navigationView.getMenu().findItem(R.id.home).setChecked(true);
+            getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,new HomeFragment()).commit();
+        }
+
     }
     public void logout(){
         SharedPreferences preferences=getSharedPreferences(getPackageName(),Context.MODE_PRIVATE);
@@ -131,11 +125,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         startActivity(intent);
         finish();
     }
-
-    public static void  showLocation(String locality,String subLocality){
+    public static void setLocation(String locality,String subLocality){
+        addressTextView.setText(locality+","+subLocality);
+    }
+    public static void  showLocation(){
         addressTextView.setVisibility(View.VISIBLE);
         locationSymbol.setVisibility(View.VISIBLE);
-        addressTextView.setText(locality+","+subLocality);
     }
     public static void hideLocation(){
         addressTextView.setVisibility(View.INVISIBLE);

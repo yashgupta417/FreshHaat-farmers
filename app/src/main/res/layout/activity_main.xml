@@ -36,6 +36,7 @@
                         android:id="@+id/title"
                         android:textColor="@color/white"
                         android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
                         android:textSize="23sp"/>
                     <TextView
                         android:id="@+id/address"
@@ -58,8 +59,8 @@
 
             </RelativeLayout>
         </androidx.appcompat.widget.Toolbar>
-        <com.example.farmerapp.ViewPager.MainViewPager
-            android:id="@+id/view_pager"
+        <FrameLayout
+            android:id="@+id/framelayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
