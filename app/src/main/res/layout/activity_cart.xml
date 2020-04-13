@@ -41,6 +41,7 @@
                 android:layout_centerInParent="true"/>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -51,6 +52,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar">
         <LinearLayout
+            android:id="@+id/body_parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"
@@ -265,4 +267,39 @@
                 android:layout_centerVertical="true"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
+    <RelativeLayout
+        android:id="@+id/empty_cart_rl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        <ImageView
+            android:id="@+id/cart_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cart"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cart_image"
+            android:layout_centerHorizontal="true"
+            android:text="@string/empty_cart"/>
+    </RelativeLayout>
+    <pl.droidsonroids.gif.GifImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/load"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

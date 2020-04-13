@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -64,8 +65,8 @@ public class RequestDetailActivity extends AppCompatActivity {
         String o_status=order.getOrderStatus(),s_status=order.getSlotStatus();
         requestStatus.setText(o_status);
         slotStatus.setText(s_status);
-        setStatusColour(requestStatus,o_status.toLowerCase());
-        setStatusColour(slotStatus,s_status.toLowerCase());
+        setStatusColour(requestStatus,o_status.toLowerCase(),this);
+        setStatusColour(slotStatus,s_status.toLowerCase(),this);
 
         Date d=order.getPickupDate();
         Calendar calendar=Calendar.getInstance();
@@ -91,15 +92,16 @@ public class RequestDetailActivity extends AppCompatActivity {
         button.setVisibility(otherViewsVisibility);
         button.setEnabled(buttonEnabled);
     }
-    public void setStatusColour(TextView textView,String status){
+    public static void setStatusColour(TextView textView, String status, Context context){
         if(status.equals("confirmed")){
-            textView.setTextColor(getResources().getColor(R.color.confirmed));
+            textView.setTextColor(context.getResources().getColor(R.color.confirmed));
         }else if(status.equals("pending")){
-            textView.setTextColor(getResources().getColor(R.color.pending));
+            textView.setTextColor(context.getResources().getColor(R.color.pending));
         }else if(status.equals("rejected")){
-            textView.setTextColor(getResources().getColor(R.color.rejected));
+            textView.setTextColor(context.getResources().getColor(R.color.rejected));
         }else if(status.equals("changed")){
-            textView.setTextColor(getResources().getColor(R.color.changed));
+            textView.setTextColor(context.getResources().getColor(R.color.changed));
         }
     }
+
 }

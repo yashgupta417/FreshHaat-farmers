@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         switch (menuItem.getItemId()){
             case R.id.home:fragment=new HomeFragment();break;
             case R.id.requests:fragment=new RequestFragment();break;
-            case R.id.payments:fragment=new PaymentFragment();break;
+            //case R.id.payments:fragment=new PaymentFragment();break;
             case R.id.logout:logout();break;
         }
         if(fragment!=null)

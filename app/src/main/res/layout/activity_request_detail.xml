@@ -34,7 +34,7 @@
             android:layout_centerInParent="true"
             android:text="Request"
             android:textColor="@color/white"
-            android:textSize="23sp"/>
+            android:textSize="20sp"/>
     </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
     <androidx.core.widget.NestedScrollView

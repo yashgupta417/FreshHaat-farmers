@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.farmerapp.Activities.RequestDetailActivity;
 import com.example.farmerapp.Data.Date;
 import com.example.farmerapp.Data.Order;
 import com.example.farmerapp.R;
@@ -79,6 +80,8 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
         holder.date.setText(dayformat.format(calendar.getTime()));
 
         holder.status.setText(request.getOrderStatus());
+        RequestDetailActivity.setStatusColour(holder.status,request.getOrderStatus().toLowerCase(),context);
+
         holder.requestId.setText(request.getOrderId());
         holder.requestType.setText(request.getOrderType().substring(0,1).toUpperCase()+request.getOrderType().substring(1).toLowerCase());
 

@@ -14,6 +14,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.farmerapp.Adapters.CartItemAdapter;
@@ -37,6 +39,8 @@ public class CartActivity extends AppCompatActivity {
     TextView totalAmount1,totalAmount2,bookSlot;
     GifImageView load;
     ConstraintLayout parent;
+    RelativeLayout emptyCartRL;
+    LinearLayout bodyLL;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,19 +50,31 @@ public class CartActivity extends AppCompatActivity {
         load=findViewById(R.id.load);
         bookSlot=findViewById(R.id.book_slot);
         parent=findViewById(R.id.parent);
+        emptyCartRL=findViewById(R.id.empty_cart_rl);
+        bodyLL=findViewById(R.id.body_parent);
 
         recyclerView=findViewById(R.id.recyler_view);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        handleVisibility(View.GONE,View.GONE,View.VISIBLE);
         viewModel= ViewModelProviders.of(this).get(CartViewModel.class);
         generateBill();
         viewModel.getBill().observe(this, new Observer<Cart>() {
             @Override
-            public void onChanged(Cart cart) {
+            public void onChanged(Cart cart){
                 activateAdapter(cart);
+                if(cart.getProducts().size()>0)
+                    handleVisibility(View.GONE,View.VISIBLE,View.GONE);
+                else
+                    handleVisibility(View.VISIBLE,View.GONE,View.GONE);
             }
         });
 
+    }
+    public void handleVisibility(Integer emptyCartVisibility,Integer bodyVisibility,Integer loadVisibility){
+        emptyCartRL.setVisibility(emptyCartVisibility);
+        bodyLL.setVisibility(bodyVisibility);
+        load.setVisibility(loadVisibility);
     }
     public void generateBill(){
         if(adapter!=null){//adapter will be not null except first case
