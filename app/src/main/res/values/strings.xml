@@ -1,10 +1,26 @@
 <resources>
+    <string name="call_executive">You can call our executive for further information</string>
     <string name="app_name">FarmerApp</string>
     <string name="Rs">\u20B9</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="slot_names">
+        <item>Slot 1</item>
+        <item>Slot 2</item>
+        <item>Slot 3</item>
+        <item>Slot 4</item>
+        <item>Slot 5</item>
+        <item>Slot 6</item>
+    </string-array>
+    <string-array name="slot_times">
+        <item>6am - 9am</item>
+        <item>9am - 12pm</item>
+        <item>12pm - 3pm</item>
+        <item>3pm - 6pm</item>
+        <item>6pm - 9pm</item>
+        <item>9pm - 12am</item>
+    </string-array>
     <string-array name="india_states">
         <item>State</item>
         <item>Andaman and Nicobar Islands</item>

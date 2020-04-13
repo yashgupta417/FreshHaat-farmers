@@ -48,7 +48,7 @@ public class VerifyOTPRepository {
                     preferences.edit().putBoolean(IS_LOGGED_IN,true).apply();
                     User user=response.body();
                     preferences.edit().putString(TOKEN,user.getToken()).apply();
-                    preferences.edit().putString(MOBILE_NO,user.getMob());
+                    preferences.edit().putString(MOBILE_NO,user.getMob()).apply();
                     if(user.getNew_user()){
                         verify.setValue(NEW_USER);//When Farmer Details are not submitted
                     }else{
@@ -114,7 +114,7 @@ public class VerifyOTPRepository {
                 if(response.isSuccessful()){
                     Farmer farmer=response.body();
                     preferences.edit().putString(USER_ID,farmer.getId()).apply();
-                    preferences.edit().putString(ADDRESS,farmer.getAddress());
+                    preferences.edit().putString(ADDRESS,farmer.getAddress()).apply();
                     preferences.edit().putBoolean(SplashActivity.IS_REGISTRATION_DONE,true).apply();
                     verify.setValue(OLD_USER);
                     return;

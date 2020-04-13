@@ -131,4 +131,8 @@ public class CartActivity extends AppCompatActivity {
             }
         }
     };
+    public void bookSlot(View view){
+        Intent intent=new Intent(getApplicationContext(),BookSlotActivity.class);
+        startActivity(intent);
+    }
 }
