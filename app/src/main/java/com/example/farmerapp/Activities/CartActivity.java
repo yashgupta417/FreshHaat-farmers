@@ -37,7 +37,7 @@ public class CartActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     CartItemAdapter adapter;
     TextView totalAmount1,totalAmount2,bookSlot;
-    GifImageView load;
+    GifImageView load,loadCenter;
     ConstraintLayout parent;
     RelativeLayout emptyCartRL;
     LinearLayout bodyLL;
@@ -48,6 +48,7 @@ public class CartActivity extends AppCompatActivity {
         totalAmount1=findViewById(R.id.total_amount);
         totalAmount2=findViewById(R.id.total_amount_2);
         load=findViewById(R.id.load);
+        loadCenter=findViewById(R.id.load_center);
         bookSlot=findViewById(R.id.book_slot);
         parent=findViewById(R.id.parent);
         emptyCartRL=findViewById(R.id.empty_cart_rl);
@@ -74,7 +75,7 @@ public class CartActivity extends AppCompatActivity {
     public void handleVisibility(Integer emptyCartVisibility,Integer bodyVisibility,Integer loadVisibility){
         emptyCartRL.setVisibility(emptyCartVisibility);
         bodyLL.setVisibility(bodyVisibility);
-        load.setVisibility(loadVisibility);
+        loadCenter.setVisibility(loadVisibility);
     }
     public void generateBill(){
         if(adapter!=null){//adapter will be not null except first case

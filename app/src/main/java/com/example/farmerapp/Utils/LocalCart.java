@@ -87,4 +87,14 @@ public class LocalCart {
         }
         return products;
     }
+    public static void emptyCart(Application application){
+        SharedPreferences preferences=application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
+        try {
+            preferences.edit().putString(PRODUCT_IDS,ObjectSerializer.serialize(new ArrayList<String>())).apply();
+            preferences.edit().putString(QUANTITIES,ObjectSerializer.serialize(new ArrayList<String>())).apply();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 }

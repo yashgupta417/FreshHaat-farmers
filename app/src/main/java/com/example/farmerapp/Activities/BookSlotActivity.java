@@ -29,6 +29,7 @@ import com.example.farmerapp.Data.Order;
 import com.example.farmerapp.Fragments.DatePickerFragment;
 import com.example.farmerapp.R;
 import com.example.farmerapp.Utils.CheckInternet;
+import com.example.farmerapp.Utils.LocalCart;
 import com.example.farmerapp.ViewModels.BookSlotViewModel;
 import com.google.android.material.snackbar.Snackbar;
 import com.santalu.maskedittext.MaskEditText;
@@ -211,6 +212,7 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
             @Override
             public void onChanged(Integer integer) {
                 if(integer==1){
+                    LocalCart.emptyCart(getApplication());
                     String orderId=viewModel.getOrderDatabaseId();
                     goToRequestDetailActivity(orderId);
                 }else if(integer==-1){

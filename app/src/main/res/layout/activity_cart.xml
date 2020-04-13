@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/parent"
+    android:background="@color/white"
     tools:context=".Activities.CartActivity">
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -55,7 +56,6 @@
             android:id="@+id/body_parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:orientation="vertical">
             <LinearLayout
                 android:id="@+id/ll_coupon"
@@ -279,8 +279,8 @@
         app:layout_constraintBottom_toBottomOf="parent">
         <ImageView
             android:id="@+id/cart_image"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
             android:scaleType="centerCrop"
             android:src="@drawable/cart"
             android:layout_centerHorizontal="true"
@@ -290,9 +290,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/cart_image"
             android:layout_centerHorizontal="true"
+            android:textColor="@color/colorPrimary"
             android:text="@string/empty_cart"/>
     </RelativeLayout>
     <pl.droidsonroids.gif.GifImageView
+        android:id="@+id/load_center"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:src="@drawable/load"
