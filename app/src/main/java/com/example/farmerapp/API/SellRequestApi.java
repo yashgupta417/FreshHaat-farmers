@@ -20,7 +20,7 @@ public interface SellRequestApi {
     Call<ResponseBody> cancelSellRequest(@Path("id") String userId,@Path("oid") String orderId);
 
     @GET("api/farmer/{id}/order")
-    Call<List<Order>> getAllSellRequests();
+    Call<List<Order>> getAllSellRequests(@Path("id")String userId);
 
     @GET("api/farmer/{id}/order/{oid}")
     Call<Order> getSellRequest(@Path("id") String userId,@Path("oid") String orderId);

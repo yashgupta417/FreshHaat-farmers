@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     MainAdapter adapter;
     MainViewModel viewModel;
     Toolbar toolbar;
+    public static TextView title;
     public static TextView addressTextView;
     public static ImageView locationSymbol;
     public static String FRUITS="Fruits";
@@ -63,11 +64,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         drawer=findViewById(R.id.drawer);
         navigationView=findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        title=findViewById(R.id.title);
 
         setUpDrawer();
         activateNavigationHeader();
         viewModel= ViewModelProviders.of(this).get(MainViewModel.class);
 
+    }
+    public static void setTitle(String s){
+        title.setText(s);
     }
     public void setUpDrawer(){
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,drawer, toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
