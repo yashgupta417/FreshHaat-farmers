@@ -29,12 +29,12 @@ public class RequestDetailRepository{
                     sellRequest.setValue(response.body());
                     return;
                 }
-                call.clone();
+                call.clone().enqueue(this);
             }
 
             @Override
             public void onFailure(Call<Order> call, Throwable t) {
-                call.clone();
+                call.clone().enqueue(this);
             }
         });
         return sellRequest;

@@ -64,6 +64,9 @@ public class SellActivity extends AppCompatActivity {
         });
 
     }
+    public void onBackClick(View view){
+        finish();
+    }
     public void activateAdapter(){
         products=LocalCart.syncQuantities(products,getApplication());
         adapter=new SellCropAdapter(products,this,SellCropAdapter.GRID);

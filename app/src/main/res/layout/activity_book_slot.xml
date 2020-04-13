@@ -21,6 +21,7 @@
             <ImageView
                 android:layout_width="30dp"
                 android:layout_height="30dp"
+                android:onClick="onBackClick"
                 android:src="@drawable/ic_arrow_back_50dp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="20dp"

@@ -1,5 +1,6 @@
 package com.example.farmerapp.Fragments.MainFragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.farmerapp.Activities.MainActivity;
+import com.example.farmerapp.Activities.RequestDetailActivity;
 import com.example.farmerapp.Adapters.RequestAdapter;
 import com.example.farmerapp.Data.Order;
 import com.example.farmerapp.R;
@@ -33,7 +35,7 @@ public class RequestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_request, container, false);
         MainActivity.hideLocation();
-        MainActivity.setTitle("Request");
+        MainActivity.setTitle("Requests");
         recyclerView=v.findViewById(R.id.recyler_view);
         load=v.findViewById(R.id.load);
         viewModel= ViewModelProviders.of(this).get(MainViewModel.class);
@@ -54,6 +56,9 @@ public class RequestFragment extends Fragment {
         adapter.setOnItemClickListener(new RequestAdapter.onItemClickListener() {
             @Override
             public void onItemClick(int position) {
+                Intent intent=new Intent(getActivity(), RequestDetailActivity.class);
+                intent.putExtra(RequestDetailActivity.ORDER_ID,adapter.requests.get(position).getDatabaseId());
+                startActivity(intent);
 
             }
         });

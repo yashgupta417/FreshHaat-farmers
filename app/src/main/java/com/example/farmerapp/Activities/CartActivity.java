@@ -95,6 +95,9 @@ public class CartActivity extends AppCompatActivity {
             updateUI(0.3f,false,View.VISIBLE,View.GONE);
         }
     }
+    public void onBackClick(View view){
+        finish();
+    }
     CartItemAdapter.onItemClickListener listener=new CartItemAdapter.onItemClickListener() {
         @Override
         public void onItemClick(int position) {

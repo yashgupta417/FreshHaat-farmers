@@ -56,12 +56,12 @@ public class MainRepository {
                     requests.setValue(response.body());
                     return;
                 }
-                call.clone();
+                call.clone().enqueue(this);
             }
 
             @Override
             public void onFailure(Call<List<Order>> call, Throwable t) {
-                call.clone();
+                call.clone().enqueue(this);
             }
         });
         return requests;

@@ -186,11 +186,11 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
         }
     }
     public void placeRequestWork(View view){
-        updateButtonUI(false);
         if(!CheckInternet.isConnected(this)){
             Toast.makeText(this, "No Internet", Toast.LENGTH_SHORT).show();
             return;
         }
+        updateButtonUI(false);
         Order order=new Order();
         if(selected==PICKUP){
             order.setOrderType("pickup");
@@ -219,6 +219,9 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
                 }
             }
         });
+    }
+    public void onBackClick(View view){
+        finish();
     }
     public void goToRequestDetailActivity(String orderId){
         Intent intent=new Intent(this,RequestDetailActivity.class);

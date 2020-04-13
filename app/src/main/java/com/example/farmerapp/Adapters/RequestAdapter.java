@@ -13,14 +13,19 @@ import com.example.farmerapp.Data.Date;
 import com.example.farmerapp.Data.Order;
 import com.example.farmerapp.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 
 public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestViewHolder>{
-    ArrayList<Order> requests;
+    public ArrayList<Order> requests;
     Context context;
+    public ArrayList<String> slotTimes;
     public RequestAdapter(ArrayList<Order> requests, Context context) {
         this.requests = requests;
         this.context = context;
+        slotTimes=new ArrayList<String>(Arrays.asList(context.getResources().getStringArray(R.array.slot_times)));
     }
     private onItemClickListener mlistener;
     public interface onItemClickListener{
@@ -65,11 +70,20 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
     public void onBindViewHolder(@NonNull RequestViewHolder holder, int position) {
         Order request=requests.get(position);
         Date date=request.getPickupDate();
-        holder.date.setText(date.getDay()+"-"+date.getMonth()+"-"+date.getYear());//change it
+
+        Calendar calendar=Calendar.getInstance();
+        calendar.set(Calendar.YEAR,Integer.parseInt(date.getYear()));
+        calendar.set(Calendar.MONTH,Integer.parseInt(date.getMonth()));
+        calendar.set(Calendar.DAY_OF_MONTH,Integer.parseInt(date.getDay()));
+        SimpleDateFormat dayformat=new SimpleDateFormat("MMM dd");
+        holder.date.setText(dayformat.format(calendar.getTime()));
+
         holder.status.setText(request.getOrderStatus());
         holder.requestId.setText(request.getOrderId());
-        holder.requestType.setText(request.getOrderType());
-        holder.slot.setText(request.getSlotNumber());//change it
+        holder.requestType.setText(request.getOrderType().substring(0,1).toUpperCase()+request.getOrderType().substring(1).toLowerCase());
+
+        String slotTime=slotTimes.get(Math.max(Integer.parseInt(request.getSlotNumber())-1,0));
+        holder.slot.setText(slotTime);//change it
     }
 
     @Override
