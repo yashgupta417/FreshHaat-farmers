@@ -88,7 +88,7 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/cc_address"
                             android:layout_marginLeft="30dp"
-                            android:text="A-2, XYZ colony, Delhi-45,110084 ,India"
+                            android:text="A-2,Sector-18,Rohini,Delhi-42"
                             android:textColor="@color/grey"
                             android:textSize="14sp" />
                     </LinearLayout>

@@ -46,7 +46,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottom_card"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.0"
@@ -133,7 +133,8 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"
-                android:paddingVertical="10dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="40dp"
                 android:layout_marginBottom="50dp"
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintRight_toRightOf="parent"
@@ -219,6 +220,7 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
     <androidx.cardview.widget.CardView
+        android:id="@+id/bottom_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintVertical_bias="1.0"

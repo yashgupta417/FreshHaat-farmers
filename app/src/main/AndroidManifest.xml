@@ -19,8 +19,7 @@
         <activity android:name=".Activities.SellActivity" />
         <activity android:name=".Activities.ProfileActivity" />
         <activity
-            android:name=".Activities.MainActivity"
-            android:screenOrientation="portrait" />
+            android:name=".Activities.MainActivity"/>
         <activity
             android:name=".Activities.SplashActivity"
             android:screenOrientation="portrait"
