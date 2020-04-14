@@ -156,14 +156,14 @@ public class RegisterAddress1Fragment extends Fragment {
         }
     }
     public void getAddress(){
+        if(locationStatus==1)
+            return;//location already fetched
         LocationUtil locationUtil=new LocationUtil(getActivity().getApplication());
         if(!locationUtil.isLocationEnabled(getContext())){
             Snackbar snackbar=Snackbar.make(RegisterDetailsActivity.parent,"Please turn your GPS on.",Snackbar.LENGTH_SHORT);
             snackbar.show();
             return;
         }
-        if(locationStatus==1)
-            return;//location already fetched
         locationTextView.setText("Locating....");
         locationUtil.observeAddress().observe(this, new Observer<List<Address>>() {
             @Override

@@ -25,5 +25,12 @@ public class SellViewModel extends AndroidViewModel {
             return repository.getVegetables();
         return null;
     }
+    public void queryProducts(String type,String query){
+        if(type.equals(MainActivity.FRUITS))
+            repository.queryFruits(query);
+        else if(type.equals(MainActivity.VEGETABLES))
+            repository.queryVegetables(query);
+        return ;
+    }
 
 }

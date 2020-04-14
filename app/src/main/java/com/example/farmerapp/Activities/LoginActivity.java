@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -28,10 +29,12 @@ public class LoginActivity extends AppCompatActivity {
     LoginViewModel viewModel;
     EditText phoneEditText;
     Button loginButton;
+    public static Activity activity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        activity=this;
         viewModel= ViewModelProviders.of(this).get(LoginViewModel.class);
         phoneEditText=findViewById(R.id.phone);
         loginButton=findViewById(R.id.login);

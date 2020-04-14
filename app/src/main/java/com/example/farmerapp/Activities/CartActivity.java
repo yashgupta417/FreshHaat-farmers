@@ -84,7 +84,14 @@ public class CartActivity extends AppCompatActivity {
         updateUI(0.3f,false,View.GONE,View.VISIBLE);
         viewModel.generateBill();
     }
-    public void updateUI(Float bookSlotAlpha,Boolean bookSlotEnabled,Integer totalPriceVisibility,Integer loadVisibility){
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        generateBill();
+    }
+
+    public void updateUI(Float bookSlotAlpha, Boolean bookSlotEnabled, Integer totalPriceVisibility, Integer loadVisibility){
         bookSlot.setAlpha(bookSlotAlpha);
         bookSlot.setEnabled(bookSlotEnabled);
         totalAmount2.setVisibility(totalPriceVisibility);

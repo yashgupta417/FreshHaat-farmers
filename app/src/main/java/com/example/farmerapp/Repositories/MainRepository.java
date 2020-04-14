@@ -7,8 +7,11 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.farmerapp.API.FarmerApi;
+import com.example.farmerapp.API.ProductApi;
 import com.example.farmerapp.API.SellRequestApi;
 import com.example.farmerapp.API.UserApi;
+import com.example.farmerapp.Data.Cart;
+import com.example.farmerapp.Data.Crop;
 import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.Data.Order;
 import com.example.farmerapp.RetrofitClient.RetrofitClient;
@@ -65,5 +68,24 @@ public class MainRepository {
             }
         });
         return requests;
+    }
+    public LiveData<List<Crop>> queryProducts(String query){
+        MutableLiveData<List<Crop>> queryResult=new MutableLiveData<List<Crop>>();
+        Call<List<Crop>> call=RetrofitClient.getInstance(application).create(ProductApi.class).queryProducts(query);
+        call.enqueue(new Callback<List<Crop>>() {
+            @Override
+            public void onResponse(Call<List<Crop>> call, Response<List<Crop>> response) {
+                if(response.isSuccessful()){
+                    queryResult.setValue(response.body());
+                    return;
+                }
+                call.clone().enqueue(this);
+            }
+            @Override
+            public void onFailure(Call<List<Crop>> call, Throwable t) {
+                call.clone().enqueue(this);
+            }
+        });
+        return queryResult;
     }
 }

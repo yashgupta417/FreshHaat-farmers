@@ -121,6 +121,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
     public void goToActivity(Class c){
         Intent intent=new Intent(getApplicationContext(),c);
         startActivity(intent);
+        LoginActivity.activity.finish();
         finish();
     }
     public void hideKeyboard(){

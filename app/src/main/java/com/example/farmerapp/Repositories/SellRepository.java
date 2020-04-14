@@ -61,4 +61,39 @@ public class SellRepository {
         });
         return vegetables;
     }
+
+    public void queryVegetables(String query){
+        Call<List<Crop>> call=RetrofitClient.getInstance(application).create(ProductApi.class).queryVegetables(query);
+        call.enqueue(new Callback<List<Crop>>() {
+            @Override
+            public void onResponse(Call<List<Crop>> call, Response<List<Crop>> response) {
+                if(response.isSuccessful()){
+                    vegetables.setValue(response.body());
+                    return;
+                }
+                call.clone().enqueue(this);
+            }
+            @Override
+            public void onFailure(Call<List<Crop>> call, Throwable t) {
+                call.clone().enqueue(this);
+            }
+        });
+    }
+    public void queryFruits(String query){
+        Call<List<Crop>> call=RetrofitClient.getInstance(application).create(ProductApi.class).queryFruits(query);
+        call.enqueue(new Callback<List<Crop>>() {
+            @Override
+            public void onResponse(Call<List<Crop>> call, Response<List<Crop>> response) {
+                if(response.isSuccessful()){
+                    fruits.setValue(response.body());
+                    return;
+                }
+                call.clone().enqueue(this);
+            }
+            @Override
+            public void onFailure(Call<List<Crop>> call, Throwable t) {
+                call.clone().enqueue(this);
+            }
+        });
+    }
 }

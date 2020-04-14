@@ -1,5 +1,4 @@
 package com.example.farmerapp.Utils;
-
 import android.Manifest;
 import android.app.Activity;
 import android.app.Application;
@@ -33,7 +32,7 @@ public class LocationUtil{
     private static final long MIN_DISTANCE_FOR_UPDATE = 10;
     private static final long MIN_TIME_FOR_UPDATE = 1000 * 60 * 2;
     Application application;
-    private boolean has_permission=false;
+    public boolean has_permission=false;
     MutableLiveData<List<Address>> address;
     public LocationUtil(Application application) {
         this.application=application;
@@ -54,7 +53,7 @@ public class LocationUtil{
                 return true;
             }
         } else {
-                return true;
+            return true;
         }
     }
     public Boolean isLocationEnabled(Context context){
