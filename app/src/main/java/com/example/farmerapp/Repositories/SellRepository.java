@@ -61,9 +61,9 @@ public class SellRepository {
         });
         return vegetables;
     }
-
+    Call<List<Crop>> call;
     public void queryVegetables(String query){
-        Call<List<Crop>> call=RetrofitClient.getInstance(application).create(ProductApi.class).queryVegetables(query);
+        call=RetrofitClient.getInstance(application).create(ProductApi.class).queryVegetables(query);
         call.enqueue(new Callback<List<Crop>>() {
             @Override
             public void onResponse(Call<List<Crop>> call, Response<List<Crop>> response) {
@@ -80,7 +80,7 @@ public class SellRepository {
         });
     }
     public void queryFruits(String query){
-        Call<List<Crop>> call=RetrofitClient.getInstance(application).create(ProductApi.class).queryFruits(query);
+        call=RetrofitClient.getInstance(application).create(ProductApi.class).queryFruits(query);
         call.enqueue(new Callback<List<Crop>>() {
             @Override
             public void onResponse(Call<List<Crop>> call, Response<List<Crop>> response) {

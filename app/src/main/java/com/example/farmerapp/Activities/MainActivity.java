@@ -22,6 +22,7 @@ import com.example.farmerapp.Fragments.MainFragments.HomeFragment;
 import com.example.farmerapp.Fragments.MainFragments.PaymentFragment;
 import com.example.farmerapp.Fragments.MainFragments.RequestFragment;
 import com.example.farmerapp.R;
+import com.example.farmerapp.Utils.LocalCart;
 import com.example.farmerapp.ViewModels.MainViewModel;
 import com.google.android.material.navigation.NavigationView;
 
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     }
     public void logout(){
+        LocalCart.emptyCart(getApplication());
         SharedPreferences preferences=getSharedPreferences(getPackageName(),Context.MODE_PRIVATE);
         preferences.edit().putBoolean(SplashActivity.IS_LOGGED_IN,false).apply();
         preferences.edit().putBoolean(SplashActivity.IS_REGISTRATION_DONE,false).apply();
