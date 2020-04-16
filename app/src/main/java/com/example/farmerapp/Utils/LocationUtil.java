@@ -32,16 +32,17 @@ public class LocationUtil{
     private static final long MIN_DISTANCE_FOR_UPDATE = 10;
     private static final long MIN_TIME_FOR_UPDATE = 1000 * 60 * 2;
     Application application;
-    public boolean has_permission=false;
     MutableLiveData<List<Address>> address;
     public LocationUtil(Application application) {
         this.application=application;
         address=new MutableLiveData<List<Address>>();
         locationManager = (LocationManager) application.getSystemService(Context.LOCATION_SERVICE);
-        initializeLocationListener();
-        getLocation();
+    }
+    public boolean isProviderEnabled(){
+        return locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
     }
     public LiveData<List<Address>> observeAddress(){
+        getLocation();
         return address;
     }
 
@@ -56,15 +57,6 @@ public class LocationUtil{
             return true;
         }
     }
-    public Boolean isLocationEnabled(Context context){
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            LocationManager lm = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
-            return lm.isLocationEnabled();
-        } else {
-            int mode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE,Settings.Secure.LOCATION_MODE_OFF);
-            return  (mode != Settings.Secure.LOCATION_MODE_OFF);
-        }
-    }
     private void getLocation() {
         if(!checkPermission()) {
             return;
@@ -72,13 +64,11 @@ public class LocationUtil{
         if (ActivityCompat.checkSelfPermission(application, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(application, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        if (!isLocationEnabled(application)) {
-            return;
-        }
         location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         if(location!=null) {
             updateAddress(location);
         }else{
+            initializeLocationListener();
             locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,MIN_TIME_FOR_UPDATE,MIN_DISTANCE_FOR_UPDATE, locationListener);
         }
     }

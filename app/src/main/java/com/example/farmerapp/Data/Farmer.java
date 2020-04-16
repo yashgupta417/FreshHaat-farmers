@@ -24,6 +24,9 @@ public class Farmer {
     @SerializedName("address")
     @Expose
     private String address;
+    @SerializedName("landmark")
+    @Expose
+    private String landmark;
     @SerializedName("pin")
     @Expose
     private String pin;
@@ -119,5 +122,13 @@ public class Farmer {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getLandmark() {
+        return landmark;
+    }
+
+    public void setLandmark(String landmark) {
+        this.landmark = landmark;
     }
 }

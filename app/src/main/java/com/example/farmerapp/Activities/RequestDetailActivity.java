@@ -6,17 +6,20 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.farmerapp.Adapters.OrderItemAdapter;
 import com.example.farmerapp.Data.Date;
 import com.example.farmerapp.Data.Order;
 import com.example.farmerapp.R;
+import com.example.farmerapp.Utils.CheckInternet;
 import com.example.farmerapp.ViewModels.RequestDetailViewModel;
 
 import java.text.SimpleDateFormat;
@@ -34,6 +37,7 @@ public class RequestDetailActivity extends AppCompatActivity {
     public static String ORDER_ID="orderId";
     GifImageView load;
     RelativeLayout rl1;
+    Order order;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,26 +56,29 @@ public class RequestDetailActivity extends AppCompatActivity {
         viewModel= ViewModelProviders.of(this).get(RequestDetailViewModel.class);
         viewModel.getSellRequest(orderId).observe(this, new Observer<Order>() {
             @Override
-            public void onChanged(Order order) {
-                setUI(order);
+            public void onChanged(Order o) {
+                order=o;
+                setUI();
             }
         });
     }
     public void onBackClick(View view){
         finish();
     }
-    public void setUI(Order order){
+    public void setUI(){
         handleVisibility(View.GONE,View.VISIBLE,true);
         String o_status=order.getOrderStatus(),s_status=order.getSlotStatus();
         requestStatus.setText(o_status);
         slotStatus.setText(s_status);
         setStatusColour(requestStatus,o_status.toLowerCase(),this);
         setStatusColour(slotStatus,s_status.toLowerCase(),this);
+        if(o_status.equals("Cancelled"))
+            buttonWork(false,0.3f,"Cancel Request");
 
         Date d=order.getPickupDate();
         Calendar calendar=Calendar.getInstance();
         calendar.set(Calendar.YEAR,Integer.parseInt(d.getYear()));
-        calendar.set(Calendar.MONTH,Integer.parseInt(d.getMonth()));
+        calendar.set(Calendar.MONTH,Integer.parseInt(d.getMonth())-1);
         calendar.set(Calendar.DAY_OF_MONTH,Integer.parseInt(d.getDay()));
         SimpleDateFormat dayformat=new SimpleDateFormat("MMM dd");
         date.setText(dayformat.format(calendar.getTime()));
@@ -101,7 +108,37 @@ public class RequestDetailActivity extends AppCompatActivity {
             textView.setTextColor(context.getResources().getColor(R.color.rejected));
         }else if(status.equals("changed")){
             textView.setTextColor(context.getResources().getColor(R.color.changed));
+        }else if(status.equals("cancelled")){
+            textView.setTextColor(context.getResources().getColor(R.color.rejected));
         }
+    }
+    public void cancelRequest(View view){
+        if(!CheckInternet.isConnected(this)){
+            Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        buttonWork(false,0.3f,"Canceling....");
+        viewModel.cancelRequest(order.getDatabaseId()).observe(this, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(integer==1){
+                    Toast.makeText(RequestDetailActivity.this, "Request Cancelled Successfully", Toast.LENGTH_SHORT).show();
+                    buttonWork(false,0.3f,"Cancel Request");
+                    String cancelled="Cancelled";
+                    requestStatus.setText(cancelled);
+                    setStatusColour(requestStatus,cancelled.toLowerCase(),getApplication());
+                }else if(integer==-1){
+                    Toast.makeText(RequestDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                    buttonWork(true,1f,"Cancel Request");
+                }
+            }
+        });
+
+    }
+    public void buttonWork(Boolean bool,Float alpha,String text){
+        button.setEnabled(bool);
+        button.setAlpha(alpha);
+        button.setText(text);
     }
 
 }

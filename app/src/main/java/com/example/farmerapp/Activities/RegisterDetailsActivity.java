@@ -39,4 +39,13 @@ public class RegisterDetailsActivity extends AppCompatActivity {
         vPager.setCurrentItem(index,true);
     }
 
+    @Override
+    public void onBackPressed() {
+        if( vPager.getCurrentItem()>0){
+            scrollPager(vPager.getCurrentItem()-1);
+        }else{
+            super.onBackPressed();
+        }
+
+    }
 }

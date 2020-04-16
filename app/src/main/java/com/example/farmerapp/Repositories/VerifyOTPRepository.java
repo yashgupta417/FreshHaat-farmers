@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -21,8 +22,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.farmerapp.Activities.SplashActivity.ADDRESS;
+import static com.example.farmerapp.Activities.SplashActivity.CITY;
 import static com.example.farmerapp.Activities.SplashActivity.IS_LOGGED_IN;
+import static com.example.farmerapp.Activities.SplashActivity.LANDMARK;
 import static com.example.farmerapp.Activities.SplashActivity.MOBILE_NO;
+import static com.example.farmerapp.Activities.SplashActivity.PINCODE;
+import static com.example.farmerapp.Activities.SplashActivity.STATE;
 import static com.example.farmerapp.Activities.SplashActivity.TOKEN;
 import static com.example.farmerapp.Activities.SplashActivity.USER_ID;
 
@@ -45,6 +50,9 @@ public class VerifyOTPRepository {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if(response.isSuccessful() && response.body().getVerified()){
+                    if(response.body().getStatus()==null || !response.body().getStatus().equals("farmer")){
+                        verify.setValue(-2);
+                    }
                     preferences.edit().putBoolean(IS_LOGGED_IN,true).apply();
                     User user=response.body();
                     preferences.edit().putString(TOKEN,user.getToken()).apply();
@@ -115,6 +123,10 @@ public class VerifyOTPRepository {
                     Farmer farmer=response.body();
                     preferences.edit().putString(USER_ID,farmer.getId()).apply();
                     preferences.edit().putString(ADDRESS,farmer.getAddress()).apply();
+                    preferences.edit().putString(LANDMARK,farmer.getLandmark()).apply();
+                    preferences.edit().putString(PINCODE,farmer.getPin()).apply();
+                    preferences.edit().putString(CITY,farmer.getCity()).apply();
+                    preferences.edit().putString(STATE,farmer.getState()).apply();
                     preferences.edit().putBoolean(SplashActivity.IS_REGISTRATION_DONE,true).apply();
                     verify.setValue(OLD_USER);
                     return;

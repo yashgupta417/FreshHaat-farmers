@@ -41,7 +41,7 @@
         android:layout_below="@id/toolbar"
         android:layout_above="@id/place_request_card"
         android:requiresFadingEdge="vertical"
-        android:fadingEdgeLength="50dp">
+        android:fadingEdgeLength="10dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -59,7 +59,8 @@
                     android:onClick="onRLClick"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingVertical="10dp">
+                    android:paddingVertical="10dp"
+                    android:background="@drawable/book_slot_card_border">
                     <TextView
                         android:id="@+id/manual_text"
                         android:layout_width="wrap_content"
@@ -184,7 +185,6 @@
                     android:id="@+id/pickup_rl"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:alpha="0.3"
                     android:onClick="onRLClick"
                     android:paddingVertical="10dp">
                     <TextView
@@ -209,15 +209,31 @@
                             android:text="Address"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp"/>
-                        <TextView
+                        <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:id="@+id/address"
-                            android:text=""
                             android:layout_marginLeft="30dp"
-                            android:textColor="#929292"
-                            android:textSize="15sp" />
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/address"
+                                android:text=""
+                                android:textColor="#929292"
+                                android:textSize="15sp" />
+                            <TextView
+                                android:id="@+id/add_new_address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:onClick="addNewAddress"
+                                android:text="Add new address"
+                                android:layout_marginTop="5dp"
+                                android:textColor="#AA000000"
+                                android:textStyle="bold"/>
+                        </LinearLayout>
+
                     </LinearLayout>
+
 
                     <LinearLayout
                         android:id="@+id/date"
@@ -305,8 +321,8 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         app:cardElevation="4dp"
         app:cardCornerRadius="10dp">
         <RelativeLayout
@@ -320,7 +336,7 @@
                 android:textColor="@color/white"
                 android:text="Place Request"
                 android:onClick="placeRequestWork"
-                android:alpha="0.5"
+                android:alpha="0.3"
                 android:enabled="false"
                 android:gravity="center"
                 android:layout_centerInParent="true"

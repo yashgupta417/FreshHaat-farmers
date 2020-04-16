@@ -11,6 +11,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.farmerapp.API.FarmerApi;
+import com.example.farmerapp.API.SellRequestApi;
 import com.example.farmerapp.Activities.SplashActivity;
 import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.Data.Image;
@@ -23,11 +24,16 @@ import id.zelory.compressor.Compressor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 import static com.example.farmerapp.Activities.SplashActivity.ADDRESS;
+import static com.example.farmerapp.Activities.SplashActivity.CITY;
+import static com.example.farmerapp.Activities.SplashActivity.LANDMARK;
+import static com.example.farmerapp.Activities.SplashActivity.PINCODE;
+import static com.example.farmerapp.Activities.SplashActivity.STATE;
 import static com.example.farmerapp.Activities.SplashActivity.USER_ID;
 
 public class RegisterDetailsRepository {
@@ -95,7 +101,11 @@ public class RegisterDetailsRepository {
                 if(response.isSuccessful()){
                     Farmer farmer=response.body();
                     preferences.edit().putString(USER_ID,farmer.getId()).apply();
-                    preferences.edit().putString(ADDRESS,farmer.getAddress());
+                    preferences.edit().putString(ADDRESS,farmer.getAddress()).apply();
+                    preferences.edit().putString(LANDMARK,farmer.getLandmark()).apply();
+                    preferences.edit().putString(PINCODE,farmer.getPin()).apply();
+                    preferences.edit().putString(CITY,farmer.getCity()).apply();
+                    preferences.edit().putString(STATE,farmer.getState()).apply();
                     preferences.edit().putBoolean(SplashActivity.IS_REGISTRATION_DONE,true).apply();
                     uploadStatus.setValue(1);
                 }
@@ -108,4 +118,5 @@ public class RegisterDetailsRepository {
             }
         });
     }
+
 }

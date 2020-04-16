@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.location.Address;
 import android.os.Bundle;
 
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.LifecycleObserver;
 import androidx.lifecycle.Observer;
@@ -16,10 +17,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.farmerapp.Activities.CartActivity;
 import com.example.farmerapp.Activities.MainActivity;
+import com.example.farmerapp.Activities.SearchActivity;
 import com.example.farmerapp.Activities.SellActivity;
 import com.example.farmerapp.Adapters.SellCropAdapter;
 import com.example.farmerapp.Data.Crop;
@@ -46,30 +51,40 @@ public class HomeFragment extends Fragment {
     RelativeLayout sellFruitsRL,sellVegetablesRL;
     FloatingActionButton cartButton;
     ArrayList<Crop> products;
+    TextView suggestText,badge;
+    RelativeLayout vegOfferRl,fruitOfferRl,cropOfferRl;
+    LinearLayout searchParent;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_home, container, false);
         recyclerView=v.findViewById(R.id.suggested_crops_recylerview);
         load=v.findViewById(R.id.load);
         cartButton=v.findViewById(R.id.cart);
+        badge=v.findViewById(R.id.badge);
         products=new ArrayList<>();
+        suggestText=v.findViewById(R.id.suggest_text);
+        suggestText.setVisibility(View.GONE);
+        searchParent=v.findViewById(R.id.search_ll);
         setClickListeners(v);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         recyclerView.setHasFixedSize(true);
+        updateBadge();
         viewModel= ViewModelProviders.of(this).get(MainViewModel.class);
         viewModel.getFarmer().observe(this, new Observer<Farmer>() {
             @Override
             public void onChanged(Farmer farmer) {
                 load.setVisibility(View.GONE);
                 products=farmer.getCrops();
+                if(products.size()>0)
+                    suggestText.setVisibility(View.VISIBLE);
                 activateAdapter();
             }
         });
         MainActivity.showLocation();
         MainActivity.setTitle("");
-        getLocation();
         return v;
     }
+
     public void activateAdapter(){
         products=LocalCart.syncQuantities(products,getActivity().getApplication());
         adapter=new SellCropAdapter(products,getContext(),SellCropAdapter.NORMAL);
@@ -95,34 +110,61 @@ public class HomeFragment extends Fragment {
                 if(crop.getQuantity()>0) {
                     crop.setQuantity(crop.getQuantity() - 1);
                     adapter.notifyItemChanged(position);
+                    if(crop.getQuantity()==0) {
+                        LocalCart.count--;
+                        updateBadge();
+                    }
                     LocalCart.update(getActivity().getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
                 }
             }
+
+            @Override
+            public void onAddToCartClick(int position) {
+                Crop crop=adapter.getItem(position);
+                crop.setQuantity(1);
+                adapter.notifyItemChanged(position);
+                LocalCart.count++;
+                updateBadge();
+                LocalCart.update(getActivity().getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
+            }
         });
     }
-
+    public void updateBadge(){
+        if(LocalCart.count==0) {
+            badge.setVisibility(View.GONE);
+        }else{
+            badge.setVisibility(View.VISIBLE);
+            badge.setText(Integer.toString(LocalCart.count));
+        }
+    }
     @Override
-    public void onResume() {
+    public void onResume(){
         super.onResume();
+        updateBadge();
         activateAdapter();
     }
 
-    public void getLocation(){
-        LocationUtil locationUtil=new LocationUtil(getActivity().getApplication());
-        if(locationUtil.isLocationEnabled(getActivity())){
-            locationUtil.observeAddress().observe(getActivity(), new Observer<List<Address>>() {
-                @Override
-                public void onChanged(List<Address> addresses) {
-                    String locality = addresses.get(0).getLocality();
-                    String subLocality = addresses.get(0).getSubLocality();
-                    MainActivity.setLocation(locality,subLocality);
-                }
-            });
-        }
-    }
     public void setClickListeners(View v){
      sellFruitsRL=v.findViewById(R.id.sell_fruits);
      sellVegetablesRL=v.findViewById(R.id.sell_vegetables);
+     vegOfferRl=v.findViewById(R.id.veg_offer);
+     fruitOfferRl=v.findViewById(R.id.fruit_offer);
+     vegOfferRl.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             Intent intent=new Intent(getActivity().getApplicationContext(),SellActivity.class);
+             intent.putExtra(MainActivity.PRODUCT_TYPE,MainActivity.VEGETABLES);
+             getActivity().startActivity(intent);
+         }
+     });
+     fruitOfferRl.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             Intent intent=new Intent(getActivity().getApplicationContext(), SellActivity.class);
+             intent.putExtra(MainActivity.PRODUCT_TYPE,MainActivity.FRUITS);
+             getActivity().startActivity(intent);
+         }
+     });
      sellFruitsRL.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
@@ -146,5 +188,13 @@ public class HomeFragment extends Fragment {
              getActivity().startActivity(intent);
          }
      });
+     searchParent.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             Intent intent=new Intent(getActivity(),SearchActivity.class);
+             startActivity(intent);
+         }
+     });
+
     }
 }

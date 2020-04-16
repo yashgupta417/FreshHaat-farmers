@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.farmerapp.Activities.MainActivity;
 import com.example.farmerapp.Activities.RequestDetailActivity;
@@ -21,6 +22,7 @@ import com.example.farmerapp.R;
 import com.example.farmerapp.ViewModels.MainViewModel;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
@@ -31,6 +33,7 @@ public class RequestFragment extends Fragment {
     RecyclerView recyclerView;
     MainViewModel viewModel;
     GifImageView load;
+    TextView noRequestsText;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_request, container, false);
@@ -38,6 +41,7 @@ public class RequestFragment extends Fragment {
         MainActivity.setTitle("Requests");
         recyclerView=v.findViewById(R.id.recyler_view);
         load=v.findViewById(R.id.load);
+        noRequestsText=v.findViewById(R.id.no_requests);
         viewModel= ViewModelProviders.of(this).get(MainViewModel.class);
         viewModel.getAllRequests().observe(this, new Observer<List<Order>>() {
             @Override
@@ -49,6 +53,11 @@ public class RequestFragment extends Fragment {
         return v;
     }
     public void setUpRecyclerView(ArrayList<Order> requests){
+        if(requests.size()==0){
+            noRequestsText.setVisibility(View.VISIBLE);
+            return;
+        }
+        Collections.reverse(requests);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setHasFixedSize(true);
         RequestAdapter adapter=new RequestAdapter(requests,getContext());

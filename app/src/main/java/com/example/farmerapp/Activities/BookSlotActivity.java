@@ -13,6 +13,7 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.farmerapp.Adapters.SlotAdapter;
+import com.example.farmerapp.BottomSheets.AddressBottomSheet;
 import com.example.farmerapp.Data.Address;
 import com.example.farmerapp.Data.Date;
 import com.example.farmerapp.Data.Order;
@@ -50,6 +52,9 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
     private static Integer PICKUP=0,MANUAL=1;
     SlotAdapter pickupSlotsAdapter,manualSlotsAdapter;
     BookSlotViewModel viewModel;
+    TextView addNewAddress;
+    String addressLines,landmark,pincode,city,state;
+    Address address;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,31 +68,55 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
         manualRL=findViewById(R.id.manual_rl);
         pickupDate=findViewById(R.id.date);
         manualDate=findViewById(R.id.cc_date);
+        addNewAddress=findViewById(R.id.add_new_address);
         selected=MANUAL;
         setUpPickupRecyclerView();
         setUpManualRecyclerView();
         setAddress();
         viewModel= ViewModelProviders.of(this).get(BookSlotViewModel.class);
     }
+    public void addNewAddress(View view){
+        if(selected==MANUAL) {
+            onRLClick(pickRL);
+            return;
+        }
+        AddressBottomSheet bottomSheet=new AddressBottomSheet(address);
+        bottomSheet.show(getSupportFragmentManager(),"address");
+        bottomSheet.setOnConfirmListener(new AddressBottomSheet.OnConfirmLocationListener() {
+            @Override
+            public void onConfirmLocation(Address changedAddress) {
+                address=changedAddress;
+                pickUpAddress.setText(address.getAddress());
+            }
+        });
+    }
     public void setAddress(){
-        TextView addressTextView=findViewById(R.id.address);
         SharedPreferences preferences=getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-        String address=preferences.getString(SplashActivity.ADDRESS,null);
-        if(address!=null){
-            addressTextView.setText(address);
+        addressLines=preferences.getString(SplashActivity.ADDRESS,null);
+        landmark=preferences.getString(SplashActivity.LANDMARK,null);
+        pincode=preferences.getString(SplashActivity.PINCODE,null);
+        city=preferences.getString(SplashActivity.CITY,null);
+        state=preferences.getString(SplashActivity.STATE,null);
+        address=new Address(addressLines);
+        address.setLandmark(landmark);
+        address.setPin(pincode);
+        address.setCity(city);
+        address.setState(state);
+        if(addressLines!=null){
+            pickUpAddress.setText(addressLines);
         }
     }
     public void onRLClick(View view){
         if(view.getId()==R.id.pickup_rl){
-            pickRL.setAlpha(1f);
-            manualRL.setAlpha(0.3f);
+            pickRL.setBackground(getResources().getDrawable(R.drawable.book_slot_card_border));
+            manualRL.setBackgroundResource(0);
             recyclerView_pick.setClickable(true);
             recyclerView_manual.setClickable(false);
             selected=PICKUP;
             updateButtonUI(pickUpDateSelected);
         }else if(view.getId()==R.id.manual_rl){
-            pickRL.setAlpha(0.3f);
-            manualRL.setAlpha(1f);
+            manualRL.setBackground(getResources().getDrawable(R.drawable.book_slot_card_border));
+            pickRL.setBackgroundResource(0);
             recyclerView_manual.setClickable(true);
             recyclerView_pick.setClickable(false);
             selected=MANUAL;
@@ -99,7 +128,7 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
             placeRequest.setAlpha(1f);
             placeRequest.setEnabled(true);
         }else{
-            placeRequest.setAlpha(0.5f);
+            placeRequest.setAlpha(0.3f);
             placeRequest.setEnabled(false);
         }
     }
@@ -199,7 +228,7 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
             order.setPickupDate(new Date(pickupDayTextView.getText().toString(),
                                          pickupMonthTextView.getText().toString(),
                                          pickupYearTextView.getText().toString()));
-            order.setPickupAddress(new Address(pickUpAddress.getText().toString()));
+            order.setPickupAddress(address);
         }else{
             order.setOrderType("manual");
             order.setSlotNumber(Integer.toString(manualSlotsAdapter.selectedIndex+1));

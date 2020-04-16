@@ -38,15 +38,15 @@ import android.widget.Toast;
 import com.example.farmerapp.Activities.RegisterDetailsActivity;
 import com.example.farmerapp.R;
 import com.example.farmerapp.Utils.LocationUtil;
-import com.example.farmerapp.ViewModels.RegisterDetailsViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
 import static com.example.farmerapp.Activities.RegisterDetailsActivity.viewModel;
-
 public class RegisterAddress1Fragment extends Fragment {
 
 
@@ -92,7 +92,7 @@ public class RegisterAddress1Fragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() > 0) {
+                if (s.toString().trim().length() > 0) {
                     isAddress1Ok = true;
                 } else {
                     isAddress1Ok = false;
@@ -113,7 +113,7 @@ public class RegisterAddress1Fragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (s.length() > 0) {
+                if (s.toString().trim().length() > 0) {
                     isAddress2OK = true;
                 } else {
                     isAddress2OK = false;
@@ -144,23 +144,23 @@ public class RegisterAddress1Fragment extends Fragment {
         });
     }
 
+
     public void updateNextButtonStatus() {
         if (isAddress1Ok) {//Address 1 is enough
             next.setEnabled(true);
             next.setAlpha(1);
-            String address=address1.getText().toString()+" "+address2.getText().toString()+" "+landmark.getText().toString();
+            String address=address1.getText().toString()+" "+address2.getText().toString();
             viewModel.farmer.setAddress(address);
+            viewModel.farmer.setLandmark(landmark.getText().toString());
         } else {
             next.setEnabled(false);
             next.setAlpha(0.3f);
         }
     }
     public void getAddress(){
-        if(locationStatus==1)
-            return;//location already fetched
         LocationUtil locationUtil=new LocationUtil(getActivity().getApplication());
-        if(!locationUtil.isLocationEnabled(getContext())){
-            Snackbar snackbar=Snackbar.make(RegisterDetailsActivity.parent,"Please turn your GPS on.",Snackbar.LENGTH_SHORT);
+        if(!locationUtil.isProviderEnabled()){
+            Snackbar snackbar=Snackbar.make(RegisterDetailsActivity.parent,"Please turn your GPS on",Snackbar.LENGTH_SHORT);
             snackbar.show();
             return;
         }
@@ -168,22 +168,61 @@ public class RegisterAddress1Fragment extends Fragment {
         locationUtil.observeAddress().observe(this, new Observer<List<Address>>() {
             @Override
             public void onChanged(List<Address> addresses) {
-                String add1 = addresses.get(0).getAddressLine(0);
-                String add2 = addresses.size() > 1 ? addresses.get(0).getAddressLine(1) : "";
-                String locality = addresses.get(0).getLocality();
-                String subLocality = addresses.get(0).getSubLocality();
-                String state = addresses.get(0).getAdminArea();
-                String postalCode = addresses.get(0).getPostalCode();
-                updateAddressInUI(add1,subLocality,state,postalCode);
+                extractAddressInfo(addresses);
                 locationStatus=1;
             }
         });
 
     }
-    public void updateAddressInUI(String add1,String subLocality,String state,String postalCode){
-        address1.setText(add1);
-        address2.setText(subLocality+" "+state+" "+postalCode);
-        locationTextView.setText(subLocality+","+state);
+    public void extractAddressInfo(List<Address> addresses){
+        String add1 =addresses.get(0).getAddressLine(0);
+        String locality = addresses.get(0).getLocality();
+        String subLocality = addresses.get(0).getSubLocality();
+        String subAdminArea=addresses.get(0).getSubAdminArea();
+        String adminArea = addresses.get(0).getAdminArea();
+        String postalCode = addresses.get(0).getPostalCode();
+        String header="",add2="";
+        if(subAdminArea!=null)
+            add2+=subAdminArea+" ";
+        if(adminArea!=null)
+            add2+=adminArea;
+        if(subLocality!=null)
+            header+=subLocality;
+        if(locality!=null){
+            if(header.length()>0)
+                header+=",";
+            header+=locality;
+        }
+
+
+        //For using in next fragment
+        if(postalCode!=null) {
+            viewModel.farmer.setPin(postalCode);
+            Log.i("adddd",viewModel.farmer.getPin());
+        }
+        ArrayList<String> states=new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.india_states)));
+        for(String s:states){
+            if(s.toLowerCase().equals(adminArea.toLowerCase())){
+                viewModel.stateIndex=states.indexOf(s);
+                break;
+            }
+        }
+        ArrayList<String> cities=new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.indian_cities)));
+        for(String c:cities){
+            if(c.toLowerCase().equals(locality.toLowerCase())){
+                viewModel.cityIndex=cities.indexOf(c);
+                break;
+            }
+        }
+        updateAddressInUI(add1,add2,header);
+        RegisterAddress2Fragment.updateAddressDetails();
+    }
+    public void updateAddressInUI(String add1,String add2,String header){
+        if(add1!=null)
+            address1.setText(add1);
+        if(add2!=null)
+            address2.setText(add2);
+        locationTextView.setText(header);
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

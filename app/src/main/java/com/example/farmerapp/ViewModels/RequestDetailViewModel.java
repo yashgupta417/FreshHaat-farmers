@@ -23,4 +23,9 @@ public class RequestDetailViewModel extends AndroidViewModel{
         String userId=preferences.getString(SplashActivity.USER_ID,null);
         return repository.getSellRequest(userId,orderId);
     }
+    public LiveData<Integer> cancelRequest(String orderId){
+        SharedPreferences preferences=getApplication().getSharedPreferences(getApplication().getPackageName(), Context.MODE_PRIVATE);
+        String userId=preferences.getString(SplashActivity.USER_ID,null);
+        return repository.cancelRequest(userId,orderId);
+    }
 }

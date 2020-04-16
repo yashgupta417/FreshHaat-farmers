@@ -1,7 +1,7 @@
 <resources>
     <string name="empty_cart">Your cart is Empty</string>
     <string name="call_executive">You can call our executive for further information</string>
-    <string name="app_name">FarmerApp</string>
+    <string name="app_name">FreshHut</string>
     <string name="Rs">\u20B9</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>

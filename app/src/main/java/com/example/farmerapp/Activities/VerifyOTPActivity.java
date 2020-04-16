@@ -114,6 +114,9 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 else if(result==-1){
                     Toast.makeText(VerifyOTPActivity.this, "Wrong OTP", Toast.LENGTH_SHORT).show();
                     updateUI(true,1f);
+                }else if(result==-2){
+                    Toast.makeText(VerifyOTPActivity.this, "You are not registered as farmer", Toast.LENGTH_SHORT).show();
+                    updateUI(true,1f);
                 }
             }
         });

@@ -74,7 +74,7 @@ public class RequestAdapter extends RecyclerView.Adapter<RequestAdapter.RequestV
 
         Calendar calendar=Calendar.getInstance();
         calendar.set(Calendar.YEAR,Integer.parseInt(date.getYear()));
-        calendar.set(Calendar.MONTH,Integer.parseInt(date.getMonth()));
+        calendar.set(Calendar.MONTH,Integer.parseInt(date.getMonth())-1);
         calendar.set(Calendar.DAY_OF_MONTH,Integer.parseInt(date.getDay()));
         SimpleDateFormat dayformat=new SimpleDateFormat("MMM dd");
         holder.date.setText(dayformat.format(calendar.getTime()));

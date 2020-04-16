@@ -5,21 +5,27 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/home"
-            android:title="Home" />
+            android:title="Home"
+            android:icon="@drawable/ic_keyboard_arrow_right"/>
         <item
             android:id="@+id/requests"
-            android:title="Requests" />
+            android:title="Requests"
+            android:icon="@drawable/ic_keyboard_arrow_right"/>
         <item
             android:id="@+id/payments"
-            android:title="Payments" />
+            android:title="Payments"
+            android:icon="@drawable/ic_keyboard_arrow_right"/>
         <item
             android:id="@+id/about"
-            android:title="About" />
+            android:title="About"
+            android:icon="@drawable/ic_keyboard_arrow_right"/>
         <item
             android:id="@+id/refer"
-            android:title="Refer" />
+            android:title="Refer"
+            android:icon="@drawable/ic_keyboard_arrow_right"/>
         <item
             android:id="@+id/logout"
-            android:title="Logout"/>
+            android:title="Logout"
+            android:icon="@drawable/ic_keyboard_arrow_right"/>
     </group>
 </menu>

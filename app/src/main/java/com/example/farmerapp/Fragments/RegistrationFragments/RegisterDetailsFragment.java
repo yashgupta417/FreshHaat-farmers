@@ -53,7 +53,7 @@ public class RegisterDetailsFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length()>0){
+                if(s.toString().trim().length()>0){
                     isnameok=true;
                 }else{
                     isnameok=false;
@@ -74,7 +74,7 @@ public class RegisterDetailsFragment extends Fragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if(s.length()==10){
+                if(s.toString().trim().length()==10){
                     isphoneok=true;
                 }else{
                     isphoneok=false;

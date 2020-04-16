@@ -13,13 +13,13 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
-        <activity android:name=".Activities.RequestDetailActivity"></activity>
+        <activity android:name=".Activities.SearchActivity"></activity>
+        <activity android:name=".Activities.RequestDetailActivity" />
         <activity android:name=".Activities.BookSlotActivity" />
         <activity android:name=".Activities.CartActivity" />
         <activity android:name=".Activities.SellActivity" />
         <activity android:name=".Activities.ProfileActivity" />
-        <activity
-            android:name=".Activities.MainActivity"/>
+        <activity android:name=".Activities.MainActivity" />
         <activity
             android:name=".Activities.SplashActivity"
             android:screenOrientation="portrait"
@@ -35,7 +35,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.RegisterDetailsActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".Activities.VerifyOTPActivity"
             android:screenOrientation="portrait" />
@@ -43,11 +43,11 @@
             android:name=".Activities.LoginActivity"
             android:screenOrientation="portrait" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>

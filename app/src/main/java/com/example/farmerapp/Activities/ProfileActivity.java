@@ -28,6 +28,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.farmerapp.BottomSheets.AddressBottomSheet;
+import com.example.farmerapp.Data.Address;
 import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.R;
 import com.example.farmerapp.Utils.CheckInternet;
@@ -123,7 +125,30 @@ public class ProfileActivity extends AppCompatActivity {
         edit_address.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getEditextInFocus(addressEdittext);
+                //getEditextInFocus(addressEdittext);
+                editAddress();
+            }
+        });
+    }
+    public void editAddress(){
+        Address address=new Address(farmer.getAddress());
+        address.setLandmark(farmer.getLandmark());
+        address.setPin(farmer.getPin());
+        address.setCity(farmer.getCity());
+        address.setState(farmer.getState());
+
+        AddressBottomSheet bottomSheet=new AddressBottomSheet(address);
+        bottomSheet.show(getSupportFragmentManager(),"address");
+        bottomSheet.setOnConfirmListener(new AddressBottomSheet.OnConfirmLocationListener() {
+            @Override
+            public void onConfirmLocation(Address address) {
+                farmer.setAddress(address.getAddress());
+                farmer.setLandmark(address.getLandmark());
+                farmer.setPin(address.getPin());
+                farmer.setCity(address.getCity());
+                farmer.setState(address.getState());
+                updateUI();
+                isEdited=true;
             }
         });
     }
@@ -171,7 +196,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
-        addressEdittext.addTextChangedListener(new TextWatcher() {
+        /*addressEdittext.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -186,6 +211,15 @@ public class ProfileActivity extends AppCompatActivity {
             public void afterTextChanged(Editable s) {
                 isEdited=true;
                 farmer.setAddress(s.toString());
+            }
+        });*/
+        addressEdittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(hasFocus){
+                    addressEdittext.clearFocus();
+                    editAddress();
+                }
             }
         });
     }

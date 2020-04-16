@@ -13,6 +13,7 @@ import com.example.farmerapp.Data.Farmer;
 
 public class RegisterDetailsViewModel extends AndroidViewModel {
     RegisterDetailsRepository repository;
+    public Integer cityIndex=-1,stateIndex=-1;
     public Uri image;
     public Farmer farmer;
     public RegisterDetailsViewModel(@NonNull Application application) {

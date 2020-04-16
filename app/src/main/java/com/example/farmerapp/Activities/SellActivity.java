@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.farmerapp.Adapters.SellCropAdapter;
 import com.example.farmerapp.Data.Crop;
@@ -35,7 +36,7 @@ public class SellActivity extends AppCompatActivity {
     SellCropAdapter adapter;
     SellViewModel viewModel;
     public Integer NO_OF_COLUMNS=2;
-    TextView title;
+    TextView title,badge;
     GifImageView load;
     ArrayList<Crop> products;
     SearchView searchView;
@@ -54,6 +55,8 @@ public class SellActivity extends AppCompatActivity {
         title.setText("Sell "+productType);
         load=findViewById(R.id.load);
         searchView=findViewById(R.id.search);
+        badge=findViewById(R.id.badge);
+        updateBadge();
 
         recyclerView=findViewById(R.id.recyler_view);
         recyclerView.setLayoutManager(new GridLayoutManager(this,NO_OF_COLUMNS));
@@ -70,6 +73,7 @@ public class SellActivity extends AppCompatActivity {
         });
 
     }
+
     public void onBackClick(View view){
         finish();
     }
@@ -92,6 +96,7 @@ public class SellActivity extends AppCompatActivity {
     }
     public void activateAdapter(){
         products=LocalCart.syncQuantities(products,getApplication());
+        updateBadge();
         adapter=new SellCropAdapter(products,this,SellCropAdapter.GRID);
         recyclerView.setAdapter(adapter);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
@@ -115,16 +120,38 @@ public class SellActivity extends AppCompatActivity {
                 if(crop.getQuantity()>0) {
                     crop.setQuantity(crop.getQuantity() - 1);
                     adapter.notifyItemChanged(position);
+                    if(crop.getQuantity()==0) {
+                        LocalCart.count--;
+                        updateBadge();
+                    }
                     LocalCart.update(getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
                 }
             }
+            @Override
+            public void onAddToCartClick(int position) {
+                Crop crop=adapter.getItem(position);
+                crop.setQuantity(1);
+                adapter.notifyItemChanged(position);
+                LocalCart.count++;
+                updateBadge();
+                LocalCart.update(getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
+            }
         });
     }
-
+    public void updateBadge(){
+        if(LocalCart.count==0) {
+            badge.setVisibility(View.GONE);
+        }else{
+            badge.setVisibility(View.VISIBLE);
+            badge.setText(Integer.toString(LocalCart.count));
+        }
+    }
     @Override
     protected void onResume() {
         super.onResume();
+        updateBadge();
         activateAdapter();
+
     }
 
     public void goToCartActivity(View v){

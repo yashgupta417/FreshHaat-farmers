@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class LocalCart {
+    public static Integer count=0;
     private static String PRODUCT_IDS="productIds";
     private static String QUANTITIES="quantities";
     public static void update(Application application,String id,String quantity){
@@ -36,8 +37,6 @@ public class LocalCart {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
     public static ArrayList<String> getProductIds(Application application)  {
         SharedPreferences preferences=application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
@@ -88,6 +87,7 @@ public class LocalCart {
         return products;
     }
     public static void emptyCart(Application application){
+        LocalCart.count=0;
         SharedPreferences preferences=application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
         try {
             preferences.edit().putString(PRODUCT_IDS,ObjectSerializer.serialize(new ArrayList<String>())).apply();

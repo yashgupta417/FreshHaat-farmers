@@ -13,7 +13,7 @@
         android:textSize="16sp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="15dp"
         android:paddingVertical="10dp"
         android:text="City"/>
 </RelativeLayout>

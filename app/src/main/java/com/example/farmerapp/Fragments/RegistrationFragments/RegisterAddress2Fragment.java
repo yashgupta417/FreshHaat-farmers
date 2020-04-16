@@ -4,9 +4,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -28,7 +31,6 @@ import com.example.farmerapp.Activities.RegisterDetailsActivity;
 import com.example.farmerapp.Activities.SelectCropActivity;
 import com.example.farmerapp.Adapters.SpinnerAdapter;
 import com.example.farmerapp.R;
-import com.example.farmerapp.ViewModels.RegisterDetailsViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -37,15 +39,16 @@ import java.util.List;
 
 import static com.example.farmerapp.Activities.RegisterDetailsActivity.viewModel;
 
+
 public class RegisterAddress2Fragment extends Fragment implements AdapterView.OnItemSelectedListener {
     public RegisterAddress2Fragment() {
         // Required empty public constructor
     }
     ImageView back;
     Button next;
-    Spinner citySpinner,stateSpinner;
+    public static Spinner citySpinner,stateSpinner;
     SpinnerAdapter stateAdapter,cityAdapter;
-    EditText pincode;
+    public static EditText pincode;
     boolean isPincodeOk=false,isCityOk=false,isStateOk=false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
         stateSpinner = v.findViewById(R.id.state);
         citySpinner = v.findViewById(R.id.city);
         pincode=v.findViewById(R.id.pin);
+
         addButtonClickListeners();
         addTextListener();
 
@@ -69,6 +73,19 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
         return v;
 
     }
+
+
+    public static void updateAddressDetails(){
+        if(viewModel.farmer.getPin()!=null ) {
+            pincode.setText(viewModel.farmer.getPin());
+        }
+        if(viewModel.cityIndex!=-1)
+            citySpinner.setSelection(viewModel.cityIndex);
+        if(viewModel.stateIndex!=-1)
+            stateSpinner.setSelection(viewModel.stateIndex);
+    }
+
+
     public void addButtonClickListeners(){
         back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -173,6 +190,7 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
                 } else {
                     isPincodeOk = false;
                 }
+                viewModel.farmer.setPin(pincode.getText().toString());
                 updateNextButtonStatus();
             }
         });
@@ -182,7 +200,6 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
         if(isStateOk && isCityOk && isPincodeOk){
             next.setEnabled(true);
             next.setAlpha(1f);
-            viewModel.farmer.setPin(pincode.getText().toString());//city and state are already saved
         }else{
             next.setEnabled(false);
             next.setAlpha(0.3f);

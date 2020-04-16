@@ -27,8 +27,10 @@ import com.example.farmerapp.Utils.LocalCart;
 import com.example.farmerapp.ViewModels.CartViewModel;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -99,14 +101,14 @@ public class CartActivity extends AppCompatActivity {
     }
     public void activateAdapter(Cart cart){
         //To maintain order of items
-        Collections.sort(cart.getProducts(), new Comparator<Crop>() {
+        ArrayList<Crop> crops=cart.getProducts();
+        Collections.sort(crops, new Comparator<Crop>() {
             @Override
-            public int compare(Crop crop1, Crop crop2){
-                if(crop1.getId().hashCode()>crop2.getId().hashCode())
-                    return 1;
-                return 0;
+            public int compare(Crop o1, Crop o2) {
+                return o1.getId().compareTo(o2.getId());
             }
         });
+        cart.setProducts(crops);
         adapter=new CartItemAdapter(cart.getProducts(),this);
         recyclerView.setAdapter(adapter);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
@@ -138,6 +140,8 @@ public class CartActivity extends AppCompatActivity {
             Crop crop=adapter.getItem(position);
             crop.setQuantity(crop.getQuantity()+1);
             adapter.notifyItemChanged(position);
+            if(crop.getQuantity()==1)
+                LocalCart.count++;
             LocalCart.update(getApplication(),crop.getId(),Integer.toString(crop.getQuantity()));
             generateBill();
         }
@@ -153,6 +157,8 @@ public class CartActivity extends AppCompatActivity {
             if(crop.getQuantity()>0) {
                 crop.setQuantity(crop.getQuantity() - 1);
                 adapter.notifyItemChanged(position);
+                if(crop.getQuantity()==0)
+                    LocalCart.count--;
                 LocalCart.update(getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
                 generateBill();
             }

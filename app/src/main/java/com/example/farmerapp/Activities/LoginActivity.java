@@ -62,6 +62,13 @@ public class LoginActivity extends AppCompatActivity {
         intent.putExtra("mobileNumber",phoneEditText.getText().toString());
         startActivity(intent);
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateUI(true,1f);
+    }
+
     public void buttonEnabling(){
         phoneEditText.addTextChangedListener(new TextWatcher() {
             @Override

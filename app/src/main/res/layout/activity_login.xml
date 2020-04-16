@@ -43,7 +43,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" HAAT"
+            android:text=" HUT"
             android:textColor="@color/grey"
             android:textSize="50dp"
             android:shadowColor="#29000000"
