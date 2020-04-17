@@ -52,6 +52,7 @@ public class VerifyOTPRepository {
                 if(response.isSuccessful() && response.body().getVerified()){
                     if(response.body().getStatus()==null || !response.body().getStatus().equals("farmer")){
                         verify.setValue(-2);
+                        return;
                     }
                     preferences.edit().putBoolean(IS_LOGGED_IN,true).apply();
                     User user=response.body();
