@@ -15,6 +15,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -70,9 +71,10 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
         manualDate=findViewById(R.id.cc_date);
         addNewAddress=findViewById(R.id.add_new_address);
         selected=MANUAL;
-        setUpPickupRecyclerView();
-        setUpManualRecyclerView();
         setAddress();
+        Calendar c=Calendar.getInstance();
+        setUpManualRecyclerView(c);
+        setUpPickupRecyclerView(c);
         viewModel= ViewModelProviders.of(this).get(BookSlotViewModel.class);
     }
     public void addNewAddress(View view){
@@ -107,6 +109,7 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
         }
     }
     public void onRLClick(View view){
+        Log.i("****","onRLClick");
         if(view.getId()==R.id.pickup_rl){
             pickRL.setBackground(getResources().getDrawable(R.drawable.book_slot_card_border));
             manualRL.setBackgroundResource(0);
@@ -148,35 +151,37 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
             onRLClick(manualRL);
         }
     }
-    public void setUpPickupRecyclerView(){
+    public void setUpPickupRecyclerView(Calendar selectedDate){
         recyclerView_pick.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         recyclerView_pick.setHasFixedSize(true);
         ((SimpleItemAnimator) recyclerView_pick.getItemAnimator()).setSupportsChangeAnimations(false);
-        pickupSlotsAdapter=new SlotAdapter(new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.slot_names))),
-                                          new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.slot_times))),this,0);
+        pickupSlotsAdapter=new SlotAdapter(this,selectedDate);
         recyclerView_pick.setAdapter(pickupSlotsAdapter);
         pickupSlotsAdapter.setOnItemClickListener(new SlotAdapter.onItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                if(selected==PICKUP)
+
+                if(selected.equals(PICKUP)) {
                     pickupSlotsAdapter.updateSelctedItem(position);
-                else
+                }
+                else {
                     onRLClick(pickRL);
+                }
             }
         });
     }
-    public void setUpManualRecyclerView(){
+    public void setUpManualRecyclerView(Calendar selectedDate){
         recyclerView_manual.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
         recyclerView_manual.setHasFixedSize(true);
         ((SimpleItemAnimator) recyclerView_pick.getItemAnimator()).setSupportsChangeAnimations(false);
-        manualSlotsAdapter=new SlotAdapter(new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.slot_names))),
-                new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.slot_times))),this,0);
+        manualSlotsAdapter=new SlotAdapter(this,selectedDate);
         recyclerView_manual.setAdapter(manualSlotsAdapter);
         manualSlotsAdapter.setOnItemClickListener(new SlotAdapter.onItemClickListener() {
             @Override
             public void onItemClick(int position) {
-                if(selected==MANUAL)
+                if(selected.equals(MANUAL)) {
                     manualSlotsAdapter.updateSelctedItem(position);
+                }
                 else
                     onRLClick(manualRL);
             }
@@ -204,6 +209,7 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
             pickupYearTextView.setText(y);
             pickUpDateSelected=true;
             updateButtonUI(pickUpDateSelected);
+            setUpPickupRecyclerView(c);
         }else if(selected==MANUAL){
             manualDayTextView=findViewById(R.id.day_manual);
             manualMonthTextView=findViewById(R.id.month_manual);
@@ -213,6 +219,7 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
             manualYearTextView.setText(y);
             manualDateSelected=true;
             updateButtonUI(manualDateSelected);
+            setUpManualRecyclerView(c);
         }
     }
     public void placeRequestWork(View view){
@@ -224,14 +231,14 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
         Order order=new Order();
         if(selected==PICKUP){
             order.setOrderType("pickup");
-            order.setSlotNumber(Integer.toString(pickupSlotsAdapter.selectedIndex+1));
+            order.setSlotNumber(pickupSlotsAdapter.slotNames.get(pickupSlotsAdapter.selectedIndex).substring(5,6));
             order.setPickupDate(new Date(pickupDayTextView.getText().toString(),
                                          pickupMonthTextView.getText().toString(),
                                          pickupYearTextView.getText().toString()));
             order.setPickupAddress(address);
         }else{
             order.setOrderType("manual");
-            order.setSlotNumber(Integer.toString(manualSlotsAdapter.selectedIndex+1));
+            order.setSlotNumber(manualSlotsAdapter.slotNames.get(manualSlotsAdapter.selectedIndex).substring(5,6));
             order.setPickupDate(new Date(manualDayTextView.getText().toString(),
                                          manualMonthTextView.getText().toString(),
                                          manualYearTextView.getText().toString()));

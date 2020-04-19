@@ -59,8 +59,9 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Se
 
     @Override
     public void onBindViewHolder(@NonNull SearchItemViewHolder holder, int position) {
-        holder.name.setText(products.get(position).getName());
-        holder.price.setText(context.getResources().getString(R.string.Rs)+" "+Float.toString(products.get(position).getPrice())+" per "+products.get(position).getUnit());
+        Crop product=products.get(position);
+        holder.name.setText(product.getName().substring(0,1).toUpperCase()+product.getName().substring(1).toLowerCase());
+        holder.price.setText(context.getResources().getString(R.string.Rs)+" "+Float.toString(product.getPrice())+" per "+product.getUnit());
     }
     @Override
     public int getItemViewType(int position) {
