@@ -70,11 +70,11 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         updateBadge();
         viewModel= ViewModelProviders.of(this).get(MainViewModel.class);
-        viewModel.getFarmer().observe(this, new Observer<Farmer>() {
+        viewModel.getSuggestedCrops().observe(this, new Observer<List<Crop>>() {
             @Override
-            public void onChanged(Farmer farmer) {
+            public void onChanged(List<Crop> crops) {
                 load.setVisibility(View.GONE);
-                products=farmer.getCrops();
+                products=(ArrayList<Crop>) crops;
                 if(products.size()>0)
                     suggestText.setVisibility(View.VISIBLE);
                 activateAdapter();

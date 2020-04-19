@@ -27,26 +27,26 @@ public class MainRepository {
     Application application;
     public MainRepository(Application application) {
         this.application=application;
-        farmer=new MutableLiveData<Farmer>();
     }
-    MutableLiveData<Farmer> farmer;
-    public LiveData<Farmer> getFarmer(){
-        Call<Farmer> call=RetrofitClient.getInstance(application).create(FarmerApi.class).getFarmer();
-        call.enqueue(new Callback<Farmer>() {
+
+    public LiveData<List<Crop>> getSuggestedCrops(String userId){
+        MutableLiveData<List<Crop>> suggestedCrops=new MutableLiveData<List<Crop>>();
+        Call<List<Crop>> call=RetrofitClient.getInstance(application).create(FarmerApi.class).getSuggestedCrops(userId);
+        call.enqueue(new Callback<List<Crop>>() {
             @Override
-            public void onResponse(Call<Farmer> call, Response<Farmer> response) {
+            public void onResponse(Call<List<Crop>> call, Response<List<Crop>> response) {
                 if(response.isSuccessful()){
-                   farmer.setValue(response.body());
-                   return;
+                    suggestedCrops.setValue(response.body());
+                    return;
                 }
             }
 
             @Override
-            public void onFailure(Call<Farmer> call, Throwable t) {
-                getFarmer();
+            public void onFailure(Call<List<Crop>> call, Throwable t) {
+                call.clone().enqueue(this);
             }
         });
-        return farmer;
+        return suggestedCrops;
     }
     public LiveData<List<Order>> getAllRequests(String userId){
         MutableLiveData<List<Order>> requests=new MutableLiveData<List<Order>>();

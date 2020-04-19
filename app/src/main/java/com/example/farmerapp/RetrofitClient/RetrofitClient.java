@@ -62,6 +62,7 @@ public class RetrofitClient {
                         public Response intercept(@NotNull Chain chain) throws IOException {
                             Request request=chain.request();
                             Response response=chain.proceed(request);
+                            //Token Expiry Handling
                             if(response.code()==403){
                                 LocalCart.emptyCart(application);
                                 SharedPreferences preferences=application.getSharedPreferences(application.getPackageName(),Context.MODE_PRIVATE);
