@@ -2,7 +2,6 @@ package com.example.farmerapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,9 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -30,7 +27,6 @@ import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.List;
 
 import pl.droidsonroids.gif.GifImageView;
 
@@ -43,6 +39,7 @@ public class CartActivity extends AppCompatActivity {
     ConstraintLayout parent;
     RelativeLayout emptyCartRL;
     LinearLayout bodyLL;
+    Boolean canChange=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,6 +62,7 @@ public class CartActivity extends AppCompatActivity {
         viewModel.getBill().observe(this, new Observer<Cart>() {
             @Override
             public void onChanged(Cart cart){
+                parentVisibility(1f,true);
                 activateAdapter(cart);
                 if(cart.getProducts().size()>0)
                     handleVisibility(View.GONE,View.VISIBLE,View.GONE);
@@ -74,12 +72,17 @@ public class CartActivity extends AppCompatActivity {
         });
 
     }
+    public void parentVisibility(Float alpha,Boolean canChange){
+        parent.setAlpha(alpha);
+        this.canChange=canChange;
+    }
     public void handleVisibility(Integer emptyCartVisibility,Integer bodyVisibility,Integer loadVisibility){
         emptyCartRL.setVisibility(emptyCartVisibility);
         bodyLL.setVisibility(bodyVisibility);
         loadCenter.setVisibility(loadVisibility);
     }
     public void generateBill(){
+        canChange=false;
         if(adapter!=null){//adapter will be not null except first case
             adapter.setOnItemClickListener(null);
         }
@@ -132,11 +135,14 @@ public class CartActivity extends AppCompatActivity {
 
         @Override
         public void onIncrementClick(int position) {
+            if(!canChange)
+                return;
             if(!CheckInternet.isConnected(CartActivity.this)){
                 Snackbar snackbar=Snackbar.make(parent,"No Internet Connection",Snackbar.LENGTH_SHORT);
                 snackbar.show();
                 return;
             }
+            parentVisibility(0.65f,false);
             Crop crop=adapter.getItem(position);
             crop.setQuantity(crop.getQuantity()+1);
             adapter.notifyItemChanged(position);
@@ -148,11 +154,14 @@ public class CartActivity extends AppCompatActivity {
 
         @Override
         public void onDecrementClick(int position) {
+            if(!canChange)
+                return;
             if(!CheckInternet.isConnected(CartActivity.this)){
                 Snackbar snackbar=Snackbar.make(parent,"No Internet Connection",Snackbar.LENGTH_SHORT);
                 snackbar.show();
                 return;
             }
+            parentVisibility(0.65f,false);
             Crop crop=adapter.getItem(position);
             if(crop.getQuantity()>0) {
                 crop.setQuantity(crop.getQuantity() - 1);
