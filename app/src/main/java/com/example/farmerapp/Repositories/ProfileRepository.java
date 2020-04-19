@@ -41,7 +41,6 @@ public class ProfileRepository {
                     farmer.setValue(response.body());
                     return;
                 }
-                call.clone().enqueue(this);
             }
 
             @Override

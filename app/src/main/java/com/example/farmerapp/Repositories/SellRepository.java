@@ -32,7 +32,6 @@ public class SellRepository {
                     fruits.setValue(response.body());
                     return;
                 }
-                getFruits();
             }
 
             @Override
@@ -51,7 +50,6 @@ public class SellRepository {
                     vegetables.setValue(response.body());
                     return;
                 }
-                getVegetables();
             }
 
             @Override
@@ -71,7 +69,6 @@ public class SellRepository {
                     vegetables.setValue(response.body());
                     return;
                 }
-                call.clone().enqueue(this);
             }
             @Override
             public void onFailure(Call<List<Crop>> call, Throwable t) {
@@ -88,7 +85,6 @@ public class SellRepository {
                     fruits.setValue(response.body());
                     return;
                 }
-                call.clone().enqueue(this);
             }
             @Override
             public void onFailure(Call<List<Crop>> call, Throwable t) {

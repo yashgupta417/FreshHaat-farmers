@@ -2,10 +2,14 @@ package com.example.farmerapp.RetrofitClient;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 
 import com.example.farmerapp.API.FarmerApi;
 import com.example.farmerapp.API.UserApi;
+import com.example.farmerapp.Activities.LoginActivity;
+import com.example.farmerapp.Activities.SplashActivity;
+import com.example.farmerapp.Utils.LocalCart;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -31,7 +35,7 @@ import static java.net.CookiePolicy.ACCEPT_ALL;
 
 public class RetrofitClient {
     public static Retrofit retrofit;
-    public static  Retrofit getInstance(Context context){
+    public static  Retrofit getInstance(Application application){
         if(retrofit==null){
             Gson gson= new GsonBuilder().serializeNulls().create();
             HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor();
@@ -41,7 +45,7 @@ public class RetrofitClient {
                         @NotNull
                         @Override
                         public Response intercept(@NotNull Chain chain) throws IOException {
-                            SharedPreferences preferences=context.getSharedPreferences(context.getPackageName(),Context.MODE_PRIVATE);
+                            SharedPreferences preferences=application.getSharedPreferences(application.getPackageName(),Context.MODE_PRIVATE);
                             String token=preferences.getString("token",null);
                             Request request;
                             if(token!=null) {
@@ -50,6 +54,25 @@ public class RetrofitClient {
                                 request=chain.request().newBuilder().build();
                             }
                             return chain.proceed(request);
+                        }
+                    })
+                    .addInterceptor(new Interceptor() {
+                        @NotNull
+                        @Override
+                        public Response intercept(@NotNull Chain chain) throws IOException {
+                            Request request=chain.request();
+                            Response response=chain.proceed(request);
+                            if(response.code()==403){
+                                LocalCart.emptyCart(application);
+                                SharedPreferences preferences=application.getSharedPreferences(application.getPackageName(),Context.MODE_PRIVATE);
+                                preferences.edit().putBoolean(SplashActivity.IS_LOGGED_IN,false).apply();
+                                preferences.edit().putBoolean(SplashActivity.IS_REGISTRATION_DONE,false).apply();
+                                preferences.edit().putString(SplashActivity.TOKEN,null).apply();
+                                Intent intent=new Intent(application, LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                application.startActivity(intent);
+                            }
+                            return  response;
                         }
                     })
                     .addInterceptor(loggingInterceptor)

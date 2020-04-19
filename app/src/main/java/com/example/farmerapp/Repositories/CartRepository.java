@@ -36,7 +36,6 @@ public class CartRepository {
                     finalCart.setValue(response.body());
                     return;
                 }
-                generateBill(localCart,userId);
             }
 
             @Override

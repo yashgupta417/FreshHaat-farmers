@@ -39,7 +39,6 @@ public class MainRepository {
                    farmer.setValue(response.body());
                    return;
                 }
-                getFarmer();
             }
 
             @Override
@@ -68,24 +67,5 @@ public class MainRepository {
             }
         });
         return requests;
-    }
-    public LiveData<List<Crop>> queryProducts(String query){
-        MutableLiveData<List<Crop>> queryResult=new MutableLiveData<List<Crop>>();
-        Call<List<Crop>> call=RetrofitClient.getInstance(application).create(ProductApi.class).queryProducts(query);
-        call.enqueue(new Callback<List<Crop>>() {
-            @Override
-            public void onResponse(Call<List<Crop>> call, Response<List<Crop>> response) {
-                if(response.isSuccessful()){
-                    queryResult.setValue(response.body());
-                    return;
-                }
-                call.clone().enqueue(this);
-            }
-            @Override
-            public void onFailure(Call<List<Crop>> call, Throwable t) {
-                call.clone().enqueue(this);
-            }
-        });
-        return queryResult;
     }
 }

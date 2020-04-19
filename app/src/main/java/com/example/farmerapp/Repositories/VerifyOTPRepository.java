@@ -106,7 +106,6 @@ public class VerifyOTPRepository {
                 if(response.isSuccessful()){
                     return;
                 }
-                Log.i("******","error");
             }
 
             @Override

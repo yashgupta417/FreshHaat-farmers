@@ -30,7 +30,6 @@ public class RequestDetailRepository{
                     sellRequest.setValue(response.body());
                     return;
                 }
-                call.clone().enqueue(this);
             }
 
             @Override

@@ -36,7 +36,6 @@ public class SearchRepository{
                     result.setValue(response.body());
                     return;
                 }
-                call.clone().enqueue(this);
             }
             @Override
             public void onFailure(Call<List<Crop>> call, Throwable t) {
