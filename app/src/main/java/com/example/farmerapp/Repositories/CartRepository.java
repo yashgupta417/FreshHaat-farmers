@@ -26,9 +26,8 @@ public class CartRepository {
     public LiveData<Cart> getBill(){
         return finalCart;
     }
-    Call<Cart> call;
     public void generateBill(Cart localCart,String userId){
-        call= RetrofitClient.getInstance(application).create(CartApi.class).generateBill(localCart,userId);
+        Call<Cart> call= RetrofitClient.getInstance(application).create(CartApi.class).generateBill(localCart,userId);
         call.enqueue(new Callback<Cart>() {
             @Override
             public void onResponse(Call<Cart> call, Response<Cart> response) {
@@ -40,7 +39,7 @@ public class CartRepository {
 
             @Override
             public void onFailure(Call<Cart> call, Throwable t) {
-                generateBill(localCart,userId);
+                call.clone().enqueue(this);
             }
         });
     }

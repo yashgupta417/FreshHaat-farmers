@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartItemViewHolder> {
     public ArrayList<Crop> crops;
+    public Boolean isClickAble=true;
     public Context context;
     private onItemClickListener mlistener;
 
@@ -114,6 +115,13 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         }
         Float totalPrice=crop.getQuantity()*crop.getPrice();
         holder.totalPrice.setText(context.getResources().getString(R.string.Rs)+" "+Float.toString(totalPrice));
+
+        if(!isClickAble){
+            holder.minus.setEnabled(false);
+            holder.minus.setAlpha(0.3f);
+            holder.plus.setEnabled(false);
+            holder.plus.setAlpha(0.3f);
+        }
     }
     @Override
     public int getItemCount() {

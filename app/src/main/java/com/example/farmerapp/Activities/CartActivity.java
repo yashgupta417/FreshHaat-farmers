@@ -62,7 +62,6 @@ public class CartActivity extends AppCompatActivity {
         viewModel.getBill().observe(this, new Observer<Cart>() {
             @Override
             public void onChanged(Cart cart){
-                parentVisibility(1f,true);
                 activateAdapter(cart);
                 if(cart.getProducts().size()>0)
                     handleVisibility(View.GONE,View.VISIBLE,View.GONE);
@@ -72,17 +71,12 @@ public class CartActivity extends AppCompatActivity {
         });
 
     }
-    public void parentVisibility(Float alpha,Boolean canChange){
-        parent.setAlpha(alpha);
-        this.canChange=canChange;
-    }
     public void handleVisibility(Integer emptyCartVisibility,Integer bodyVisibility,Integer loadVisibility){
         emptyCartRL.setVisibility(emptyCartVisibility);
         bodyLL.setVisibility(bodyVisibility);
         loadCenter.setVisibility(loadVisibility);
     }
     public void generateBill(){
-        canChange=false;
         if(adapter!=null){//adapter will be not null except first case
             adapter.setOnItemClickListener(null);
         }
@@ -135,17 +129,15 @@ public class CartActivity extends AppCompatActivity {
 
         @Override
         public void onIncrementClick(int position) {
-            if(!canChange)
-                return;
             if(!CheckInternet.isConnected(CartActivity.this)){
                 Snackbar snackbar=Snackbar.make(parent,"No Internet Connection",Snackbar.LENGTH_SHORT);
                 snackbar.show();
                 return;
             }
-            parentVisibility(0.65f,false);
-            Crop crop=adapter.getItem(position);
+            Crop crop=adapter.crops.get(position);
             crop.setQuantity(crop.getQuantity()+1);
-            adapter.notifyItemChanged(position);
+            adapter.isClickAble=false;
+            adapter.notifyDataSetChanged();
             if(crop.getQuantity()==1)
                 LocalCart.count++;
             LocalCart.update(getApplication(),crop.getId(),Integer.toString(crop.getQuantity()));
@@ -154,18 +146,16 @@ public class CartActivity extends AppCompatActivity {
 
         @Override
         public void onDecrementClick(int position) {
-            if(!canChange)
-                return;
             if(!CheckInternet.isConnected(CartActivity.this)){
                 Snackbar snackbar=Snackbar.make(parent,"No Internet Connection",Snackbar.LENGTH_SHORT);
                 snackbar.show();
                 return;
             }
-            parentVisibility(0.65f,false);
-            Crop crop=adapter.getItem(position);
+            Crop crop=adapter.crops.get(position);
             if(crop.getQuantity()>0) {
                 crop.setQuantity(crop.getQuantity() - 1);
-                adapter.notifyItemChanged(position);
+                adapter.isClickAble=false;
+                adapter.notifyDataSetChanged();
                 if(crop.getQuantity()==0)
                     LocalCart.count--;
                 LocalCart.update(getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));

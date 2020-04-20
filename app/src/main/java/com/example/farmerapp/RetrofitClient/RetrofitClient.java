@@ -35,12 +35,13 @@ import static java.net.CookiePolicy.ACCEPT_ALL;
 
 public class RetrofitClient {
     public static Retrofit retrofit;
+    public static OkHttpClient okHttpClient;
     public static  Retrofit getInstance(Application application){
         if(retrofit==null){
             Gson gson= new GsonBuilder().serializeNulls().create();
             HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor();
             loggingInterceptor.level(HttpLoggingInterceptor.Level.BODY);
-            OkHttpClient okHttpClient=new OkHttpClient.Builder()
+            okHttpClient=new OkHttpClient.Builder()
                     .addInterceptor(new Interceptor() {
                         @NotNull
                         @Override
