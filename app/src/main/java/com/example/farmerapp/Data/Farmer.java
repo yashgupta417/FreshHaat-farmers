@@ -23,7 +23,10 @@ public class Farmer {
     private String alternateMob;
     @SerializedName("address")
     @Expose
-    private String address;
+    private String addressLine1;
+    @SerializedName("place")
+    @Expose
+    private String addressLine2;
     @SerializedName("landmark")
     @Expose
     private String landmark;
@@ -65,14 +68,6 @@ public class Farmer {
 
     public void setAlternateMob(String alternateMob) {
         this.alternateMob = alternateMob;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public String getPin() {
@@ -130,5 +125,21 @@ public class Farmer {
 
     public void setLandmark(String landmark) {
         this.landmark = landmark;
+    }
+
+    public String getAddressLine1() {
+        return addressLine1;
+    }
+
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
+    }
+
+    public String getAddressLine2() {
+        return addressLine2;
+    }
+
+    public void setAddressLine2(String addressLine2) {
+        this.addressLine2 = addressLine2;
     }
 }

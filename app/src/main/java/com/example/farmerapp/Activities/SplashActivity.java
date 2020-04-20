@@ -16,11 +16,6 @@ public class SplashActivity extends AppCompatActivity {
     public static String IS_LOGGED_IN="is_logged_in";
     public static String IS_REGISTRATION_DONE="is_registration_done";
     public static String TOKEN="token";
-    public static String ADDRESS="address";
-    public static String LANDMARK="landmark";
-    public static String PINCODE="pincode";
-    public static String CITY="city";
-    public static String STATE="state";
     public static String USER_ID="userId";
     public static String MOBILE_NO="mobile_number";
     @Override

@@ -6,10 +6,10 @@ import com.google.gson.annotations.SerializedName;
 public class Address {
     @SerializedName("address")
     @Expose
-    private String address;
+    private String addressLine1;
     @SerializedName("place")
     @Expose
-    private String place;
+    private String addressLine2;
     @SerializedName("landmark")
     @Expose
     private String landmark;
@@ -23,26 +23,8 @@ public class Address {
     @Expose
     private String state;
 
-    public Address(String address) {
-        this.address = address;
+    public Address() {
     }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
-    }
-
     public String getLandmark() {
         return landmark;
     }
@@ -73,5 +55,21 @@ public class Address {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+    public String getAddressLine1() {
+        return addressLine1;
+    }
+
+    public void setAddressLine1(String addressLine1) {
+        this.addressLine1 = addressLine1;
+    }
+
+    public String getAddressLine2() {
+        return addressLine2;
+    }
+
+    public void setAddressLine2(String addressLine2) {
+        this.addressLine2 = addressLine2;
     }
 }

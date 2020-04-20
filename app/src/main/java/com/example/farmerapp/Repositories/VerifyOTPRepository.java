@@ -20,14 +20,8 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-
-import static com.example.farmerapp.Activities.SplashActivity.ADDRESS;
-import static com.example.farmerapp.Activities.SplashActivity.CITY;
 import static com.example.farmerapp.Activities.SplashActivity.IS_LOGGED_IN;
-import static com.example.farmerapp.Activities.SplashActivity.LANDMARK;
 import static com.example.farmerapp.Activities.SplashActivity.MOBILE_NO;
-import static com.example.farmerapp.Activities.SplashActivity.PINCODE;
-import static com.example.farmerapp.Activities.SplashActivity.STATE;
 import static com.example.farmerapp.Activities.SplashActivity.TOKEN;
 import static com.example.farmerapp.Activities.SplashActivity.USER_ID;
 
@@ -122,11 +116,6 @@ public class VerifyOTPRepository {
                 if(response.isSuccessful()){
                     Farmer farmer=response.body();
                     preferences.edit().putString(USER_ID,farmer.getId()).apply();
-                    preferences.edit().putString(ADDRESS,farmer.getAddress()).apply();
-                    preferences.edit().putString(LANDMARK,farmer.getLandmark()).apply();
-                    preferences.edit().putString(PINCODE,farmer.getPin()).apply();
-                    preferences.edit().putString(CITY,farmer.getCity()).apply();
-                    preferences.edit().putString(STATE,farmer.getState()).apply();
                     preferences.edit().putBoolean(SplashActivity.IS_REGISTRATION_DONE,true).apply();
                     verify.setValue(OLD_USER);
                     return;

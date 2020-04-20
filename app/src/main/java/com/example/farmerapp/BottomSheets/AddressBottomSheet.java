@@ -94,8 +94,10 @@ public class AddressBottomSheet extends BottomSheetDialogFragment{
     public void initializeUI(){
         if(address==null)
             return;
-        if(address.getAddress()!=null)
-            addressLine1.setText(address.getAddress());
+        if(address.getAddressLine1()!=null)
+            addressLine1.setText(address.getAddressLine1());
+        if(address.getAddressLine2()!=null)
+            addressLine2.setText(address.getAddressLine2());
         if(address.getLandmark()!=null)
             landmark.setText(address.getLandmark());
         if(address.getPin()!=null)
@@ -114,7 +116,8 @@ public class AddressBottomSheet extends BottomSheetDialogFragment{
         mListener=listener;
     }
     public void confirmLocationWork(){
-        address.setAddress(addressLine1.getText().toString().trim() + " " + addressLine2.getText().toString().trim());
+        address.setAddressLine1(addressLine1.getText().toString().trim());
+        address.setAddressLine2(addressLine2.getText().toString().trim());
         address.setLandmark(landmark.getText().toString());
         address.setPin(pincode.getText().toString());
         address.setCity(city.getText().toString());

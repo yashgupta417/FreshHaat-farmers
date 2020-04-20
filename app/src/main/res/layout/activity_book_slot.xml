@@ -209,20 +209,29 @@
                             android:text="Address"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp"/>
-                        <LinearLayout
+                        <RelativeLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="30dp"
-                            android:orientation="vertical">
+                            android:layout_marginLeft="30dp">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/address"
                                 android:text=""
                                 android:textColor="#929292"
-                                android:textSize="15sp" />
+                                android:textSize="15sp"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentLeft="true"/>
+                            <pl.droidsonroids.gif.GifImageView
+                                android:layout_width="22dp"
+                                android:layout_height="22dp"
+                                android:id="@+id/load"
+                                android:src="@drawable/load"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentLeft="true"/>
                             <TextView
                                 android:id="@+id/add_new_address"
+                                android:layout_below="@+id/address"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:onClick="addNewAddress"
@@ -230,7 +239,7 @@
                                 android:layout_marginTop="5dp"
                                 android:textColor="#AA000000"
                                 android:textStyle="bold"/>
-                        </LinearLayout>
+                        </RelativeLayout>
 
                     </LinearLayout>
 

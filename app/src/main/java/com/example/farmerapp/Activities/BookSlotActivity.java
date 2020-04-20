@@ -28,6 +28,7 @@ import com.example.farmerapp.Adapters.SlotAdapter;
 import com.example.farmerapp.BottomSheets.AddressBottomSheet;
 import com.example.farmerapp.Data.Address;
 import com.example.farmerapp.Data.Date;
+import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.Data.Order;
 import com.example.farmerapp.Fragments.DatePickerFragment;
 import com.example.farmerapp.R;
@@ -42,6 +43,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 
+import pl.droidsonroids.gif.GifImageView;
+
 public class BookSlotActivity extends AppCompatActivity implements DatePickerDialog.OnDateSetListener {
     RecyclerView recyclerView_pick,recyclerView_manual;
     RelativeLayout pickRL,manualRL;
@@ -54,8 +57,8 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
     SlotAdapter pickupSlotsAdapter,manualSlotsAdapter;
     BookSlotViewModel viewModel;
     TextView addNewAddress;
-    String addressLines,landmark,pincode,city,state;
-    Address address;
+    Address address;//pickupAddress
+    GifImageView load;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,12 +73,26 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
         pickupDate=findViewById(R.id.date);
         manualDate=findViewById(R.id.cc_date);
         addNewAddress=findViewById(R.id.add_new_address);
+        load=findViewById(R.id.load);
         selected=MANUAL;
-        setAddress();
+        updateLoadUI(View.VISIBLE,0.3f,false);
+        viewModel= ViewModelProviders.of(this).get(BookSlotViewModel.class);
+        viewModel.getFarmer().observe(this, new Observer<Farmer>() {
+            @Override
+            public void onChanged(Farmer farmer) {
+                updateLoadUI(View.GONE,1f,true);
+                setAddress(farmer);
+            }
+        });
+
         Calendar c=Calendar.getInstance();
         setUpManualRecyclerView(c);
         setUpPickupRecyclerView(c);
-        viewModel= ViewModelProviders.of(this).get(BookSlotViewModel.class);
+    }
+    public void updateLoadUI(Integer loadVisibility,Float alpha,Boolean enabled){
+        load.setVisibility(loadVisibility);
+        addNewAddress.setAlpha(alpha);
+        addNewAddress.setEnabled(enabled);
     }
     public void addNewAddress(View view){
         if(selected==MANUAL) {
@@ -88,28 +105,28 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
             @Override
             public void onConfirmLocation(Address changedAddress) {
                 address=changedAddress;
-                pickUpAddress.setText(address.getAddress());
+                updateAddressInUI();
             }
         });
     }
-    public void setAddress(){
-        SharedPreferences preferences=getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
-        addressLines=preferences.getString(SplashActivity.ADDRESS,null);
-        landmark=preferences.getString(SplashActivity.LANDMARK,null);
-        pincode=preferences.getString(SplashActivity.PINCODE,null);
-        city=preferences.getString(SplashActivity.CITY,null);
-        state=preferences.getString(SplashActivity.STATE,null);
-        address=new Address(addressLines);
-        address.setLandmark(landmark);
-        address.setPin(pincode);
-        address.setCity(city);
-        address.setState(state);
-        if(addressLines!=null){
-            pickUpAddress.setText(addressLines);
+    public void setAddress(Farmer farmer){
+        address=new Address();
+        address.setAddressLine1(farmer.getAddressLine1());
+        address.setAddressLine2(farmer.getAddressLine2());
+        address.setLandmark(farmer.getLandmark());
+        address.setPin(farmer.getPin());
+        address.setCity(farmer.getCity());
+        address.setState(farmer.getState());
+        updateAddressInUI();
+    }
+    public void updateAddressInUI(){
+        if(address.getAddressLine1()!=null){
+            pickUpAddress.setText(address.getAddressLine1());
+            if(address.getAddressLine2()!=null)
+                pickUpAddress.append(" "+address.getAddressLine2());
         }
     }
     public void onRLClick(View view){
-        Log.i("****","onRLClick");
         if(view.getId()==R.id.pickup_rl){
             pickRL.setBackground(getResources().getDrawable(R.drawable.book_slot_card_border));
             manualRL.setBackgroundResource(0);
@@ -230,6 +247,11 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
         updateButtonUI(false);
         Order order=new Order();
         if(selected==PICKUP){
+            if(address==null){
+                Toast.makeText(this, "Address loading", Toast.LENGTH_SHORT).show();
+                updateButtonUI(true);
+                return;
+            }
             order.setOrderType("pickup");
             order.setSlotNumber(pickupSlotsAdapter.slotNames.get(pickupSlotsAdapter.selectedIndex).substring(5,6));
             order.setPickupDate(new Date(pickupDayTextView.getText().toString(),
@@ -242,7 +264,7 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
             order.setPickupDate(new Date(manualDayTextView.getText().toString(),
                                          manualMonthTextView.getText().toString(),
                                          manualYearTextView.getText().toString()));
-            order.setPickupAddress(new Address(manualAddress.getText().toString()));
+            order.setPickupAddress(address);
         }
         viewModel.placeSellRequest(order).observe(this, new Observer<Integer>() {
             @Override

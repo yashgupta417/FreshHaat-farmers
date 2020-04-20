@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.Data.Order;
 import com.example.farmerapp.Repositories.BookSlotRepository;
 
@@ -26,5 +27,9 @@ public class BookSlotViewModel extends AndroidViewModel {
     }
     public String getOrderDatabaseId(){
         return repository.getOrderDatabaseId();
+    }
+
+    public LiveData<Farmer> getFarmer(){
+        return repository.getFarmer();
     }
 }

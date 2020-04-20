@@ -133,6 +133,9 @@ public class RegisterAddress1Fragment extends Fragment {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                viewModel.farmer.setAddressLine1(address1.getText().toString());
+                viewModel.farmer.setAddressLine2(address2.getText().toString());
+                viewModel.farmer.setLandmark(landmark.getText().toString());
                 ((RegisterDetailsActivity) getActivity()).scrollPager(3);
             }
         });
@@ -149,9 +152,6 @@ public class RegisterAddress1Fragment extends Fragment {
         if (isAddress1Ok) {//Address 1 is enough
             next.setEnabled(true);
             next.setAlpha(1);
-            String address=address1.getText().toString()+" "+address2.getText().toString();
-            viewModel.farmer.setAddress(address);
-            viewModel.farmer.setLandmark(landmark.getText().toString());
         } else {
             next.setEnabled(false);
             next.setAlpha(0.3f);

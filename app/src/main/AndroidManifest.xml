@@ -14,7 +14,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
         <activity android:name=".Activities.SearchActivity"></activity>
-        <activity android:name=".Activities.RequestDetailActivity" />
+        <activity android:name=".Activities.RequestDetailActivity"/>
         <activity android:name=".Activities.BookSlotActivity" />
         <activity android:name=".Activities.CartActivity" />
         <activity android:name=".Activities.SellActivity" />
@@ -35,7 +35,8 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.RegisterDetailsActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
         <activity
             android:name=".Activities.VerifyOTPActivity"
             android:screenOrientation="portrait" />

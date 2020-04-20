@@ -1,6 +1,8 @@
 package com.example.farmerapp.Repositories;
 
 import android.app.Application;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
@@ -9,6 +11,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.farmerapp.API.FarmerApi;
+import com.example.farmerapp.Activities.SplashActivity;
 import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.Data.Image;
 import com.example.farmerapp.RetrofitClient.RetrofitClient;
@@ -24,11 +27,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static com.example.farmerapp.Activities.SplashActivity.USER_ID;
+
 public class ProfileRepository {
     Application application;
-
+    SharedPreferences preferences;
     public ProfileRepository(Application application) {
         this.application = application;
+        preferences=application.getSharedPreferences(application.getPackageName(), Context.MODE_PRIVATE);
     }
 
     public LiveData<Farmer> getFarmer(){
@@ -104,6 +110,8 @@ public class ProfileRepository {
             @Override
             public void onResponse(Call<Farmer> call, Response<Farmer> response) {
                 if(response.isSuccessful()){
+                    Farmer farmer=response.body();
+                    preferences.edit().putBoolean(SplashActivity.IS_REGISTRATION_DONE,true).apply();
                     updateStatus.setValue(1);
                     return;
                 }

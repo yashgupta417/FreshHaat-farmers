@@ -100,8 +100,11 @@ public class ProfileActivity extends AppCompatActivity {
             alternateMobileEdittext.setText(farmer.getAlternateMob());
         if(farmer.getKYC()!=null)
             kycEdittext.setText(farmer.getKYC());
-        if(farmer.getAddress()!=null){
-            addressEdittext.setText(farmer.getAddress());
+        if(farmer.getAddressLine1()!=null){
+            addressEdittext.setText(farmer.getAddressLine1());
+            if(farmer.getAddressLine1()!=null){
+                addressEdittext.append(" "+farmer.getAddressLine2());
+            }
         }
         listenEditRequest();
         activateEditingListeners();
@@ -131,7 +134,9 @@ public class ProfileActivity extends AppCompatActivity {
         });
     }
     public void editAddress(){
-        Address address=new Address(farmer.getAddress());
+        Address address=new Address();
+        address.setAddressLine1(farmer.getAddressLine1());
+        address.setAddressLine2(farmer.getAddressLine2());
         address.setLandmark(farmer.getLandmark());
         address.setPin(farmer.getPin());
         address.setCity(farmer.getCity());
@@ -142,7 +147,8 @@ public class ProfileActivity extends AppCompatActivity {
         bottomSheet.setOnConfirmListener(new AddressBottomSheet.OnConfirmLocationListener() {
             @Override
             public void onConfirmLocation(Address address) {
-                farmer.setAddress(address.getAddress());
+                farmer.setAddressLine1(address.getAddressLine1());
+                farmer.setAddressLine2(address.getAddressLine2());
                 farmer.setLandmark(address.getLandmark());
                 farmer.setPin(address.getPin());
                 farmer.setCity(address.getCity());
@@ -196,23 +202,6 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
-        /*addressEdittext.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                isEdited=true;
-                farmer.setAddress(s.toString());
-            }
-        });*/
         addressEdittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
