@@ -65,22 +65,34 @@
     <RelativeLayout
         android:id="@+id/add_to_cart_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="22dp"
         android:layout_marginTop="15dp"
+        android:paddingVertical="1dp"
+        android:background="@drawable/add_crop_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="1"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/ll_1">
+        <ImageView
+            android:id="@+id/cart"
+            android:layout_width="17dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_shopping_cart"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"/>
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="22dp"
-            android:text="Add"
-            android:paddingHorizontal="20dp"
-            android:paddingVertical="2dp"
+            android:id="@+id/add_to_cart_text"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:textSize="13sp"
+            android:text="Add To Cart"
+            android:layout_toRightOf="@+id/cart"
+            android:layout_marginLeft="7dp"
+            android:layout_centerInParent="true"
             android:textColor="@color/white"
-            android:background="@drawable/add_crop_back"
             android:gravity="center"/>
     </RelativeLayout>
     <RelativeLayout
