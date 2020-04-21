@@ -27,6 +27,7 @@ import com.example.farmerapp.Activities.MainActivity;
 import com.example.farmerapp.Activities.SearchActivity;
 import com.example.farmerapp.Activities.SellActivity;
 import com.example.farmerapp.Adapters.SellCropAdapter;
+import com.example.farmerapp.BottomSheets.ChangeQuantityBottomSheet;
 import com.example.farmerapp.Data.Crop;
 import com.example.farmerapp.Data.Farmer;
 import com.example.farmerapp.R;
@@ -126,6 +127,25 @@ public class HomeFragment extends Fragment {
                 LocalCart.count++;
                 updateBadge();
                 LocalCart.update(getActivity().getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
+            }
+
+            @Override
+            public void onQuantityClick(int position) {
+                ChangeQuantityBottomSheet bottomSheet=new ChangeQuantityBottomSheet(adapter.crops.get(position));
+                bottomSheet.show(getActivity().getSupportFragmentManager(),"changeQuantity");
+                bottomSheet.setOnDoneListener(new ChangeQuantityBottomSheet.OnDoneListener() {
+                    @Override
+                    public void onDone(Integer quantity) {
+                        Crop crop=adapter.getItem(position);
+                        crop.setQuantity(quantity);
+                        adapter.notifyItemChanged(position);
+                        if(quantity==0) {
+                            LocalCart.count--;
+                            updateBadge();
+                        }
+                        LocalCart.update(getActivity().getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
+                    }
+                });
             }
         });
     }

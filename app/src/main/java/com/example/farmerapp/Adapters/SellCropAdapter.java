@@ -39,6 +39,7 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
         void onIncrementClick(int position);
         void onDecrementClick(int position);
         void onAddToCartClick(int position);
+        void onQuantityClick(int position);
     }
 
     public void setOnItemClickListener(onItemClickListener listener){
@@ -106,7 +107,17 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
                     }
                 }
             });
-
+            count.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onQuantityClick(position);
+                        }
+                    }
+                }
+            });
 
         }
     }
