@@ -231,6 +231,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                     }
                 })
+                .setCancelable(false)
                 .show();
         dialogCount=1;
     }
