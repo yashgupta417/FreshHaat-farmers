@@ -36,7 +36,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cart"
+                android:text="@string/cart"
                 android:textColor="@color/white"
                 android:textSize="24sp"
                 android:layout_centerInParent="true"/>
@@ -66,7 +66,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Coupon Available"
+                    android:text="@string/coupon_available"
                     android:textSize="17sp"
                     android:textColor="#a7a7a7"
                     android:layout_gravity="center"/>
@@ -101,7 +101,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Applied"
+                        android:text="@string/applied"
                         android:textColor="@color/white"
                         android:paddingHorizontal="10dp"
                         android:paddingVertical="5dp"
@@ -147,7 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:textColor="@color/colorPrimary"
-                    android:text="Coupon"/>
+                    android:text="@string/coupon"/>
                 <TextView
                     android:id="@+id/coupon_discount"
                     android:layout_width="wrap_content"
@@ -163,7 +163,7 @@
                     android:layout_marginTop="7dp"
                     android:textSize="14sp"
                     android:layout_below="@+id/coupon_text"
-                    android:text="Tax and Charges"/>
+                    android:text="@string/tax_and_charges"/>
                 <TextView
                     android:id="@+id/tax_amount"
                     android:layout_width="wrap_content"
@@ -181,7 +181,7 @@
                     android:layout_marginTop="7dp"
                     android:textSize="14sp"
                     android:layout_below="@+id/tax_text"
-                    android:text="Transportation and Labour"/>
+                    android:text="@string/transportaion_and_labour"/>
                 <TextView
                     android:id="@+id/others_amount"
                     android:layout_width="wrap_content"
@@ -206,7 +206,7 @@
                     android:layout_marginTop="10dp"
                     android:textSize="24sp"
                     android:layout_below="@+id/dotted_line_2"
-                    android:text="Total"/>
+                    android:text="@string/total"/>
                 <TextView
                     android:id="@+id/total_amount"
                     android:layout_width="wrap_content"
@@ -249,7 +249,7 @@
                 android:id="@+id/book_slot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Book Slot"
+                android:text="@string/book_slot_button"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:onClick="bookSlot"

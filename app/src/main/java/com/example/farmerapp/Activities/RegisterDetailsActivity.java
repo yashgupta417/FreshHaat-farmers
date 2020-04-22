@@ -24,6 +24,7 @@ public class RegisterDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LanguageActivity.loadSavedLocale(this);
         setContentView(R.layout.activity_register_details);
         load=findViewById(R.id.load);
         parent=findViewById(R.id.registration_parent);
@@ -31,7 +32,6 @@ public class RegisterDetailsActivity extends AppCompatActivity {
         vPager.disableScroll(true);
         adapter = new RegisterDetailsAdapter(getSupportFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         vPager.setAdapter(adapter);
-
         viewModel= ViewModelProviders.of(this).get(RegisterDetailsViewModel.class);
     }
 

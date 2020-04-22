@@ -55,6 +55,7 @@ public class ProfileActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LanguageActivity.loadSavedLocale(this);
         setContentView(R.layout.activity_profile);
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);

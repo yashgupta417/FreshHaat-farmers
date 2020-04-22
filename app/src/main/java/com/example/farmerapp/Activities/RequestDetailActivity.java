@@ -41,6 +41,7 @@ public class RequestDetailActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LanguageActivity.loadSavedLocale(this);
         setContentView(R.layout.activity_request_detail);
         String orderId=getIntent().getStringExtra(ORDER_ID);
         requestStatus=findViewById(R.id.sell_request_status);

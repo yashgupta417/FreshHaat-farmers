@@ -35,6 +35,7 @@ public class VerifyOTPActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LanguageActivity.loadSavedLocale(this);
         setContentView(R.layout.activity_verify_otp);
         viewModel= ViewModelProviders.of(this).get(VerifyOTPViewModel.class);
         mobileNumber =getIntent().getStringExtra("mobileNumber");

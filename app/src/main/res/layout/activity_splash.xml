@@ -17,15 +17,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="FRESH"
-            android:textColor="@color/white"
-            android:textSize="35sp"
-            android:textStyle="bold"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" HUT"
+            android:text="@string/splash_title"
             android:textColor="@color/white"
             android:textSize="35sp"
             android:textStyle="bold"

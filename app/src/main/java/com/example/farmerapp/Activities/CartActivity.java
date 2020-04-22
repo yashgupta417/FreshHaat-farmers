@@ -43,6 +43,7 @@ public class CartActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LanguageActivity.loadSavedLocale(this);
         setContentView(R.layout.activity_cart);
         totalAmount1=findViewById(R.id.total_amount);
         totalAmount2=findViewById(R.id.total_amount_2);

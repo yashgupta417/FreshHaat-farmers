@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
-            android:text="Req Date"
+            android:text="@string/request_list_date"
             android:textColor="#bebebe"
             android:textSize="10sp"/>
         <TextView
@@ -36,7 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentRight="true"
-            android:text="Sell Status"
+            android:text="@string/request_list_sell_status"
             android:textColor="#bebebe"
             android:textSize="10sp"/>
         <TextView
@@ -58,7 +58,7 @@
             android:layout_marginLeft="5dp"
             android:textColor="#70c7b7"
             android:textSize="10sp"
-            android:text="Req Id"/>
+            android:text="@string/request_list_request_id"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -77,7 +77,7 @@
             android:layout_marginRight="25dp"
             android:textColor="#70c7b7"
             android:textSize="10sp"
-            android:text="Slot"/>
+            android:text="@string/request_list_slot"/>
         <ImageView
             android:id="@+id/line"
             android:layout_width="match_parent"
@@ -105,7 +105,7 @@
             android:layout_marginTop="10dp"
             android:textColor="#505050"
             android:textSize="12sp"
-            android:text="Collection"/>
+            android:text="@string/request_list_collection"/>
         <TextView
             android:id="@+id/slot"
             android:layout_width="wrap_content"

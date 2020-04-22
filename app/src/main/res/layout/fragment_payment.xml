@@ -11,7 +11,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No Payments"
+            android:text="@string/payment_no_payment"
             android:textSize="16sp"
             android:id="@+id/no_requests"
             android:layout_centerInParent="true"/>

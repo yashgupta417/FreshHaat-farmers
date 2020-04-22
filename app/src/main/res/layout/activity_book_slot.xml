@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:text="Book Slot"
+                android:text="@string/book_slot"
                 android:textColor="@color/white"
                 android:textSize="23sp"/>
         </RelativeLayout>
@@ -66,7 +66,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:text="Manual"
+                        android:text="@string/manual"
                         android:textColor="@color/black"
                         android:textSize="20sp"/>
                     <LinearLayout
@@ -81,7 +81,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/cc_address_text"
-                            android:text="CC Address"
+                            android:text="@string/cc_address"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp" />
                         <TextView
@@ -108,7 +108,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/cc_date_text"
-                            android:text="Date"
+                            android:text="@string/date"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp"/>
                         <EditText
@@ -192,7 +192,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
-                        android:text="Free Home Pickup"
+                        android:text="@string/free_home_pickup"
                         android:textColor="@color/black"
                         android:textSize="20sp" />
                     <LinearLayout
@@ -206,7 +206,7 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Address"
+                            android:text="@string/address"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp"/>
                         <RelativeLayout
@@ -235,7 +235,7 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:onClick="addNewAddress"
-                                android:text="Add new address"
+                                android:text="@string/add_new_address"
                                 android:layout_marginTop="5dp"
                                 android:textColor="#AA000000"
                                 android:textStyle="bold"/>
@@ -258,7 +258,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:id="@+id/date_text"
-                            android:text="Date"
+                            android:text="@string/date"
                             android:textColor="@color/colorPrimary"
                             android:textSize="16sp"/>
                         <EditText
@@ -343,7 +343,7 @@
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimary"
                 android:textColor="@color/white"
-                android:text="Place Request"
+                android:text="@string/place_request"
                 android:onClick="placeRequestWork"
                 android:alpha="0.3"
                 android:enabled="false"

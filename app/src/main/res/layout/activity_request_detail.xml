@@ -32,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="Request"
+            android:text="@string/request"
             android:textColor="@color/white"
             android:textSize="20sp"/>
     </RelativeLayout>
@@ -59,7 +59,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Sell Request"
+                    android:text="@string/request_sell_request"
                     android:textSize="30sp"
                     android:textColor="#616161"/>
                 <TextView
@@ -80,7 +80,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Slot"
+                    android:text="@string/request_slot"
                     android:textSize="17sp"
                     android:textColor="#616161"/>
                 <TextView
@@ -130,21 +130,21 @@
                         android:id="@+id/item_head"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Item"
+                        android:text="@string/request_item"
                         android:layout_alignParentLeft="true"
                         android:textSize="17sp"
                         android:textColor="#70c7b7"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Units"
+                        android:text="@string/request_units"
                         android:layout_centerHorizontal="true"
                         android:textSize="17sp"
                         android:textColor="#70c7b7"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Price"
+                        android:text="@string/request_price"
                         android:layout_alignParentRight="true"
                         android:textSize="17sp"
                         android:textColor="#70c7b7"/>
@@ -170,7 +170,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="40dp"
-        android:text="@string/call_executive"
+        android:text="@string/request_call_executive"
         android:textColor="#a1a1a1"
         android:gravity="center"
         android:layout_above="@+id/cancel_request"
@@ -181,7 +181,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:text="Cancel Request"
+        android:text="@string/request_cancel_request"
         android:onClick="cancelRequest"
         android:textColor="@color/white"
         android:paddingHorizontal="20dp"

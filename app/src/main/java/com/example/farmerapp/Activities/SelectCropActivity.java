@@ -37,6 +37,7 @@ public class SelectCropActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LanguageActivity.loadSavedLocale(this);
         setContentView(R.layout.activity_select_crop);
         selectedCrops=new ArrayList<Crop>();
         load=findViewById(R.id.load);

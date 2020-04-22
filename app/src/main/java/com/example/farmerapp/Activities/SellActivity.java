@@ -45,6 +45,7 @@ public class SellActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LanguageActivity.loadSavedLocale(this);
         setContentView(R.layout.activity_sell);
         productType=getIntent().getStringExtra(MainActivity.PRODUCT_TYPE);
         products=new ArrayList<Crop>();
@@ -53,7 +54,10 @@ public class SellActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         title=findViewById(R.id.title);
-        title.setText("Sell "+productType);
+        if(productType.equals(MainActivity.FRUITS))
+            title.setText(getResources().getString(R.string.sell_fruits));
+        else if(productType.equals(MainActivity.VEGETABLES))
+            title.setText(getResources().getString(R.string.sell_vegetables));
         load=findViewById(R.id.load);
         searchView=findViewById(R.id.search);
         badge=findViewById(R.id.badge);

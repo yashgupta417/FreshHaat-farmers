@@ -62,6 +62,7 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LanguageActivity.loadSavedLocale(this);
         setContentView(R.layout.activity_book_slot);
         recyclerView_manual=findViewById(R.id.recyler_view_cc);
         recyclerView_pick=findViewById(R.id.recyler_view_pickup);

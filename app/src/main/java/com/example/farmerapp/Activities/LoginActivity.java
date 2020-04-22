@@ -2,14 +2,11 @@ package com.example.farmerapp.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,8 +14,6 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.farmerapp.R;
 import com.example.farmerapp.Utils.CheckInternet;
@@ -33,6 +28,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LanguageActivity.loadSavedLocale(this);
         setContentView(R.layout.activity_login);
         activity=this;
         viewModel= ViewModelProviders.of(this).get(LoginViewModel.class);
@@ -66,7 +62,10 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        updateUI(true,1f);
+        if(phoneEditText.getText().toString().trim().length()==10)
+            updateUI(true,1f);
+        else
+            updateUI(false,0.3f);
     }
 
     public void buttonEnabling(){

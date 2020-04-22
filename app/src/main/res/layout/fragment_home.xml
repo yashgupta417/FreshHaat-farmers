@@ -70,7 +70,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="Search"
+                        android:hint="@string/main_query_hint"
                         android:textSize="18sp"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center_vertical"/>
@@ -115,7 +115,7 @@
                         <TextView
                             android:layout_width="218dp"
                             android:layout_height="match_parent"
-                            android:text="Sell Vegetables"
+                            android:text="@string/main_sell_vegetables"
                             android:textSize="20sp"
                             android:textColor="@color/white"
                             android:paddingLeft="20dp"
@@ -141,7 +141,7 @@
                         <TextView
                             android:layout_width="218dp"
                             android:layout_height="match_parent"
-                            android:text="Sell Fruits"
+                            android:text="@string/main_sell_fruits"
                             android:textSize="20sp"
                             android:textColor="@color/white"
                             android:paddingLeft="20dp"
@@ -166,7 +166,7 @@
                         <TextView
                             android:layout_width="218dp"
                             android:layout_height="match_parent"
-                            android:text="Sell Crops"
+                            android:text="@string/main_sell_crops"
                             android:textSize="20sp"
                             android:textColor="@color/white"
                             android:paddingLeft="20dp"
@@ -191,7 +191,7 @@
                 android:id="@+id/suggest_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Suggested For You"
+                android:text="@string/main_suggested_for_you"
                 android:textColor="#616161"
                 android:textSize="17sp"
                 android:background="#e8e8e8"

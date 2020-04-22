@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.location.Address;
 import android.location.LocationManager;
 import android.os.Build;
@@ -28,7 +29,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.farmerapp.Fragments.MainFragments.HomeFragment;
 import com.example.farmerapp.Fragments.MainFragments.PaymentFragment;
@@ -39,8 +39,10 @@ import com.example.farmerapp.Utils.LocationUtil;
 import com.example.farmerapp.ViewModels.MainViewModel;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.navigation.NavigationView;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -56,15 +58,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public static String FRUITS="Fruits";
     public static String VEGETABLES="Vegetables";
     public static String PRODUCT_TYPE="product_type";
-    private Integer dialogCount=0;
+   // private Integer dialogCount=0;
+    Snackbar snackbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        LanguageActivity.loadSavedLocale(this);
         setContentView(R.layout.activity_main);
         toolbar=findViewById(R.id.toolbar);
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
-
         addressTextView=findViewById(R.id.address);
         locationSymbol=findViewById(R.id.loc);
         shimmer=findViewById(R.id.shimmer);
@@ -77,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         activateNavigationHeader();
         viewModel= ViewModelProviders.of(this).get(MainViewModel.class);
         registerReceiver(gpsReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
-
+        snackbar=Snackbar.make(drawer,getResources().getString(R.string.no_gps_message),Snackbar.LENGTH_INDEFINITE);
     }
 
     public static void setTitle(String s){
@@ -99,12 +102,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.home:fragment=new HomeFragment();break;
             case R.id.requests:fragment=new RequestFragment();break;
             case R.id.payments:fragment=new PaymentFragment();break;
+            case R.id.change_language:changeLanguage();break;
             case R.id.logout:logout();break;
         }
         if(fragment!=null)
             getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,fragment).commit();
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void changeLanguage(){
+        Intent intent=new Intent(this, LanguageActivity.class);
+        startActivity(intent);
     }
     public void activateNavigationHeader(){
         View v=navigationView.getHeaderView(0);
@@ -157,6 +165,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         getPermissionAndGetLocation();
+
     }
 
     public void setLocation(String s){
@@ -182,8 +191,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public void getLocation(){
         LocationUtil locationUtil=new LocationUtil(getApplication());
         if(locationUtil.isProviderEnabled()){
-            setLocation("Locating...");
+            setLocation(getResources().getString(R.string.locating));
             shimmer.startShimmer();
+            snackbar.dismiss();
             locationUtil.observeAddress().observe(this, new Observer<List<Address>>() {
                 @Override
                 public void onChanged(List<Address> addresses) {
@@ -202,38 +212,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 }
             });
         }else{
-            if(dialogCount==1)
-                return;
+            //if(dialogCount==1)
+              //  return;
             new Handler().postDelayed(new Runnable(){
                 @Override
                 public void run() {
-                    showDialog();
+                    showError();
                 }
-            }, 7000);
+            }, 2000);
 
         }
     }
-    public void showDialog(){
-        new AlertDialog.Builder(this)
-                .setTitle("Enable Location")
-                .setIcon(R.drawable.ic_location)
-                .setMessage("Please turn on location for better performance.")
-                .setPositiveButton("Enable", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-                        startActivity(intent);
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                    }
-                })
-                .setCancelable(false)
-                .show();
-        dialogCount=1;
+    public void showError(){
+        snackbar.show();
+       // dialogCount=1;
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

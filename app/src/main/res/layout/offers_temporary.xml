@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="200dp"
                 android:layout_height="match_parent"
-                android:text="Vegetables\n 50% off"
+                android:text="@string/main_vegetables_off"
                 android:textSize="28sp"
                 android:textColor="@color/white"
                 android:paddingLeft="20dp"
@@ -52,7 +52,7 @@
                 <TextView
                     android:layout_width="200dp"
                     android:layout_height="match_parent"
-                    android:text="Fruits \n 30% off"
+                    android:text="@string/main_fruits_off"
                     android:textSize="28sp"
                     android:textColor="@color/white"
                     android:paddingLeft="20dp"
@@ -78,7 +78,7 @@
                 <TextView
                     android:layout_width="200dp"
                     android:layout_height="match_parent"
-                    android:text="Crops\n 40% off"
+                    android:text="@string/main_crops_off"
                     android:textSize="28sp"
                     android:textColor="@color/white"
                     android:paddingLeft="20dp"

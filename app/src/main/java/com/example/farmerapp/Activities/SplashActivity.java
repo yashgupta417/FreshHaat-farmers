@@ -49,6 +49,7 @@ public class SplashActivity extends AppCompatActivity {
             intent=new Intent(getApplicationContext(),MainActivity.class);
         }
         startActivity(intent);
+        LanguageActivity.loadSavedLocale(this);//this will go to language activity too when the app is opened first time
         finish();
     }
 }

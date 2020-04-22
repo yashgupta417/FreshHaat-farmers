@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     android:id="@+id/parent_login"
     tools:context=".Activities.LoginActivity">
 
@@ -62,7 +61,7 @@
         android:textAllCaps="false"
         android:enabled="false"
         android:alpha="0.3"
-        android:text="Login or Register"
+        android:text="@string/login_or_register"
         android:textColor="@color/white"
         android:onClick="login"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -99,7 +98,7 @@
         android:background="@drawable/back_1"
         android:drawableLeft="@drawable/ic_phone"
         android:drawablePadding="10dp"
-        android:hint="Mobile Number"
+        android:hint="@string/mobile_number_hint"
         android:maxLength="10"
         android:inputType="phone"
         android:paddingHorizontal="15dp"

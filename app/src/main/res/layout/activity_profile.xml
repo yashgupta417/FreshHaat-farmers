@@ -29,7 +29,7 @@
             android:layout_height="30dp"
             android:onClick="onBackClick"
             android:src="@drawable/ic_arrow_back_50dp"
-            android:layout_marginTop="10dp"
+            android:layout_centerVertical="true"
             android:layout_marginLeft="15dp"/>
         </RelativeLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -111,7 +111,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Name"
+                    android:text="@string/profile_name"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"/>
                 <LinearLayout
@@ -121,7 +121,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Mr"
+                        android:text="@string/profile_mr"
                         android:textColor="@color/colorPrimary"
                         android:textSize="15sp"
                         android:background="@drawable/boundary_green_back"
@@ -133,7 +133,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="100"
-                        android:hint="Name"
+                        android:hint="@string/profile_name_hint"
                         android:enabled="false"
                         android:maxLines="1"
                         android:textSize="15sp"
@@ -152,7 +152,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="verified"
+                        android:text="@string/profile_verified"
                         android:textColor="@color/blueLight"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center_vertical"
@@ -161,7 +161,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Contact"
+                    android:text="@string/profile_contact"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:layout_marginTop="30dp"/>
@@ -189,7 +189,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="verified"
+                        android:text="@string/profile_verified"
                         android:textColor="@color/blueLight"
                         android:layout_marginLeft="10dp"
                         android:layout_gravity="center_vertical"
@@ -204,7 +204,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="20"
-                        android:hint="Alternate Mobile No."
+                        android:hint="@string/profile_alternate_mobile_no"
                         android:maxLines="1"
                         android:maxLength="10"
                         android:inputType="phone"
@@ -225,7 +225,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="KYC"
+                    android:text="@string/profile_kyc"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:layout_marginTop="30dp"/>
@@ -238,7 +238,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="20"
-                        android:hint="XXXXXXXX (Optional)"
+                        android:hint="@string/profile_kyc_hint"
                         android:maxLines="1"
                         android:maxLength="12"
                         android:textSize="15sp"
@@ -258,7 +258,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Address"
+                    android:text="@string/profile_address"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp"
                     android:layout_marginTop="30dp"/>
@@ -271,7 +271,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="20"
-                        android:hint="Address"
+                        android:hint="@string/profile_address_hint"
                         android:gravity="start"
                         android:minLines="3"
                         android:textSize="15sp"
@@ -293,7 +293,7 @@
                 android:id="@+id/save_changes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Save Changes"
+                android:text="@string/profile_save_changes"
                 android:textColor="@color/white"
                 android:gravity="center"
                 android:onClick="saveChanges"

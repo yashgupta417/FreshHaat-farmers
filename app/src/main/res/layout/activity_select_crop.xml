@@ -24,7 +24,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Select Crops"
+        android:text="@string/select_crops"
         android:textColor="@color/colorPrimary"
         android:textSize="33sp"
         app:layout_constraintBottom_toBottomOf="@+id/register_header"
