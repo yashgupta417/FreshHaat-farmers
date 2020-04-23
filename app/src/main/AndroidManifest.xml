@@ -25,18 +25,19 @@
             android:name=".Activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Activities.SelectCropActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Activities.RegisterDetailsActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".Activities.VerifyOTPActivity"
             android:screenOrientation="portrait" />

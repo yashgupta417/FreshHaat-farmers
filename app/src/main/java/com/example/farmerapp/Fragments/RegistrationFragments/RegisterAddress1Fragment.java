@@ -164,7 +164,7 @@ public class RegisterAddress1Fragment extends Fragment {
             snackbar.show();
             return;
         }
-        locationTextView.setText("Locating....");
+        locationTextView.setText(getActivity().getResources().getString(R.string.locating));
         locationUtil.observeAddress().observe(this, new Observer<List<Address>>() {
             @Override
             public void onChanged(List<Address> addresses) {
@@ -202,14 +202,14 @@ public class RegisterAddress1Fragment extends Fragment {
         }
         ArrayList<String> states=new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.india_states)));
         for(String s:states){
-            if(s.toLowerCase().equals(adminArea.toLowerCase())){
+            if(adminArea!=null && s.toLowerCase().equals(adminArea.toLowerCase())){
                 viewModel.stateIndex=states.indexOf(s);
                 break;
             }
         }
         ArrayList<String> cities=new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.indian_cities)));
         for(String c:cities){
-            if(c.toLowerCase().equals(locality.toLowerCase())){
+            if(locality!=null && c.toLowerCase().equals(locality.toLowerCase())){
                 viewModel.cityIndex=cities.indexOf(c);
                 break;
             }
@@ -222,7 +222,8 @@ public class RegisterAddress1Fragment extends Fragment {
             address1.setText(add1);
         if(add2!=null)
             address2.setText(add2);
-        locationTextView.setText(header);
+        if(header!=null)
+            locationTextView.setText(header);
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

@@ -74,7 +74,6 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
 
     }
 
-
     public static void updateAddressDetails(){
         if(viewModel.farmer.getPin()!=null ) {
             pincode.setText(viewModel.farmer.getPin());
