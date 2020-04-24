@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Activities.SellActivity">
+    tools:context="com.farmerapp.Activities.SellActivity">
 
     <RelativeLayout
         android:id="@+id/serach_rl"

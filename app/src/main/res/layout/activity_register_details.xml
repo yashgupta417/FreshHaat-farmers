@@ -31,7 +31,7 @@
          app:layout_constraintStart_toStartOf="parent"
          app:layout_constraintTop_toTopOf="parent"
          app:layout_constraintVertical_bias="1" />
-    <com.example.farmerapp.ViewPager.RegistrationViewPager
+    <com.farmerapp.ViewPager.RegistrationViewPager
         android:id="@+id/regTabs"
         android:layout_width="match_parent"
         android:layout_height="0dp"

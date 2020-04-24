@@ -13,35 +13,35 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
-        <activity android:name=".Activities.SearchActivity" />
-        <activity android:name=".Activities.RequestDetailActivity" />
-        <activity android:name=".Activities.BookSlotActivity" />
-        <activity android:name=".Activities.CartActivity" />
-        <activity android:name=".Activities.SellActivity" />
-        <activity android:name=".Activities.ProfileActivity" />
-        <activity android:name=".Activities.LanguageActivity" android:screenOrientation="portrait"></activity>
-        <activity android:name=".Activities.MainActivity" />
+        <activity android:name="com.farmerapp.Activities.SearchActivity" />
+        <activity android:name="com.farmerapp.Activities.RequestDetailActivity" />
+        <activity android:name="com.farmerapp.Activities.BookSlotActivity" />
+        <activity android:name="com.farmerapp.Activities.CartActivity" />
+        <activity android:name="com.farmerapp.Activities.SellActivity" />
+        <activity android:name="com.farmerapp.Activities.ProfileActivity" />
+        <activity android:name="com.farmerapp.Activities.LanguageActivity" android:screenOrientation="portrait"></activity>
+        <activity android:name="com.farmerapp.Activities.MainActivity" />
         <activity
-            android:name=".Activities.SplashActivity"
+            android:name="com.farmerapp.Activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
 
         </activity>
         <activity
-            android:name=".Activities.SelectCropActivity"
+            android:name="com.farmerapp.Activities.SelectCropActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.RegisterDetailsActivity"
+            android:name="com.farmerapp.Activities.RegisterDetailsActivity"
             android:screenOrientation="portrait">            <intent-filter>
             <action android:name="android.intent.action.MAIN" />
 
             <category android:name="android.intent.category.LAUNCHER" />
         </intent-filter></activity>
         <activity
-            android:name=".Activities.VerifyOTPActivity"
+            android:name="com.farmerapp.Activities.VerifyOTPActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Activities.LoginActivity"
+            android:name="com.farmerapp.Activities.LoginActivity"
             android:screenOrientation="portrait" />
     </application>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
