@@ -9,7 +9,7 @@ android {
 
 
     defaultConfig {
-        applicationId "com.example.farmerapp"
+        applicationId "com.farmerapp"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 1
