@@ -72,9 +72,13 @@ public class LanguageActivity extends AppCompatActivity {
             SharedPreferences preferences=getSharedPreferences(getPackageName(),Context.MODE_PRIVATE);
             preferences.edit().putString("langCode",adapter.languageCodes.get(adapter.selectedIndex)).apply();
             setLocale(adapter.languageCodes.get(adapter.selectedIndex),this);
-            Intent intent=new Intent(this,SplashActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
+            if(landCode!=null) {
+                Intent intent = new Intent(this, SplashActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }else{
+                finish();
+            }
         }
     }
     public static void setLocale(String langCode, Activity activity) {

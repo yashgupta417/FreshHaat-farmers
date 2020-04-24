@@ -23,7 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="No Requests"
+            android:text="@string/request_no_requests"
             android:textSize="16sp"
             android:visibility="invisible"
             android:id="@+id/no_requests"

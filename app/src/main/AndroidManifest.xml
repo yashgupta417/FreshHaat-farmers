@@ -25,18 +25,18 @@
             android:name="com.farmerapp.Activities.SplashActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name="com.farmerapp.Activities.SelectCropActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.farmerapp.Activities.RegisterDetailsActivity"
-            android:screenOrientation="portrait">            <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter></activity>
+            android:screenOrientation="portrait">  </activity>
         <activity
             android:name="com.farmerapp.Activities.VerifyOTPActivity"
             android:screenOrientation="portrait" />

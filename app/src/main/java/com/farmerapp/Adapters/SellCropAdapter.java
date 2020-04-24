@@ -115,6 +115,17 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
                     }
                 }
             });
+            image.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onQuantityClick(position);
+                        }
+                    }
+                }
+            });
 
         }
     }

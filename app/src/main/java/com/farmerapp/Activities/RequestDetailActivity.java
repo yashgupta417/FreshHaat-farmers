@@ -73,7 +73,7 @@ public class RequestDetailActivity extends AppCompatActivity {
         setStatusColour(requestStatus,o_status.toLowerCase(),this);
         setStatusColour(slotStatus,s_status.toLowerCase(),this);
         if(o_status.equals("Cancelled"))
-            buttonWork(false,0.3f,"Cancel Request");
+            buttonWork(false,0.3f,getResources().getString(R.string.request_cancel_request));
 
         Date d=order.getPickupDate();
         Calendar calendar=Calendar.getInstance();
@@ -117,19 +117,19 @@ public class RequestDetailActivity extends AppCompatActivity {
             Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
             return;
         }
-        buttonWork(false,0.3f,"Canceling....");
+        buttonWork(false,0.3f,getResources().getString(R.string.request_cancelling));
         viewModel.cancelRequest(order.getDatabaseId()).observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
                 if(integer==1){
                     Toast.makeText(RequestDetailActivity.this, "Request Cancelled Successfully", Toast.LENGTH_SHORT).show();
-                    buttonWork(false,0.3f,"Cancel Request");
-                    String cancelled="Cancelled";
+                    buttonWork(false,0.3f,getResources().getString(R.string.request_cancel_request));
+                    String cancelled=getResources().getString(R.string.request_cancelled);
                     requestStatus.setText(cancelled);
                     setStatusColour(requestStatus,cancelled.toLowerCase(),getApplication());
                 }else if(integer==-1){
                     Toast.makeText(RequestDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
-                    buttonWork(true,1f,"Cancel Request");
+                    buttonWork(true,1f,getResources().getString(R.string.request_cancel_request));
                 }
             }
         });

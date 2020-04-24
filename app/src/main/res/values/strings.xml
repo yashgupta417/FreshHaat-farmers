@@ -39,6 +39,7 @@
     <string name="profile_saving">Saving...</string>
     <string name="requests">Requests</string>
     <string name="request">Request</string>
+    <string name="request_no_requests">No Requests</string>
     <string name="request_sell_request">Sell Request</string>
     <string name="request_slot">Slot :</string>
     <string name="request_item">Item</string>
@@ -46,6 +47,8 @@
     <string name="request_price">Price</string>
     <string name="request_call_executive">You can call our executive for further information</string>
     <string name="request_cancel_request">Cancel Request</string>
+    <string name="request_cancelled">Cancelled</string>
+    <string name="request_cancelling">Cancelling...</string>
     <string name="search_query_hint">Search</string>
     <string name="search_toolbar_title">FreshHut</string>
     <string name="select_crops">Select Crops</string>
