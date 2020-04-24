@@ -27,9 +27,6 @@ public class Order{
     @SerializedName("order")
     @Expose
     private ArrayList<Crop> products;
-    @SerializedName("totalPrice")
-    @Expose
-    private Float totalPrice;
     @SerializedName("orderDate")
     @Expose
     private String orderDate;
@@ -92,14 +89,6 @@ public class Order{
 
     public void setProducts(ArrayList<Crop> products) {
         this.products = products;
-    }
-
-    public Float getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Float totalPrice) {
-        this.totalPrice = totalPrice;
     }
 
     public String getOrderDate() {

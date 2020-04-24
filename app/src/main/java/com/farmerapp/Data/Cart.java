@@ -9,9 +9,6 @@ public class Cart {
     @SerializedName("cart")
     @Expose
     private ArrayList<Crop> products;
-    @SerializedName("totalPrice")
-    @Expose
-    private Float totalPrice;
     @SerializedName("userId")
     @Expose
     private String userId;
@@ -20,13 +17,6 @@ public class Cart {
     }
 
 
-    public Float getTotalPrice() {
-        return totalPrice;
-    }
-
-    public void setTotalPrice(Float totalPrice) {
-        this.totalPrice = totalPrice;
-    }
 
     public String getUserId() {
         return userId;

@@ -97,9 +97,17 @@ public class CartActivity extends AppCompatActivity {
         totalAmount2.setVisibility(totalPriceVisibility);
         load.setVisibility(loadVisibility);
     }
+    public Float getTotalPrice(ArrayList<Crop> crops){
+        Float totalPrice=0f;
+        for(Crop crop:crops){
+            totalPrice+=crop.getQuantity()*crop.getPrice();
+        }
+        return totalPrice;
+    }
     public void activateAdapter(Cart cart){
         //To maintain order of items
         ArrayList<Crop> crops=cart.getProducts();
+        Float totalPrice=getTotalPrice(crops);
         Collections.sort(crops, new Comparator<Crop>() {
             @Override
             public int compare(Crop o1, Crop o2) {
@@ -111,11 +119,11 @@ public class CartActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         adapter.setOnItemClickListener(listener);
-        totalAmount1.setText(getResources().getString(R.string.Rs)+" "+Float.toString(cart.getTotalPrice()));
-        totalAmount2.setText(getResources().getString(R.string.Rs)+" "+Float.toString(cart.getTotalPrice()));
-        if(cart.getTotalPrice()>0){
+        totalAmount1.setText(getResources().getString(R.string.Rs)+" "+Float.toString(totalPrice));
+        totalAmount2.setText(getResources().getString(R.string.Rs)+" "+Float.toString(totalPrice));
+        if(totalPrice>0){
             updateUI(1f,true,View.VISIBLE,View.GONE);
-        }else if(cart.getTotalPrice()==0){
+        }else if(totalPrice==0){
             updateUI(0.3f,false,View.VISIBLE,View.GONE);
         }
     }

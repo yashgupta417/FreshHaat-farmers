@@ -16,7 +16,7 @@ public class Crop {
     @SerializedName("image")
     @Expose
     private String image;
-    @SerializedName("price")
+    @SerializedName("unitPrice")
     @Expose
     private Float price;
     @SerializedName("unit")
