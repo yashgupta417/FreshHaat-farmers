@@ -254,14 +254,14 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
                 return;
             }
             order.setOrderType("pickup");
-            order.setSlotNumber(pickupSlotsAdapter.slotNames.get(pickupSlotsAdapter.selectedIndex).substring(5,6));
+            order.setSlotNumber(Integer.toString(pickupSlotsAdapter.getSelectedSlotNumber()));
             order.setPickupDate(new Date(pickupDayTextView.getText().toString(),
                                          pickupMonthTextView.getText().toString(),
                                          pickupYearTextView.getText().toString()));
             order.setPickupAddress(address);
         }else{
             order.setOrderType("manual");
-            order.setSlotNumber(manualSlotsAdapter.slotNames.get(manualSlotsAdapter.selectedIndex).substring(5,6));
+            order.setSlotNumber(Integer.toString(manualSlotsAdapter.getSelectedSlotNumber()));
             order.setPickupDate(new Date(manualDayTextView.getText().toString(),
                                          manualMonthTextView.getText().toString(),
                                          manualYearTextView.getText().toString()));

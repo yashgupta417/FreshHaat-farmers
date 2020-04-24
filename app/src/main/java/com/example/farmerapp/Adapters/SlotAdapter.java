@@ -22,7 +22,7 @@ import java.util.Date;
 public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder>{
     public ArrayList<String> slotNames,slotTimes;
     public ArrayList<Integer> selected;
-    public Integer selectedIndex;
+    public Integer selectedIndex,startingIndex;//Our final slot number will be starting Index + selectedIndex + 1
     Context context;
     private onItemClickListener mlistener;
     Calendar c1;
@@ -34,12 +34,15 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
         selected=new ArrayList<Integer>();
         initialize();
     }
+    public Integer getSelectedSlotNumber(){
+        return startingIndex+selectedIndex+1;
+    }
     public void initialize(){
         Calendar c2=Calendar.getInstance();
         boolean indexSelected=false;
         selected.clear();
         for(int i=0;i<slotNames.size();i++){
-            int slotNumber=Integer.parseInt(slotNames.get(i).substring(5,6));
+            int slotNumber=i+1;
             c1.set(Calendar.HOUR_OF_DAY,6+(slotNumber-1)*3+2);
             c1.set(Calendar.MINUTE,59);
             c1.set(Calendar.SECOND,59);
@@ -50,15 +53,15 @@ public class SlotAdapter extends RecyclerView.Adapter<SlotAdapter.SlotViewHolder
             else{
                 if(!indexSelected){
                     selected.add(1);
-                    selectedIndex=i;
+                    startingIndex=i;
                     indexSelected=true;
                 }else{
                     selected.add(0);
                 }
             }
         }
-        slotNames=new ArrayList<String>(slotNames.subList(selectedIndex,slotNames.size()));
-        slotTimes=new ArrayList<String>(slotTimes.subList(selectedIndex,slotTimes.size()));
+        slotNames=new ArrayList<String>(slotNames.subList(startingIndex,slotNames.size()));
+        slotTimes=new ArrayList<String>(slotTimes.subList(startingIndex,slotTimes.size()));
         selectedIndex=0;
     }
     public void updateSelctedItem(Integer newIndex){

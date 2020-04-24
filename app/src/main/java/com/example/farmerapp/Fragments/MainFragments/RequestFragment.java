@@ -38,7 +38,7 @@ public class RequestFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_request, container, false);
         MainActivity.hideLocation();
-        MainActivity.setTitle("Requests");
+        MainActivity.setTitle(getResources().getString(R.string.requests));
         recyclerView=v.findViewById(R.id.recyler_view);
         load=v.findViewById(R.id.load);
         noRequestsText=v.findViewById(R.id.no_requests);

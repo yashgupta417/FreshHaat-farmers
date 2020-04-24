@@ -169,7 +169,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void setLocation(String s){
-        addressTextView.setText(s);
+        if(!s.isEmpty())
+            addressTextView.setText(s);
+        else
+            addressTextView.setText(getResources().getString(R.string.main_location_empty));
     }
     public static void  showLocation(){
         addressTextView.setVisibility(View.VISIBLE);
@@ -192,7 +195,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         LocationUtil locationUtil=new LocationUtil(getApplication());
         if(locationUtil.isProviderEnabled()){
             setLocation(getResources().getString(R.string.locating));
-            shimmer.startShimmer();
+            if(!shimmer.isShimmerStarted())
+                shimmer.startShimmer();
+            else
+                shimmer.showShimmer(true);
             snackbar.dismiss();
             locationUtil.observeAddress().observe(this, new Observer<List<Address>>() {
                 @Override

@@ -36,10 +36,11 @@
     <string name="profile_mr">श्री</string>
     <string name="profile_contact">कांटेक्ट</string>
     <string name="profile_save_changes">सेव चंगेस</string>
+    <string name="profile_saving">सेविंग...</string>
     <string name="requests">रिक्वेस्ट्स</string>
     <string name="request">रिक्वेस्ट</string>
     <string name="request_sell_request">सेल्ल रिक्वेस्ट्स</string>
-    <string name="request_slot">स्लॉट</string>
+    <string name="request_slot">स्लॉट :</string>
     <string name="request_item">आइटम</string>
     <string name="request_units">यूनिट्स</string>
     <string name="request_price">कीमत</string>
@@ -48,6 +49,7 @@
     <string name="search_query_hint">खोजें</string>
     <string name="search_toolbar_title">FreshHut</string>
     <string name="select_crops">फसलों का चयन</string>
+    <string name="select_crops_next">आगे</string>
     <string name="sell_query_hint">खोजें</string>
     <string name="sell_fruits">फल बेचे</string>
     <string name="sell_vegetables">सब्जियां बेचे</string>
@@ -56,6 +58,7 @@
     <string name="otp_verify">वेरीफाई</string>
     <string name="otp_title_part_1">FRESH</string>
     <string name="otp_title_part_2">HUT</string>
+    <string name="address_sheet_location_empty">आपका स्थान अनुपलब्ध है</string>
     <string name="address_sheet_current_location">वर्तमान स्थान</string>
     <string name="address_sheet_address_line_1_hint">पता पंक्ति 1</string>
     <string name="address_sheet_address_line_2_hint">पता पंक्ति 2</string>
@@ -66,6 +69,8 @@
     <string name="address_sheet_confirm_location">स्थान की पुष्टि करें</string>
     <string name="change_quantity_sheet_done">पूर्ण</string>
     <string name="change_quantity_quantity_hint">मात्रा</string>
+    <string name="main_location_empty">आपका स्थान अनुपलब्ध है</string>
+    <string name="main_current_location">वर्तमान स्थान</string>
     <string name="main_query_hint">खोजें</string>
     <string name="main_vegetables_off">सब्जियां\n 50% की छूट</string>
     <string name="main_fruits_off">फल\n 35% की छूट</string>
@@ -100,13 +105,14 @@
     <string name="menu_about">अबाउट</string>
     <string name="menu_change_langauge">भाषा बदलें</string>
     <string name="menu_logout">लॉग आउट</string>
+    <string name="payments">पेमेंट्स</string>
     <string-array name="slot_names">
-        <item>Slot 1</item>
-        <item>Slot 2</item>
-        <item>Slot 3</item>
-        <item>Slot 4</item>
-        <item>Slot 5</item>
-        <item>Slot 6</item>
+        <item>स्लॉट 1</item>
+        <item>स्लॉट 2</item>
+        <item>स्लॉट 3</item>
+        <item>स्लॉट 4</item>
+        <item>स्लॉट 5</item>
+        <item>स्लॉट 6</item>
     </string-array>
     <string-array name="slot_times">
         <item>6am - 9am</item>
@@ -117,26 +123,26 @@
         <item>9pm - 12am</item>
     </string-array>
     <string-array name="india_states">
-        <item>State</item>
-        <item>Delhi</item>
-        <item>U.P.</item>
-        <item>Haryana</item>
-        <item>Karnataka</item>
-        <item>Maharashtra</item>
-        <item>Telangana</item>
+        <item>राज्य</item>
+        <item>दिल्ली</item>
+        <item>यूपी</item>
+        <item>हरियाणा</item>
+        <item>कर्नाटक</item>
+        <item>महाराष्ट्र</item>
+        <item>तेलंगाना</item>
     </string-array>
     <string-array name="indian_cities">
-        <item>City</item>
-        <item>Delhi</item>
-        <item>Mumbai</item>
-        <item>Pune</item>
-        <item>Chennai</item>
-        <item>Kolkata</item>
-        <item>Bengaluru</item>
-        <item>Hyderabad</item>
-        <item>Gurugram</item>
-        <item>Noida</item>
-        <item>Gaziabad</item>
-        <item>Faridabad</item>
+        <item>शहर</item>
+        <item>दिल्ली</item>
+        <item>मुंबई</item>
+        <item>पुणे</item>
+        <item>चेन्नई</item>
+        <item>कोलकाता</item>
+        <item>बेंगलुरु</item>
+        <item>हैदराबाद</item>
+        <item>गुरुग्राम</item>
+        <item>नोएडा</item>
+        <item>गाजियाबाद</item>
+        <item>फरीदाबाद</item>
     </string-array>
 </resources>

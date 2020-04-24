@@ -25,6 +25,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
+
 public class LocationUtil{
     LocationManager locationManager = null;
     LocationListener locationListener = null;

@@ -36,10 +36,11 @@
     <string name="profile_mr">Mr.</string>
     <string name="profile_contact">Contact</string>
     <string name="profile_save_changes">Save Changes</string>
+    <string name="profile_saving">Saving...</string>
     <string name="requests">Requests</string>
     <string name="request">Request</string>
     <string name="request_sell_request">Sell Request</string>
-    <string name="request_slot">Slot</string>
+    <string name="request_slot">Slot :</string>
     <string name="request_item">Item</string>
     <string name="request_units">Units</string>
     <string name="request_price">Price</string>
@@ -48,6 +49,7 @@
     <string name="search_query_hint">Search</string>
     <string name="search_toolbar_title">FreshHut</string>
     <string name="select_crops">Select Crops</string>
+    <string name="select_crops_next">Next</string>
     <string name="sell_query_hint">Search</string>
     <string name="sell_fruits">Sell Fruits</string>
     <string name="sell_vegetables">Sell Vegetables</string>
@@ -56,6 +58,7 @@
     <string name="otp_verify">Verify</string>
     <string name="otp_title_part_1">FRESH</string>
     <string name="otp_title_part_2">HUT</string>
+    <string name="address_sheet_location_empty">Your Location is Unavailable</string>
     <string name="address_sheet_current_location">Current Location</string>
     <string name="address_sheet_address_line_1_hint">Address Line 1</string>
     <string name="address_sheet_address_line_2_hint">Address Line 2</string>
@@ -66,6 +69,8 @@
     <string name="address_sheet_confirm_location">Confirm Location</string>
     <string name="change_quantity_sheet_done">Done</string>
     <string name="change_quantity_quantity_hint">Quantity</string>
+    <string name="main_location_empty">Your Location is Unavailable</string>
+    <string name="main_current_location">Current Location</string>
     <string name="main_query_hint">Search</string>
     <string name="main_vegetables_off">Vegetables\n 50% off</string>
     <string name="main_fruits_off">Fruits\n 40% off</string>
@@ -100,6 +105,7 @@
     <string name="menu_about">About</string>
     <string name="menu_change_langauge">Change Language</string>
     <string name="menu_logout">Logout</string>
+    <string name="payments">Payments</string>
     <string-array name="slot_names">
         <item>Slot 1</item>
         <item>Slot 2</item>

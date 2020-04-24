@@ -126,7 +126,7 @@ public class AddressBottomSheet extends BottomSheetDialogFragment{
     }
 
     public void getLocation(){
-            currentLocationText.setText("Locating....");
+            currentLocationText.setText(getResources().getString(R.string.locating));
             LocationUtil locationUtil=new LocationUtil(getActivity().getApplication());
             if(locationUtil.isProviderEnabled()){
                 locationUtil.observeAddress().observe(this, new Observer<List<Address>>() {
@@ -139,7 +139,7 @@ public class AddressBottomSheet extends BottomSheetDialogFragment{
                 new Handler().postDelayed(new Runnable(){
                     @Override
                     public void run() {
-                        currentLocationText.setText("Current Location");
+                        currentLocationText.setText(getResources().getString(R.string.address_sheet_current_location));
                         Toast.makeText(getActivity(), "Please turn your GPS on", Toast.LENGTH_SHORT).show();
                     }
                 }, 2000);

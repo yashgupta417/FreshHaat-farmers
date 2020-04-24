@@ -31,7 +31,6 @@ public class SelectCropActivity extends AppCompatActivity {
     GifImageView load;
     ArrayList<Crop> selectedCrops;
     Button next;
-    TextView skip;
     ConstraintLayout parent;
     CropAdapter adapter;
     @Override
@@ -42,7 +41,6 @@ public class SelectCropActivity extends AppCompatActivity {
         selectedCrops=new ArrayList<Crop>();
         load=findViewById(R.id.load);
         next=findViewById(R.id.next);
-        skip=findViewById(R.id.skip);
         parent=findViewById(R.id.parent);
         recyclerView=findViewById(R.id.crop_recylcer_view);
         recyclerView.setLayoutManager(new GridLayoutManager(this,NO_OF_COLUMN));
@@ -54,8 +52,6 @@ public class SelectCropActivity extends AppCompatActivity {
                 setAdapter(crops);
                 load.setVisibility(View.GONE);
                 next.setVisibility(View.VISIBLE);
-                skip.setVisibility(View.VISIBLE);
-                skip.setEnabled(true);
             }
         });
 
@@ -106,15 +102,9 @@ public class SelectCropActivity extends AppCompatActivity {
             }
         });
     }
-    public void skipWork(View view){
-        Intent intent=new Intent(getApplicationContext(),MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
     public void updateUI(Boolean nextBool,Float nextAlpha,Boolean skipBool,Boolean recyclerViewBool){
         next.setEnabled(nextBool);
         next.setAlpha(nextAlpha);
-        skip.setEnabled(skipBool);
         recyclerView.setEnabled(recyclerViewBool);
     }
 }

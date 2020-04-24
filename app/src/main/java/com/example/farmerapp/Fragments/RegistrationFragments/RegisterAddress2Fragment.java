@@ -50,6 +50,7 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
     SpinnerAdapter stateAdapter,cityAdapter;
     public static EditText pincode;
     boolean isPincodeOk=false,isCityOk=false,isStateOk=false;
+    ArrayList<String> indianCities,indianStates;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_reg_address2, container, false);
@@ -61,12 +62,14 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
 
         addButtonClickListeners();
         addTextListener();
+        indianStates=new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.india_states)));
+        indianCities=new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.indian_cities)));
 
-        stateAdapter = new SpinnerAdapter(getContext(), new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.india_states))));
+        stateAdapter = new SpinnerAdapter(getContext(),indianStates);
         stateSpinner.setAdapter(stateAdapter);
         stateSpinner.setOnItemSelectedListener(this);
 
-        cityAdapter = new SpinnerAdapter(getContext(), new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.indian_cities))));
+        cityAdapter = new SpinnerAdapter(getContext(),indianCities);
         citySpinner.setAdapter(cityAdapter);
         citySpinner.setOnItemSelectedListener(this);
 
@@ -147,7 +150,7 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String item = parent.getItemAtPosition(position).toString();
         if(parent.getId()==R.id.city) {
-                if (item.equals("City")) {
+                if (position==0) {
                     isCityOk = false;
                 } else {
                     viewModel.farmer.setCity(item);
@@ -155,7 +158,7 @@ public class RegisterAddress2Fragment extends Fragment implements AdapterView.On
                 }
                 updateNextButtonStatus();
         }else if(parent.getId()==R.id.state){
-            if(item.equals("State")) {
+            if(position==0) {
                     isStateOk=false;
             }
             else {

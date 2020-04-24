@@ -228,16 +228,16 @@ public class ProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "No changes to apply", Toast.LENGTH_SHORT).show();
             return;
         }
-        updateSaveButtonUI(false,0.3f,"Saving...");
+        updateSaveButtonUI(false,0.3f,getResources().getString(R.string.profile_saving));
         viewModel.postChanges(farmer).observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
                 if(integer==1){
                     isEdited=false;
-                    updateSaveButtonUI(true,1f,"Save Changes");
+                    updateSaveButtonUI(true,1f,getResources().getString(R.string.profile_save_changes));
                     Toast.makeText(ProfileActivity.this, "Changes Saved Successfully", Toast.LENGTH_SHORT).show();
                 }else if(integer==-1){
-                    updateSaveButtonUI(true,1f,"Save Changes");
+                    updateSaveButtonUI(true,1f,getResources().getString(R.string.profile_save_changes));
                     Toast.makeText(ProfileActivity.this, "Something Went Wrong", Toast.LENGTH_SHORT).show();
                 }
             }

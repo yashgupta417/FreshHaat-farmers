@@ -86,7 +86,7 @@ public class RequestDetailActivity extends AppCompatActivity {
 
         ArrayList<String> slotTimes=new ArrayList<String>(Arrays.asList(getResources().getStringArray(R.array.slot_times)));
         String slotTime=slotTimes.get(Math.max(Integer.parseInt(order.getSlotNumber())-1,0));
-        slot.setText("Slot : "+slotTime);
+        slot.setText(getResources().getString(R.string.request_slot)+" "+slotTime);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
