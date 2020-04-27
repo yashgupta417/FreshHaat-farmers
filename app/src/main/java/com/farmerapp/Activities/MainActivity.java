@@ -27,6 +27,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.farmerapp.Data.Farmer;
 import com.farmerapp.Fragments.MainFragments.HomeFragment;
 import com.farmerapp.Fragments.MainFragments.PaymentFragment;
 import com.farmerapp.Fragments.MainFragments.RequestFragment;
@@ -73,8 +75,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         navigationView.getMenu().findItem(R.id.home).setChecked(true);
         title=findViewById(R.id.title);
         setUpDrawer();
-        activateNavigationHeader();
         viewModel= ViewModelProviders.of(this).get(MainViewModel.class);
+        activateNavigationHeader();
         registerReceiver(gpsReceiver, new IntentFilter(LocationManager.PROVIDERS_CHANGED_ACTION));
         snackbar=Snackbar.make(drawer,getResources().getString(R.string.no_gps_message),Snackbar.LENGTH_INDEFINITE);
     }
@@ -110,14 +112,26 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent=new Intent(this, LanguageActivity.class);
         startActivity(intent);
     }
+    CircleImageView imageView;
     public void activateNavigationHeader(){
         View v=navigationView.getHeaderView(0);
-        CircleImageView imageView=v.findViewById(R.id.image);
+        imageView=v.findViewById(R.id.image);
         imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToProfile();
                // drawer.closeDrawer(GravityCompat.START);
+            }
+        });
+
+    }
+    public void loadProfileImage(){
+        viewModel.getFarmer().observe(this, new Observer<Farmer>() {
+            @Override
+            public void onChanged(Farmer farmer) {
+                if(farmer!=null && farmer.getProfilePhoto()!=null && !farmer.getProfilePhoto().equals("")){
+                    Glide.with(MainActivity.this).load(farmer.getProfilePhoto()).placeholder(R.drawable.load_static).into(imageView);
+                }
             }
         });
     }
@@ -161,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onResume() {
         super.onResume();
         getPermissionAndGetLocation();
+        loadProfileImage();
 
     }
 

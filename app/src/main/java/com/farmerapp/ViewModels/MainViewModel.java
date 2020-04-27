@@ -9,6 +9,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
 import com.farmerapp.Data.Crop;
+import com.farmerapp.Data.Farmer;
 import com.farmerapp.Data.Order;
 import com.farmerapp.Repositories.MainRepository;
 
@@ -32,5 +33,9 @@ public class MainViewModel extends AndroidViewModel {
     public LiveData<List<Order>> getAllRequests(){
 
         return repository.getAllRequests(userId);
+    }
+
+    public LiveData<Farmer> getFarmer(){
+        return repository.getFarmer();
     }
 }

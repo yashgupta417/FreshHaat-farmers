@@ -25,7 +25,6 @@
             android:icon="@drawable/ic_keyboard_arrow_right"/>
         <item
             android:id="@+id/logout"
-            android:title="@string/menu_logout"
-            android:icon="@drawable/ic_keyboard_arrow_right"/>
+            android:title="@string/menu_logout"/>
     </group>
 </menu>

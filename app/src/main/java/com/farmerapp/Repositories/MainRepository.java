@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.farmerapp.API.FarmerApi;
 import com.farmerapp.API.SellRequestApi;
 import com.farmerapp.Data.Crop;
+import com.farmerapp.Data.Farmer;
 import com.farmerapp.Data.Order;
 import com.farmerapp.RetrofitClient.RetrofitClient;
 
@@ -61,5 +62,25 @@ public class MainRepository {
             }
         });
         return requests;
+    }
+
+    public LiveData<Farmer> getFarmer(){
+        MutableLiveData<Farmer> farmer=new MutableLiveData<Farmer>();
+        Call<Farmer> call= RetrofitClient.getInstance(application).create(FarmerApi.class).getFarmer();
+        call.enqueue(new Callback<Farmer>() {
+            @Override
+            public void onResponse(Call<Farmer> call, Response<Farmer> response) {
+                if(response.isSuccessful()){
+                    farmer.setValue(response.body());
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Farmer> call, Throwable t) {
+                call.clone().enqueue(this);
+            }
+        });
+        return farmer;
     }
 }

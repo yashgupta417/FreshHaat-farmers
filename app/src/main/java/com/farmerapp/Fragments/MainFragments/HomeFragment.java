@@ -81,7 +81,7 @@ public class HomeFragment extends Fragment {
 
     public void activateAdapter(){
         products=LocalCart.syncQuantities(products,getActivity().getApplication());
-        adapter=new SellCropAdapter(products,getContext(),SellCropAdapter.NORMAL);
+        adapter=new SellCropAdapter(products,getActivity(),SellCropAdapter.NORMAL);
         recyclerView.setAdapter(adapter);
         ((SimpleItemAnimator) recyclerView.getItemAnimator()).setSupportsChangeAnimations(false);
         adapter.setOnItemClickListener(new SellCropAdapter.onItemClickListener() {
@@ -92,34 +92,19 @@ public class HomeFragment extends Fragment {
 
             @Override
             public void onIncrementClick(int position) {
-                Crop crop=adapter.getItem(position);
-                crop.setQuantity(crop.getQuantity()+1);
-                adapter.notifyItemChanged(position);
-                LocalCart.update(getActivity().getApplication(),crop.getId(),Integer.toString(crop.getQuantity()));
+                adapter.incrementCount(position);
             }
 
             @Override
             public void onDecrementClick(int position) {
-                Crop crop=adapter.getItem(position);
-                if(crop.getQuantity()>0) {
-                    crop.setQuantity(crop.getQuantity() - 1);
-                    adapter.notifyItemChanged(position);
-                    if(crop.getQuantity()==0) {
-                        LocalCart.count--;
-                        updateBadge();
-                    }
-                    LocalCart.update(getActivity().getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
-                }
+                adapter.decrementCount(position);
+                updateBadge();
             }
 
             @Override
             public void onAddToCartClick(int position) {
-                Crop crop=adapter.getItem(position);
-                crop.setQuantity(1);
-                adapter.notifyItemChanged(position);
-                LocalCart.count++;
+                adapter.addToCart(position);
                 updateBadge();
-                LocalCart.update(getActivity().getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
             }
 
             @Override
@@ -129,14 +114,8 @@ public class HomeFragment extends Fragment {
                 bottomSheet.setOnDoneListener(new ChangeQuantityBottomSheet.OnDoneListener() {
                     @Override
                     public void onDone(Integer quantity) {
-                        Crop crop=adapter.getItem(position);
-                        crop.setQuantity(quantity);
-                        adapter.notifyItemChanged(position);
-                        if(quantity==0) {
-                            LocalCart.count--;
-                            updateBadge();
-                        }
-                        LocalCart.update(getActivity().getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
+                        adapter.changeQuantity(position,quantity);
+                        updateBadge();
                     }
                 });
             }

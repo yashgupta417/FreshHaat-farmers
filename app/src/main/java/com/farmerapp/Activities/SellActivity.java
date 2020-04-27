@@ -109,33 +109,18 @@ public class SellActivity extends AppCompatActivity {
 
             @Override
             public void onIncrementClick(int position) {
-                Crop crop=adapter.getItem(position);
-                crop.setQuantity(crop.getQuantity()+1);
-                adapter.notifyItemChanged(position);
-                LocalCart.update(getApplication(),crop.getId(),Integer.toString(crop.getQuantity()));
+                adapter.incrementCount(position);
             }
 
             @Override
             public void onDecrementClick(int position) {
-                Crop crop=adapter.getItem(position);
-                if(crop.getQuantity()>0) {
-                    crop.setQuantity(crop.getQuantity() - 1);
-                    adapter.notifyItemChanged(position);
-                    if(crop.getQuantity()==0) {
-                        LocalCart.count--;
-                        updateBadge();
-                    }
-                    LocalCart.update(getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
-                }
+                adapter.decrementCount(position);
+                updateBadge();
             }
             @Override
             public void onAddToCartClick(int position) {
-                Crop crop=adapter.getItem(position);
-                crop.setQuantity(1);
-                adapter.notifyItemChanged(position);
-                LocalCart.count++;
+                adapter.addToCart(position);
                 updateBadge();
-                LocalCart.update(getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
             }
 
             @Override
@@ -145,14 +130,8 @@ public class SellActivity extends AppCompatActivity {
                 bottomSheet.setOnDoneListener(new ChangeQuantityBottomSheet.OnDoneListener() {
                     @Override
                     public void onDone(Integer quantity) {
-                        Crop crop=adapter.getItem(position);
-                        crop.setQuantity(quantity);
-                        adapter.notifyItemChanged(position);
-                        if(quantity==0) {
-                            LocalCart.count--;
-                            updateBadge();
-                        }
-                        LocalCart.update(getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
+                        adapter.changeQuantity(position,quantity);
+                        updateBadge();
                     }
                 });
             }

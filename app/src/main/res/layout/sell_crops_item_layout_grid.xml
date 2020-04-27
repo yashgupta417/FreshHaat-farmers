@@ -23,6 +23,23 @@
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="40% extra"
+        android:textSize="10sp"
+        android:textStyle="bold"
+        android:id="@+id/offer"
+        android:textColor="@color/white"
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="2dp"
+        android:background="@drawable/offer_back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
     <RelativeLayout
         android:id="@+id/ll_1"
         android:layout_width="wrap_content"
@@ -45,21 +62,34 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"/>
         <TextView
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="12sp"
-            android:text="34"
-            android:layout_below="@id/name"
-            android:layout_alignParentRight="true"/>
-        <TextView
             android:id="@+id/unit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="10sp"
+            android:textSize="11sp"
+            android:layout_marginBottom="2dp"
             android:text="Tomato"
-            android:layout_alignBottom="@+id/price"
-            android:layout_alignParentLeft="true"/>
+            android:layout_alignBottom="@+id/offer_price"
+            android:layout_alignParentRight="true"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/offer_price"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@id/name"
+            android:text="500"/>
+        <TextView
+            android:id="@+id/price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="11sp"
+            android:text="Tomato"
+            android:layout_alignBottom="@+id/offer_price"
+            android:layout_marginBottom="1dp"
+            android:layout_toRightOf="@+id/offer_price"
+            android:layout_marginLeft="5dp"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/add_to_cart_parent"

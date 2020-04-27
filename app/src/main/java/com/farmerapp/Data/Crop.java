@@ -19,12 +19,33 @@ public class Crop {
     @SerializedName("unitPrice")
     @Expose
     private Float price;
+    @SerializedName("discountedPrice")
+    @Expose
+    private Float offerPrice;
+    @SerializedName("discount")
+    @Expose
+    private Float offer;
     @SerializedName("unit")
     @Expose
     private String unit;
+    @SerializedName("unitQty")
+    @Expose
+    private String batchSize;
     @SerializedName("quantity")
     @Expose
     private Integer quantity;
+    @SerializedName("minQty")
+    @Expose
+    private Integer minQuantity;
+    @SerializedName("maxQty")
+    @Expose
+    private Integer maxQuantity;
+    @SerializedName("incrementVal")
+    @Expose
+    private Integer incrementValue;
+    @SerializedName("checked")
+    @Expose
+    private Boolean isAvailable;
     public Crop() {
     }
 
@@ -84,5 +105,61 @@ public class Crop {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public Integer getMinQuantity() {
+        return minQuantity;
+    }
+
+    public void setMinQuantity(Integer minQuantity) {
+        this.minQuantity = minQuantity;
+    }
+
+    public Integer getMaxQuantity() {
+        return maxQuantity;
+    }
+
+    public void setMaxQuantity(Integer maxQuantity) {
+        this.maxQuantity = maxQuantity;
+    }
+
+    public Integer getIncrementValue() {
+        return incrementValue;
+    }
+
+    public void setIncrementValue(Integer incrementValue) {
+        this.incrementValue = incrementValue;
+    }
+
+    public Float getOfferPrice() {
+        return offerPrice;
+    }
+
+    public void setOfferPrice(Float offerPrice) {
+        this.offerPrice = offerPrice;
+    }
+
+    public Float getOffer() {
+        return offer;
+    }
+
+    public void setOffer(Float offer) {
+        this.offer = offer;
+    }
+
+    public String getBatchSize() {
+        return batchSize;
+    }
+
+    public void setBatchSize(String batchSize) {
+        this.batchSize = batchSize;
+    }
+
+    public Boolean getAvailable() {
+        return isAvailable;
+    }
+
+    public void setAvailable(Boolean available) {
+        isAvailable = available;
     }
 }

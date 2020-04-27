@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingVertical="20dp"
+    android:paddingTop="20dp"
     android:background="@color/white">
     <androidx.cardview.widget.CardView
         android:id="@+id/image_card"
@@ -30,13 +30,53 @@
         android:layout_toRightOf="@id/image_card"
         android:textSize="22sp"
         android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/offer_price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="price"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimary"
+        android:layout_toRightOf="@id/image_card"
+        android:layout_below="@+id/name"/>
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="price"
-        android:layout_toRightOf="@id/image_card"
-        android:layout_below="@+id/name"/>
+        android:text="345"
+        android:textSize="12sp"
+        android:layout_marginLeft="5dp"
+        android:layout_toRightOf="@id/offer_price"
+        android:layout_alignBottom="@id/offer_price"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/unit"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/offer_price"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="2dp"
+        android:textSize="12sp"
+        android:text="2 kg"/>
+    <TextView
+        android:id="@+id/min"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/quantity"
+        android:layout_alignLeft="@id/quantity"
+        android:text="min: 38"
+        android:textSize="11sp"
+        android:layout_marginLeft="2dp"/>
+    <TextView
+        android:id="@+id/max"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/quantity"
+        android:layout_alignRight="@id/quantity"
+        android:textSize="11sp"
+        android:text="max: 38"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -45,21 +85,34 @@
         android:hint="@string/change_quantity_quantity_hint"
         android:maxLength="3"
         android:textSize="16sp"
-        android:layout_marginTop="15dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="15dp"
         android:layout_toRightOf="@+id/image_card"
         android:layout_alignBottom="@+id/image_card"
         android:backgroundTint="@color/colorPrimary"/>
-    <Button
-        android:id="@+id/done"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="15dp"
-        android:layout_below="@id/image_card"
-        android:text="@string/change_quantity_sheet_done"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
-        android:textColor="@color/white"
-        android:background="@drawable/back_2"/>
+        android:layout_marginBottom="20dp"
+        android:layout_marginHorizontal="15dp"
+        android:layout_below="@id/image_card">
+        <Button
+            android:id="@+id/remove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/change_quantity_remove"
+            android:textColor="#FF0000"
+            android:background="@drawable/remove"/>
+        <Button
+            android:id="@+id/update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/change_quantity_sheet_update"
+            android:textColor="@color/white"
+            android:background="@drawable/done"/>
+    </LinearLayout>
+
 
 </RelativeLayout>
