@@ -100,8 +100,8 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
         Crop crop=crops.get(position);
 
         holder.name.setText(crop.getName().substring(0,1).toUpperCase()+crop.getName().substring(1).toLowerCase());
-        holder.price.setText(context.getResources().getString(R.string.Rs)+" "+Float.toString(crop.getPrice()));
-        holder.unit.setText(" per "+crop.getUnit());
+        holder.price.setText(context.getResources().getString(R.string.Rs)+" "+Float.toString(crop.getOfferPrice()));
+        holder.unit.setText("/"+crop.getBatchSize()+" "+crop.getUnit());
         if(crop.getQuantity()>0){
             holder.count.setText(Integer.toString(crop.getQuantity()));
             holder.count.setVisibility(View.VISIBLE);
@@ -112,7 +112,7 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
             holder.minus.setEnabled(false);
             holder.minus.setAlpha(0.3f);
         }
-        Float totalPrice=crop.getQuantity()*crop.getPrice();
+        Float totalPrice=crop.getQuantity()*crop.getOfferPrice();
         holder.totalPrice.setText(context.getResources().getString(R.string.Rs)+" "+Float.toString(totalPrice));
 
         if(!isClickAble){
@@ -120,6 +120,16 @@ public class CartItemAdapter extends RecyclerView.Adapter<CartItemAdapter.CartIt
             holder.minus.setAlpha(0.3f);
             holder.plus.setEnabled(false);
             holder.plus.setAlpha(0.3f);
+        }
+        if(crop.getQuantity()==crop.getMaxQuantity()){
+            holder.plus.setAlpha(0.3f);
+        }else{
+            holder.plus.setAlpha(1f);
+        }
+        if(crop.getQuantity()==crop.getMinQuantity()){
+            holder.minus.setAlpha(0.3f);
+        }else{
+            holder.minus.setAlpha(1f);
         }
     }
     @Override

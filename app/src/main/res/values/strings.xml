@@ -14,8 +14,10 @@
     <string name="add_new_address">Add new Address</string>
     <string name="place_request">Place Request</string>
     <string name="cart">Cart</string>
+    <string name="cart_minimum_message">Minimum limit reached</string>
+    <string name="cart_maximum_message">Maximum limit reached</string>
     <string name="coupon_available">Coupon Available</string>
-    <string name="applied">Applied</string>
+    <string name="applied">Apply</string>
     <string name="coupon">Coupon</string>
     <string name="tax_and_charges">Tax and Charges</string>
     <string name="transportaion_and_labour">Transportation and Labour</string>

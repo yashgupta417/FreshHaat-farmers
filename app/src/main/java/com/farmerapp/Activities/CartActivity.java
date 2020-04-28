@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.farmerapp.Adapters.CartItemAdapter;
 import com.farmerapp.Data.Cart;
@@ -100,7 +101,7 @@ public class CartActivity extends AppCompatActivity {
     public Float getTotalPrice(ArrayList<Crop> crops){
         Float totalPrice=0f;
         for(Crop crop:crops){
-            totalPrice+=crop.getQuantity()*crop.getPrice();
+            totalPrice+=crop.getQuantity()*crop.getOfferPrice();
         }
         return totalPrice;
     }
@@ -144,6 +145,10 @@ public class CartActivity extends AppCompatActivity {
                 return;
             }
             Crop crop=adapter.crops.get(position);
+            if(crop.getQuantity()==crop.getMaxQuantity()){
+                Toast.makeText(CartActivity.this, getResources().getString(R.string.cart_maximum_message), Toast.LENGTH_SHORT).show();
+                return;
+            }
             crop.setQuantity(crop.getQuantity()+1);
             adapter.isClickAble=false;
             adapter.notifyDataSetChanged();
@@ -161,6 +166,10 @@ public class CartActivity extends AppCompatActivity {
                 return;
             }
             Crop crop=adapter.crops.get(position);
+            if(crop.getQuantity()==crop.getMinQuantity()){
+                Toast.makeText(CartActivity.this, getResources().getString(R.string.cart_minimum_message), Toast.LENGTH_SHORT).show();
+                return;
+            }
             if(crop.getQuantity()>0) {
                 crop.setQuantity(crop.getQuantity() - 1);
                 adapter.isClickAble=false;

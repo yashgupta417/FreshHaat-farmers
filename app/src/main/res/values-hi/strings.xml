@@ -14,8 +14,10 @@
     <string name="add_new_address">नया पता जोड़ें</string>
     <string name="place_request">बुक करे</string>
     <string name="cart">कार्ट</string>
+    <string name="cart_minimum_message">न्यूनतम सीमा</string>
+    <string name="cart_maximum_message">अधिकतम सीमा </string>
     <string name="coupon_available">कूपन उपलब्ध</string>
-    <string name="applied">लागू</string>
+    <string name="applied">अप्लाई</string>
     <string name="coupon">कूपन</string>
     <string name="tax_and_charges">कर और शुल्क</string>
     <string name="transportaion_and_labour">परिवहन और श्रम</string>
