@@ -43,8 +43,12 @@
     <string name="request_sell_request">Sell Request</string>
     <string name="request_slot">Slot :</string>
     <string name="request_item">Item</string>
-    <string name="request_units">Units</string>
+    <string name="request_quantity">Quantity</string>
     <string name="request_price">Price</string>
+    <string name="request_cancel_title">Cancel Request</string>
+    <string name="request_cancel_message">Are you sure you want to cancel the Request?</string>
+    <string name="request_cancel_positive">Yes</string>
+    <string name="request_cancel_negative">No</string>
     <string name="request_call_executive">You can call our executive for further information</string>
     <string name="request_cancel_request">Cancel Request</string>
     <string name="request_cancelled">Cancelled</string>

@@ -43,8 +43,12 @@
     <string name="request_sell_request">सेल्ल रिक्वेस्ट्स</string>
     <string name="request_slot">स्लॉट :</string>
     <string name="request_item">आइटम</string>
-    <string name="request_units">यूनिट्स</string>
+    <string name="request_quantity">मात्रा</string>
     <string name="request_price">कीमत</string>
+    <string name="request_cancel_title">कैंसिल रिक्वेस्ट</string>
+    <string name="request_cancel_message">क्या आप वाकई रिक्वेस्ट को रद्द करना चाहते हैं?</string>
+    <string name="request_cancel_positive">हाँ</string>
+    <string name="request_cancel_negative">नहीं</string>
     <string name="request_call_executive">अधिक जानकारी के लिए आप हमारी कार्यकारिणी को कॉल कर सकते हैं</string>
     <string name="request_cancel_request">रद्द करें</string>
     <string name="request_cancelled">रद्द</string>

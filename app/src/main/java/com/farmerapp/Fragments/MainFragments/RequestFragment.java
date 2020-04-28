@@ -43,6 +43,16 @@ public class RequestFragment extends Fragment {
         load=v.findViewById(R.id.load);
         noRequestsText=v.findViewById(R.id.no_requests);
         viewModel= ViewModelProviders.of(this).get(MainViewModel.class);
+        return v;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getRequests();
+    }
+
+    public void getRequests(){
         viewModel.getAllRequests().observe(this, new Observer<List<Order>>() {
             @Override
             public void onChanged(List<Order> orders) {
@@ -50,7 +60,6 @@ public class RequestFragment extends Fragment {
                 setUpRecyclerView((ArrayList<Order>) orders);
             }
         });
-        return v;
     }
     public void setUpRecyclerView(ArrayList<Order> requests){
         if(requests.size()==0){

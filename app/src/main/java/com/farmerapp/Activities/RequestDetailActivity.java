@@ -1,5 +1,6 @@
 package com.farmerapp.Activities;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -100,7 +102,7 @@ public class RequestDetailActivity extends AppCompatActivity {
         button.setEnabled(buttonEnabled);
     }
     public static void setStatusColour(TextView textView, String status, Context context){
-        if(status.equals("confirmed")){
+        if(status.equals("confirmed")|| status.equals("accepted")){
             textView.setTextColor(context.getResources().getColor(R.color.confirmed));
         }else if(status.equals("pending")){
             textView.setTextColor(context.getResources().getColor(R.color.pending));
@@ -112,7 +114,7 @@ public class RequestDetailActivity extends AppCompatActivity {
             textView.setTextColor(context.getResources().getColor(R.color.rejected));
         }
     }
-    public void cancelRequest(View view){
+    public void cancelRequest(){
         if(!CheckInternet.isConnected(this)){
             Toast.makeText(this, "No Internet Connection", Toast.LENGTH_SHORT).show();
             return;
@@ -134,6 +136,25 @@ public class RequestDetailActivity extends AppCompatActivity {
             }
         });
 
+    }
+    public void showConfirmationDialog(View view){
+        new AlertDialog.Builder(this)
+                .setTitle(getResources().getString(R.string.request_cancel_title))
+                .setMessage(getResources().getString(R.string.request_cancel_message))
+                .setCancelable(false)
+                .setPositiveButton(getResources().getString(R.string.request_cancel_positive), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        cancelRequest();
+                    }
+                })
+                .setNegativeButton(getResources().getString(R.string.request_cancel_negative), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
     }
     public void buttonWork(Boolean bool,Float alpha,String text){
         button.setEnabled(bool);

@@ -32,11 +32,11 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
         mlistener=listener;
     }
     public static class OrderItemViewHolder extends RecyclerView.ViewHolder{
-        TextView item,units,price;
+        TextView item,quantity,price;
         public OrderItemViewHolder(@NonNull View itemView,final onItemClickListener listener){
             super(itemView);
             item=itemView.findViewById(R.id.item);
-            units=itemView.findViewById(R.id.units);
+            quantity=itemView.findViewById(R.id.quantity);
             price=itemView.findViewById(R.id.price);
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
@@ -64,8 +64,8 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
     public void onBindViewHolder(@NonNull OrderItemViewHolder holder, int position) {
         Crop product=products.get(position);
         holder.item.setText(product.getName().substring(0,1).toUpperCase()+product.getName().substring(1).toLowerCase());
-        holder.units.setText(Integer.toString(product.getQuantity()));
-        holder.price.setText(Float.toString(product.getQuantity()*product.getPrice()));
+        holder.quantity.setText(Integer.toString(product.getQuantity())+"x"+product.getBatchSize()+" "+product.getUnit());
+        holder.price.setText(context.getResources().getString(R.string.Rs)+Float.toString(product.getQuantity()*product.getPrice()));
     }
     @Override
     public int getItemViewType(int position) {

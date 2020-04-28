@@ -13,12 +13,12 @@
         android:textSize="16sp"
         android:textColor="#585858"/>
     <TextView
-        android:id="@+id/units"
+        android:id="@+id/quantity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Units"
         android:layout_centerHorizontal="true"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:textColor="@color/grey"/>
     <TextView
         android:id="@+id/price"
@@ -26,6 +26,6 @@
         android:layout_height="wrap_content"
         android:text="Price"
         android:layout_alignParentRight="true"
-        android:textSize="15sp"
+        android:textSize="14sp"
         android:textColor="@color/grey"/>
 </RelativeLayout>
