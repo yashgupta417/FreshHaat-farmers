@@ -61,7 +61,7 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Se
     public void onBindViewHolder(@NonNull SearchItemViewHolder holder, int position) {
         Crop product=products.get(position);
         holder.name.setText(product.getName().substring(0,1).toUpperCase()+product.getName().substring(1).toLowerCase());
-        holder.price.setText(context.getResources().getString(R.string.Rs)+" "+Float.toString(product.getPrice())+" per "+product.getUnit());
+        holder.price.setText(context.getResources().getString(R.string.Rs)+" "+Float.toString(product.getOfferPrice())+"/"+product.getBatchSize()+" "+product.getUnit());
     }
     @Override
     public int getItemViewType(int position) {

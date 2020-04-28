@@ -65,7 +65,7 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
         Crop product=products.get(position);
         holder.item.setText(product.getName().substring(0,1).toUpperCase()+product.getName().substring(1).toLowerCase());
         holder.quantity.setText(Integer.toString(product.getQuantity())+"x"+product.getBatchSize()+" "+product.getUnit());
-        holder.price.setText(context.getResources().getString(R.string.Rs)+Float.toString(product.getQuantity()*product.getPrice()));
+        holder.price.setText(context.getResources().getString(R.string.Rs)+Float.toString(product.getQuantity()*product.getOfferPrice()));
     }
     @Override
     public int getItemViewType(int position) {
