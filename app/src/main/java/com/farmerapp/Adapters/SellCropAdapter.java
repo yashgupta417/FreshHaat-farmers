@@ -16,6 +16,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.farmerapp.Activities.LanguageActivity;
 import com.farmerapp.Data.Crop;
 import com.example.farmerapp.R;
 import com.farmerapp.Utils.LocalCart;
@@ -201,7 +202,11 @@ public class SellCropAdapter extends RecyclerView.Adapter<SellCropAdapter.SellCr
             Glide.with(activity).load(crop.getImage()).into(holder.image);
         }
 
-        holder.name.setText(crop.getName().substring(0,1).toUpperCase()+crop.getName().substring(1).toLowerCase());
+        String locale= LanguageActivity.getSavedLocale(activity);
+        if(locale!=null && locale.equals("hi"))
+            holder.name.setText(crop.getNameHindi());
+        else
+            holder.name.setText(crop.getName().substring(0,1).toUpperCase()+crop.getName().substring(1).toLowerCase());
         holder.price.setText(activity.getResources().getString(R.string.Rs)+crop.getPrice());
         holder.price.setPaintFlags(holder.price.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         holder.offerPrice.setText(activity.getResources().getString(R.string.Rs)+crop.getOfferPrice());

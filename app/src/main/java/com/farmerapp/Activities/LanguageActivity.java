@@ -99,4 +99,9 @@ public class LanguageActivity extends AppCompatActivity {
             activity.startActivity(intent);
         }
     }
+    public static String getSavedLocale(Context context){
+        SharedPreferences preferences=context.getSharedPreferences(context.getPackageName(),Context.MODE_PRIVATE);
+        String landCode=preferences.getString("langCode",null);
+        return landCode;
+    }
 }

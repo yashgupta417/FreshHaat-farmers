@@ -13,6 +13,9 @@ public class Crop {
     @SerializedName("name")
     @Expose
     private String name;
+    @SerializedName("nameHindi")
+    @Expose
+    private String nameHindi;
     @SerializedName("image")
     @Expose
     private String image;
@@ -161,5 +164,13 @@ public class Crop {
 
     public void setAvailable(Boolean available) {
         isAvailable = available;
+    }
+
+    public String getNameHindi() {
+        return nameHindi;
+    }
+
+    public void setNameHindi(String nameHindi) {
+        this.nameHindi = nameHindi;
     }
 }

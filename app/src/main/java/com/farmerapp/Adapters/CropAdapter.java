@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.farmerapp.R;
+import com.farmerapp.Activities.LanguageActivity;
 import com.farmerapp.Data.Crop;
 
 import java.util.ArrayList;
@@ -91,7 +92,11 @@ public class CropAdapter extends RecyclerView.Adapter<CropAdapter.CropViewHolder
            holder.tick.setVisibility(View.INVISIBLE);
         }
         Glide.with(context).load(crop.getImage()).into(holder.cropImage);
-        holder.cropName.setText(crop.getName().substring(0,1).toUpperCase()+crop.getName().substring(1).toLowerCase());
+        String locale= LanguageActivity.getSavedLocale(context);
+        if(locale!=null && locale.equals("hi"))
+            holder.cropName.setText(crop.getNameHindi());
+        else
+            holder.cropName.setText(crop.getName().substring(0,1).toUpperCase()+crop.getName().substring(1).toLowerCase());
     }
 
     @Override

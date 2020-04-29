@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.farmerapp.Activities.LanguageActivity;
 import com.farmerapp.Data.Crop;
 import com.example.farmerapp.R;
 
@@ -63,7 +64,11 @@ public class OrderItemAdapter extends RecyclerView.Adapter<OrderItemAdapter.Orde
     @Override
     public void onBindViewHolder(@NonNull OrderItemViewHolder holder, int position) {
         Crop product=products.get(position);
-        holder.item.setText(product.getName().substring(0,1).toUpperCase()+product.getName().substring(1).toLowerCase());
+        String locale= LanguageActivity.getSavedLocale(context);
+        if(locale!=null && locale.equals("hi"))
+            holder.item.setText(product.getNameHindi());
+        else
+            holder.item.setText(product.getName().substring(0,1).toUpperCase()+product.getName().substring(1).toLowerCase());
         holder.quantity.setText(Integer.toString(product.getQuantity())+"x"+product.getBatchSize()+" "+product.getUnit());
         holder.price.setText(context.getResources().getString(R.string.Rs)+Float.toString(product.getQuantity()*product.getOfferPrice()));
     }

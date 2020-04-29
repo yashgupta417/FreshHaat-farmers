@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.farmerapp.Activities.LanguageActivity;
 import com.farmerapp.Data.Crop;
 import com.example.farmerapp.R;
 
@@ -60,7 +61,11 @@ public class SearchItemAdapter extends RecyclerView.Adapter<SearchItemAdapter.Se
     @Override
     public void onBindViewHolder(@NonNull SearchItemViewHolder holder, int position) {
         Crop product=products.get(position);
-        holder.name.setText(product.getName().substring(0,1).toUpperCase()+product.getName().substring(1).toLowerCase());
+        String locale= LanguageActivity.getSavedLocale(context);
+        if(locale!=null && locale.equals("hi"))
+            holder.name.setText(product.getNameHindi());
+        else
+            holder.name.setText(product.getName().substring(0,1).toUpperCase()+product.getName().substring(1).toLowerCase());
         holder.price.setText(context.getResources().getString(R.string.Rs)+" "+Float.toString(product.getOfferPrice())+"/"+product.getBatchSize()+" "+product.getUnit());
     }
     @Override
