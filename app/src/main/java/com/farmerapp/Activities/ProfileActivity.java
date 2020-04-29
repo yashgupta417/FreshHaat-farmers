@@ -42,7 +42,7 @@ public class ProfileActivity extends AppCompatActivity {
     CircleImageView imageView;
     TextView mobileTextView;
     EditText nameEdittext,alternateMobileEdittext,kycEdittext,addressEdittext;
-    ImageView edit_image,edit_alternateMob,edit_kyc,edit_address;
+    ImageView edit_image,edit_alternateMob,edit_kyc,edit_address,edit_name;
     ProfileViewModel viewModel;
     ConstraintLayout body;
     GifImageView load;
@@ -64,6 +64,7 @@ public class ProfileActivity extends AppCompatActivity {
         addressEdittext=findViewById(R.id.address);
         load=findViewById(R.id.load);
         body=findViewById(R.id.body_parent);
+        edit_name=findViewById(R.id.edit_name);
         edit_image=findViewById(R.id.edit_image);
         edit_alternateMob=findViewById(R.id.edit_alternate_mob);
         edit_kyc=findViewById(R.id.edit_kyc);
@@ -111,6 +112,12 @@ public class ProfileActivity extends AppCompatActivity {
         finish();
     }
     public void listenEditRequest(){
+        edit_name.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getEditextInFocus(nameEdittext);
+            }
+        });
         edit_alternateMob.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,6 +172,23 @@ public class ProfileActivity extends AppCompatActivity {
         imm.showSoftInput(editText, 0);
     }
     public void activateEditingListeners(){
+        nameEdittext.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                isEdited = true;
+                farmer.setName(s.toString().trim());
+            }
+        });
         alternateMobileEdittext.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -178,8 +202,9 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                isEdited=true;
+                isEdited = true;
                 farmer.setAlternateMob(s.toString());
+
             }
         });
         kycEdittext.addTextChangedListener(new TextWatcher() {
@@ -195,9 +220,8 @@ public class ProfileActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable s) {
-                isEdited=true;
+                isEdited = true;
                 farmer.setKYC(s.toString());
-
             }
         });
         addressEdittext.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -225,6 +249,8 @@ public class ProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "No changes to apply", Toast.LENGTH_SHORT).show();
             return;
         }
+        if(!validate())
+            return;
         updateSaveButtonUI(false,0.3f,getResources().getString(R.string.profile_saving));
         viewModel.postChanges(farmer).observe(this, new Observer<Integer>() {
             @Override
@@ -239,6 +265,17 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public boolean validate(){
+        if(farmer.getName().isEmpty()){
+            Toast.makeText(this, "Name can't be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if((farmer.getAddressLine1()+farmer.getAddressLine2()).isEmpty()){
+            Toast.makeText(this, "Address can't be empty", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
