@@ -13,13 +13,16 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
+        <activity android:name="com.farmerapp.Activities.PaymentDetailActivity"></activity>
         <activity android:name="com.farmerapp.Activities.SearchActivity" />
         <activity android:name="com.farmerapp.Activities.RequestDetailActivity" />
         <activity android:name="com.farmerapp.Activities.BookSlotActivity" />
         <activity android:name="com.farmerapp.Activities.CartActivity" />
         <activity android:name="com.farmerapp.Activities.SellActivity" />
         <activity android:name="com.farmerapp.Activities.ProfileActivity" />
-        <activity android:name="com.farmerapp.Activities.LanguageActivity" android:screenOrientation="portrait"></activity>
+        <activity
+            android:name="com.farmerapp.Activities.LanguageActivity"
+            android:screenOrientation="portrait" />
         <activity android:name="com.farmerapp.Activities.MainActivity" />
         <activity
             android:name="com.farmerapp.Activities.SplashActivity"
@@ -36,7 +39,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.farmerapp.Activities.RegisterDetailsActivity"
-            android:screenOrientation="portrait">  </activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.farmerapp.Activities.VerifyOTPActivity"
             android:screenOrientation="portrait" />
@@ -44,9 +47,11 @@
             android:name="com.farmerapp.Activities.LoginActivity"
             android:screenOrientation="portrait" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
 </manifest>

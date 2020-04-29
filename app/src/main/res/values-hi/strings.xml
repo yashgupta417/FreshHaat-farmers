@@ -1,4 +1,12 @@
 <resources>
+    <string name="pay_settings">सेटिंग्स </string>
+    <string name="pd_save">सेव डिटेल्स</string>
+    <string name="pd_ifsc">IFSC कोड</string>
+    <string name="pd_acc_hol_name">खाताधारक का नाम</string>
+    <string name="pd_acc_no">खाता नंबर</string>
+    <string name="pd_bank_details">बैंक जानकारी</string>
+    <string name="pd_verify">वेरीफाई</string>
+    <string name="pd_title">पेमेंट डिटेल्स</string>
     <string name="empty_cart">आपकी कार्ट खाली है</string>
     <string name="app_name">FreshHut</string>
     <string name="Rs">\u20B9</string>
