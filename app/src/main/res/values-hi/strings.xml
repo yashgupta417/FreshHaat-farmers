@@ -1,4 +1,8 @@
 <resources>
+    <string name="cc_address_">पता</string>
+    <string name="cc_phone">फ़ोन नंबर</string>
+    <string name="cc_center_id">सेण्टर ID</string>
+    <string name="cc_title">निकटतम संग्रह केंद्र</string>
     <string name="pay_settings">सेटिंग्स </string>
     <string name="pd_save">सेव डिटेल्स</string>
     <string name="pd_ifsc">IFSC कोड</string>

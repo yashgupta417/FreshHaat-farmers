@@ -13,11 +13,13 @@ import androidx.recyclerview.widget.SimpleItemAnimator;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.farmerapp.Activities.CartActivity;
+import com.farmerapp.Activities.CollectionCentreActivity;
 import com.farmerapp.Activities.MainActivity;
 import com.farmerapp.Activities.SearchActivity;
 import com.farmerapp.Activities.SellActivity;
@@ -48,6 +50,7 @@ public class HomeFragment extends Fragment {
     TextView suggestText,badge;
     RelativeLayout vegOfferRl,fruitOfferRl,cropOfferRl;
     LinearLayout searchParent;
+    ImageView locationButton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_home, container, false);
@@ -59,6 +62,7 @@ public class HomeFragment extends Fragment {
         suggestText=v.findViewById(R.id.suggest_text);
         suggestText.setVisibility(View.GONE);
         searchParent=v.findViewById(R.id.search_ll);
+        locationButton=v.findViewById(R.id.location_button);
         setClickListeners(v);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false));
         recyclerView.setHasFixedSize(true);
@@ -78,7 +82,10 @@ public class HomeFragment extends Fragment {
         MainActivity.setTitle("");
         return v;
     }
-
+    public void goToCollectionCentreActivity(){
+     Intent intent=new Intent(getActivity(), CollectionCentreActivity.class);
+     getActivity().startActivity(intent);
+    }
     public void activateAdapter(){
         products=LocalCart.syncQuantities(products,getActivity().getApplication());
         adapter=new SellCropAdapter(products,getActivity(),SellCropAdapter.NORMAL);
@@ -141,6 +148,12 @@ public class HomeFragment extends Fragment {
      sellVegetablesRL=v.findViewById(R.id.sell_vegetables);
      vegOfferRl=v.findViewById(R.id.veg_offer);
      fruitOfferRl=v.findViewById(R.id.fruit_offer);
+     locationButton.setOnClickListener(new View.OnClickListener() {
+         @Override
+         public void onClick(View v) {
+             goToCollectionCentreActivity();
+         }
+     });
      vegOfferRl.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {

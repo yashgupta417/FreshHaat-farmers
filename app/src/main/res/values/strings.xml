@@ -1,4 +1,8 @@
 <resources>
+    <string name="cc_address_">Address</string>
+    <string name="cc_phone">Phone Number</string>
+    <string name="cc_center_id">Center ID</string>
+    <string name="cc_title">Nearest Collection Center</string>
     <string name="pay_settings">Settings</string>
     <string name="pd_save">Save Details</string>
     <string name="pd_ifsc">IFSC Code</string>

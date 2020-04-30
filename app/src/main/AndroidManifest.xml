@@ -13,7 +13,11 @@
         android:theme="@style/Theme.AppCompat.DayNight.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:ignore="LockedOrientationActivity">
-        <activity android:name="com.farmerapp.Activities.PaymentDetailActivity"></activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCepulR-9Z9M5eI_-V6ckqFqdDm_eOlxtA" />
+        <activity android:name="com.farmerapp.Activities.CollectionCentreActivity"></activity>
+        <activity android:name="com.farmerapp.Activities.PaymentDetailActivity" />
         <activity android:name="com.farmerapp.Activities.SearchActivity" />
         <activity android:name="com.farmerapp.Activities.RequestDetailActivity" />
         <activity android:name="com.farmerapp.Activities.BookSlotActivity" />
@@ -47,11 +51,11 @@
             android:name="com.farmerapp.Activities.LoginActivity"
             android:screenOrientation="portrait" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>
