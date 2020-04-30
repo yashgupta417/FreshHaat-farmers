@@ -39,9 +39,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
-        android:layout_above="@id/place_request_card"
         android:requiresFadingEdge="vertical"
-        android:fadingEdgeLength="10dp">
+        android:fadingEdgeLength="60dp">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -178,7 +177,7 @@
                 android:layout_marginHorizontal="30dp"
                 android:layout_below="@+id/manual_card"
                 android:layout_marginTop="20dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="90dp"
                 app:cardCornerRadius="30dp"
                 app:cardElevation="4dp">
                 <RelativeLayout

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.SimpleItemAnimator;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -71,7 +72,18 @@ public class CartActivity extends AppCompatActivity {
                     handleVisibility(View.VISIBLE,View.GONE,View.GONE);
             }
         });
-
+        startTimer();
+    }
+    private Integer Connection_Time_Out=10*60*1000;
+    public void startTimer(){
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                Intent intent=new Intent(getApplication(),MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        }, Connection_Time_Out);
     }
     public void handleVisibility(Integer emptyCartVisibility,Integer bodyVisibility,Integer loadVisibility){
         emptyCartRL.setVisibility(emptyCartVisibility);

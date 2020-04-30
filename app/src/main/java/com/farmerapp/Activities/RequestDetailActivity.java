@@ -126,9 +126,11 @@ public class RequestDetailActivity extends AppCompatActivity {
                 if(integer==1){
                     Toast.makeText(RequestDetailActivity.this, "Request Cancelled Successfully", Toast.LENGTH_SHORT).show();
                     buttonWork(false,0.3f,getResources().getString(R.string.request_cancel_request));
-                    String cancelled=getResources().getString(R.string.request_cancelled);
+                    String cancelled="Cancelled";
                     requestStatus.setText(cancelled);
+                    slotStatus.setText(cancelled);
                     setStatusColour(requestStatus,cancelled.toLowerCase(),getApplication());
+                    setStatusColour(slotStatus,cancelled.toLowerCase(),getApplication());
                 }else if(integer==-1){
                     Toast.makeText(RequestDetailActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                     buttonWork(true,1f,getResources().getString(R.string.request_cancel_request));

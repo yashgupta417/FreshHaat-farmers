@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.SimpleItemAnimator;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -80,6 +81,18 @@ public class BookSlotActivity extends AppCompatActivity implements DatePickerDia
         Calendar c=Calendar.getInstance();
         setUpManualRecyclerView(c);
         setUpPickupRecyclerView(c);
+        startTimer();
+    }
+    private Integer Connection_Time_Out=10*60*1000;
+    public void startTimer(){
+        new Handler().postDelayed(new Runnable(){
+            @Override
+            public void run(){
+                Intent intent=new Intent(getApplication(),MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        }, Connection_Time_Out);
     }
     public void updateLoadUI(Integer loadVisibility,Float alpha,Boolean enabled){
         load.setVisibility(loadVisibility);
