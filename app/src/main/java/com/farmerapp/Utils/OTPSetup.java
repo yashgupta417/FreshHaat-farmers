@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.EditText;
@@ -21,7 +22,16 @@ public class OTPSetup {
         this.activity=activity;
         otp=new MutableLiveData<String>();
     }
-
+    public void setOTP(String s){
+        if(s==null || s.length()!=5)
+            return;
+        otp1.setText(s.substring(0,1));
+        otp2.setText(s.substring(1,2));
+        otp3.setText(s.substring(2,3));
+        otp4.setText(s.substring(3,4));
+        otp5.setText(s.substring(4,5));
+        otp5.setSelection(1);
+    }
     public void setup(){
         otp1=activity.findViewById(R.id.otp1);
         otp2=activity.findViewById(R.id.otp2);

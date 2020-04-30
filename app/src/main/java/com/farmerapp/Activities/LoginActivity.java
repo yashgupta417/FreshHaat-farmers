@@ -1,12 +1,16 @@
 package com.farmerapp.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         loginButton=findViewById(R.id.login);
         buttonEnabling();
     }
-    public void login(View view){
+    public void login(){
         updateUI(false,0.3f);
         hideKeyboard();
         if(CheckInternet.isConnected(this)) {
@@ -46,6 +50,29 @@ public class LoginActivity extends AppCompatActivity {
         else {
             showNetworkError();
             updateUI(true,1f);
+        }
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 11) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                login();
+            }else{
+                login();
+            }
+        }
+    }
+
+    public void getSMSPermissionAndLogin(View view) {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(Manifest.permission.READ_SMS) != PackageManager.PERMISSION_GRANTED || checkSelfPermission(Manifest.permission.RECEIVE_SMS)!=PackageManager.PERMISSION_GRANTED){
+                requestPermissions(new String[]{Manifest.permission.READ_SMS,Manifest.permission.RECEIVE_SMS}, 11);
+            } else {
+                login();
+            }
+        } else {
+            login();
         }
     }
     public void showNetworkError(){

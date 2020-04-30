@@ -81,6 +81,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         snackbar=Snackbar.make(drawer,getResources().getString(R.string.no_gps_message),Snackbar.LENGTH_INDEFINITE);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(gpsReceiver);
+    }
+
     public static void setTitle(String s){
         title.setText(s);
     }

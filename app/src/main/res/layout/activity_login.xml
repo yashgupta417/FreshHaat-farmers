@@ -63,7 +63,7 @@
         android:alpha="0.3"
         android:text="@string/login_or_register"
         android:textColor="@color/white"
-        android:onClick="login"
+        android:onClick="getSMSPermissionAndLogin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
