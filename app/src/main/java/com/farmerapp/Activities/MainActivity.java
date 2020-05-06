@@ -107,12 +107,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             case R.id.requests:fragment=new RequestFragment();break;
             case R.id.payments:fragment=new PaymentFragment();break;
             case R.id.change_language:changeLanguage();break;
+            case R.id.about:goToAbout();break;
             case R.id.logout:logout();break;
         }
         if(fragment!=null)
             getSupportFragmentManager().beginTransaction().replace(R.id.framelayout,fragment).commit();
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+    public void goToAbout(){
+        Intent intent=new Intent(this, AboutActivity.class);
+        startActivity(intent);
     }
     public void changeLanguage(){
         Intent intent=new Intent(this, LanguageActivity.class);
