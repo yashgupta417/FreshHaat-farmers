@@ -8,9 +8,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
 import com.example.farmerapp.R;
 import com.farmerapp.Utils.LocalCart;
+
+import java.util.ArrayList;
 
 public class SplashActivity extends AppCompatActivity {
     public static String IS_LOGGED_IN="is_logged_in";

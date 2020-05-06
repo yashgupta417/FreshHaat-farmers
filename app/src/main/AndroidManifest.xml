@@ -54,19 +54,11 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCepulR-9Z9M5eI_-V6ckqFqdDm_eOlxtA" />
 
-        <receiver android:name="com.farmerapp.Utils.SMSReceiver">
-            <intent-filter>
-                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
-            </intent-filter>
-        </receiver>
     </application>
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_SMS" />
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
-
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>

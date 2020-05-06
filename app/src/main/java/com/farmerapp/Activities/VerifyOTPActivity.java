@@ -1,23 +1,13 @@
 package com.farmerapp.Activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
-import android.provider.Telephony;
-import android.telephony.SmsManager;
-import android.telephony.TelephonyManager;
-import android.telephony.TelephonyScanManager;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -29,16 +19,9 @@ import com.example.farmerapp.R;
 import com.farmerapp.Repositories.VerifyOTPRepository;
 import com.farmerapp.Utils.CheckInternet;
 import com.farmerapp.Utils.OTPSetup;
-import com.farmerapp.Utils.SMSReceiver;
 import com.farmerapp.ViewModels.VerifyOTPViewModel;
-import com.google.android.gms.auth.api.phone.SmsRetriever;
-import com.google.android.gms.auth.api.phone.SmsRetrieverClient;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.security.Provider;
 import java.util.Locale;
 
 public class VerifyOTPActivity extends AppCompatActivity {
@@ -90,18 +73,8 @@ public class VerifyOTPActivity extends AppCompatActivity {
                 }
             }
         });
-        activateSMSListner();
     }
 
-    public void activateSMSListner(){
-        SMSReceiver.setOtpReceivedListener(new SMSReceiver.OnOTPReceivedListener() {
-            @Override
-            public void messageReceived(String messageText){
-                if(otpSetup!=null)
-                    otpSetup.setOTP(messageText);
-            }
-        });
-    }
 
     public void updateTimeTextView(Long milliLeft){
         int mins=(int) (milliLeft/1000)/60;

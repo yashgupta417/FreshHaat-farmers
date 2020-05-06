@@ -23,13 +23,13 @@ public class PaymentFragment extends Fragment {
         View v =inflater.inflate(R.layout.fragment_payment, container, false);
         MainActivity.hideLocation();
         MainActivity.setTitle(getResources().getString(R.string.payments));
-        settings=v.findViewById(R.id.settings);
+        /*settings=v.findViewById(R.id.settings);
         settings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToPaymentSettings();
             }
-        });
+        });*/
         return v;
     }
     public void goToPaymentSettings(){

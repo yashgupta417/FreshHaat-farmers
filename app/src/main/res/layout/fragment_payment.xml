@@ -15,6 +15,7 @@
             android:textSize="16sp"
             android:id="@+id/no_requests"
             android:layout_centerInParent="true"/>
+        <!--
         <Button
             android:id="@+id/settings"
             android:layout_width="wrap_content"
@@ -26,6 +27,6 @@
             android:textColor="@color/white"
             android:paddingHorizontal="40dp"
             android:paddingVertical="5dp"
-            android:background="@drawable/pay_settings_back"/>
+            android:background="@drawable/pay_settings_back"/>-->
     </RelativeLayout>
 </FrameLayout>
