@@ -12,7 +12,7 @@
     <string name="pd_verify">Verify</string>
     <string name="pd_title">Payment Details</string>
     <string name="empty_cart">Your cart is Empty</string>
-    <string name="app_name">FreshHut</string>
+    <string name="app_name">FreshOk Kisan</string>
     <string name="Rs">\u20B9</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -74,11 +74,11 @@
     <string name="sell_query_hint">Search</string>
     <string name="sell_fruits">Sell Fruits</string>
     <string name="sell_vegetables">Sell Vegetables</string>
-    <string name="splash_title">FRESH HUT</string>
+    <string name="splash_title">FRESHOk</string>
     <string name="otp_resend">Resend OTP</string>
     <string name="otp_verify">Verify</string>
     <string name="otp_title_part_1">FRESH</string>
-    <string name="otp_title_part_2">HUT</string>
+    <string name="otp_title_part_2">OK</string>
     <string name="address_sheet_location_empty">Your Location is Unavailable</string>
     <string name="address_sheet_current_location">Current Location</string>
     <string name="address_sheet_address_line_1_hint">Address Line 1</string>
