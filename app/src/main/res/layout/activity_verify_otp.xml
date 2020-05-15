@@ -20,36 +20,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/banner"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15"
+        app:layout_constraintVertical_bias="0.13"
         >
-        <TextView
+        <androidx.cardview.widget.CardView
+            android:layout_alignParentTop="true"
+            android:id="@+id/brand_logo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/otp_title_part_1"
-            android:textColor="@color/colorPrimary"
-            android:textSize="50dp"
-            android:shadowColor="#29000000"
-            android:shadowDy="3"
-            android:shadowRadius="6"/>
+            android:layout_centerHorizontal="true"
+            app:cardCornerRadius="10dp">
+            <ImageView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/logo"/>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/brand_name"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_below="@id/brand_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="2dp"
+            android:fontFamily="sans-serif-medium"
+            android:includeFontPadding="false"
+            android:text="freshOk"
+            android:textColor="#22d4b4"
+            android:textSize="35dp" />
         <TextView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/otp_title_part_2"
-            android:textColor="@color/grey"
-            android:textSize="50dp"
-            android:shadowColor="#29000000"
-            android:shadowDy="3"
-            android:shadowRadius="6"/>
-    </LinearLayout>
+            android:layout_height="13dp"
+            android:text="Kisan"
+            android:includeFontPadding="false"
+            android:textColor="#22d4b4"
+            android:fontFamily="sans-serif-medium"
+            android:layout_below="@id/brand_name"
+            android:layout_alignRight="@+id/brand_name"
+            android:textSize="12sp" />
+    </RelativeLayout>
 
     <Button
         android:id="@+id/verify"
@@ -108,7 +125,7 @@
         android:id="@+id/otp_ll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-       android:layout_marginTop="50dp"
+       android:layout_marginTop="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
