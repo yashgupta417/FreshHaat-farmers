@@ -5,8 +5,10 @@ import android.app.Application;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.farmerapp.API.BannerApi;
 import com.farmerapp.API.FarmerApi;
 import com.farmerapp.API.SellRequestApi;
+import com.farmerapp.Data.Banner;
 import com.farmerapp.Data.Crop;
 import com.farmerapp.Data.Farmer;
 import com.farmerapp.Data.Order;
@@ -82,5 +84,24 @@ public class MainRepository {
             }
         });
         return farmer;
+    }
+    public LiveData<List<Banner>> getBanners(){
+        MutableLiveData<List<Banner>> banners=new MutableLiveData<List<Banner>>();
+        Call<List<Banner>> call=RetrofitClient.getInstance(application).create(BannerApi.class).getBanners();
+        call.enqueue(new Callback<List<Banner>>() {
+            @Override
+            public void onResponse(Call<List<Banner>> call, Response<List<Banner>> response) {
+                if(response.isSuccessful()){
+                    banners.setValue(response.body());
+                    return;
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Banner>> call, Throwable t) {
+                call.clone().enqueue(this);
+            }
+        });
+        return banners;
     }
 }

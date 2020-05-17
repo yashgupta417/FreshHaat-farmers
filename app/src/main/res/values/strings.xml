@@ -26,6 +26,7 @@
     <string name="add_new_address">Add new Address</string>
     <string name="place_request">Place Request</string>
     <string name="cart">Cart</string>
+    <string name="cart_item_removed">Item Removed</string>
     <string name="cart_minimum_message">Minimum limit reached</string>
     <string name="cart_maximum_message">Maximum limit reached</string>
     <string name="coupon_available">Coupon Available</string>

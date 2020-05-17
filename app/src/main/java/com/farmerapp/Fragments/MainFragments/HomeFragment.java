@@ -23,8 +23,10 @@ import com.farmerapp.Activities.CollectionCentreActivity;
 import com.farmerapp.Activities.MainActivity;
 import com.farmerapp.Activities.SearchActivity;
 import com.farmerapp.Activities.SellActivity;
+import com.farmerapp.Adapters.BannersAdapter;
 import com.farmerapp.Adapters.SellCropAdapter;
 import com.farmerapp.BottomSheets.ChangeQuantityBottomSheet;
+import com.farmerapp.Data.Banner;
 import com.farmerapp.Data.Crop;
 import com.example.farmerapp.R;
 import com.farmerapp.Utils.LocalCart;
@@ -78,6 +80,7 @@ public class HomeFragment extends Fragment {
                 activateAdapter();
             }
         });
+        fetchAndDisplayBanners(viewModel,v);
         MainActivity.showLocation();
         MainActivity.setTitle("");
         return v;
@@ -85,6 +88,22 @@ public class HomeFragment extends Fragment {
     public void goToCollectionCentreActivity(){
      Intent intent=new Intent(getActivity(), CollectionCentreActivity.class);
      getActivity().startActivity(intent);
+    }
+    public void fetchAndDisplayBanners(MainViewModel viewModel,View view){
+        viewModel.getBanners().observe(this, new Observer<List<Banner>>() {
+            @Override
+            public void onChanged(List<Banner> banners) {
+                setBanners(view,new ArrayList<>(banners));
+            }
+        });
+    }
+    public void setBanners(View v,ArrayList<Banner> banners){
+        RecyclerView recyclerView=v.findViewById(R.id.banner_recyclerview);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
+        BannersAdapter adapter=new BannersAdapter(banners,getActivity());
+        recyclerView.setAdapter(adapter);
+
     }
     public void activateAdapter(){
         products=LocalCart.syncQuantities(products,getActivity().getApplication());
@@ -146,28 +165,10 @@ public class HomeFragment extends Fragment {
     public void setClickListeners(View v){
      sellFruitsRL=v.findViewById(R.id.sell_fruits);
      sellVegetablesRL=v.findViewById(R.id.sell_vegetables);
-     vegOfferRl=v.findViewById(R.id.veg_offer);
-     fruitOfferRl=v.findViewById(R.id.fruit_offer);
      locationButton.setOnClickListener(new View.OnClickListener() {
          @Override
          public void onClick(View v) {
              goToCollectionCentreActivity();
-         }
-     });
-     vegOfferRl.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-             Intent intent=new Intent(getActivity().getApplicationContext(), SellActivity.class);
-             intent.putExtra(MainActivity.PRODUCT_TYPE,MainActivity.VEGETABLES);
-             getActivity().startActivity(intent);
-         }
-     });
-     fruitOfferRl.setOnClickListener(new View.OnClickListener() {
-         @Override
-         public void onClick(View v) {
-             Intent intent=new Intent(getActivity().getApplicationContext(), SellActivity.class);
-             intent.putExtra(MainActivity.PRODUCT_TYPE,MainActivity.FRUITS);
-             getActivity().startActivity(intent);
          }
      });
      sellFruitsRL.setOnClickListener(new View.OnClickListener() {

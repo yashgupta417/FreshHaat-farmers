@@ -90,19 +90,6 @@ public class CartActivity extends AppCompatActivity {
         bodyLL.setVisibility(bodyVisibility);
         loadCenter.setVisibility(loadVisibility);
     }
-    public void generateBill(){
-        if(adapter!=null){//adapter will be not null except first case
-            adapter.setOnItemClickListener(null);
-        }
-        updateUI(0.3f,false,View.GONE,View.VISIBLE);
-        viewModel.generateBill();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        generateBill();
-    }
 
     public void updateUI(Float bookSlotAlpha, Boolean bookSlotEnabled, Integer totalPriceVisibility, Integer loadVisibility){
         bookSlot.setAlpha(bookSlotAlpha);
@@ -140,6 +127,19 @@ public class CartActivity extends AppCompatActivity {
             updateUI(0.3f,false,View.VISIBLE,View.GONE);
         }
     }
+    public void generateBill(){
+        if(adapter!=null){//adapter will be not null except first case
+            adapter.setOnItemClickListener(null);
+        }
+        updateUI(0.3f,false,View.GONE,View.VISIBLE);
+        viewModel.generateBill();
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        generateBill();
+    }
+
     public void onBackClick(View view){
         finish();
     }
@@ -151,18 +151,22 @@ public class CartActivity extends AppCompatActivity {
 
         @Override
         public void onIncrementClick(int position) {
+            if(!adapter.isClickAble)
+                return;
+            adapter.isClickAble=false;
             if(!CheckInternet.isConnected(CartActivity.this)){
                 Snackbar snackbar=Snackbar.make(parent,"No Internet Connection",Snackbar.LENGTH_SHORT);
                 snackbar.show();
+                adapter.isClickAble=true;
                 return;
             }
             Crop crop=adapter.crops.get(position);
             if(crop.getQuantity()==crop.getMaxQuantity()){
                 Toast.makeText(CartActivity.this, getResources().getString(R.string.cart_maximum_message), Toast.LENGTH_SHORT).show();
+                adapter.isClickAble=true;
                 return;
             }
             crop.setQuantity(crop.getQuantity()+1);
-            adapter.isClickAble=false;
             adapter.notifyDataSetChanged();
             if(crop.getQuantity()==1)
                 LocalCart.count++;
@@ -172,22 +176,27 @@ public class CartActivity extends AppCompatActivity {
 
         @Override
         public void onDecrementClick(int position) {
+            if(!adapter.isClickAble)
+                return;
+            adapter.isClickAble=false;
             if(!CheckInternet.isConnected(CartActivity.this)){
                 Snackbar snackbar=Snackbar.make(parent,"No Internet Connection",Snackbar.LENGTH_SHORT);
                 snackbar.show();
+                adapter.isClickAble=true;
                 return;
             }
             Crop crop=adapter.crops.get(position);
             if(crop.getQuantity()==crop.getMinQuantity()){
-                Toast.makeText(CartActivity.this, getResources().getString(R.string.cart_minimum_message), Toast.LENGTH_SHORT).show();
-                return;
-            }
-            if(crop.getQuantity()>0) {
-                crop.setQuantity(crop.getQuantity() - 1);
-                adapter.isClickAble=false;
+                crop.setQuantity(0);
+                LocalCart.count--;
+                LocalCart.update(getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
                 adapter.notifyDataSetChanged();
-                if(crop.getQuantity()==0)
-                    LocalCart.count--;
+                Toast.makeText(CartActivity.this, getResources().getString(R.string.cart_item_removed), Toast.LENGTH_SHORT).show();
+                generateBill();
+            }
+            else if(crop.getQuantity()>crop.getMinQuantity()) {
+                crop.setQuantity(crop.getQuantity() - 1);
+                adapter.notifyDataSetChanged();
                 LocalCart.update(getApplication(), crop.getId(), Integer.toString(crop.getQuantity()));
                 generateBill();
             }

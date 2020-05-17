@@ -26,6 +26,7 @@
     <string name="add_new_address">नया पता जोड़ें</string>
     <string name="place_request">बुक करे</string>
     <string name="cart">कार्ट</string>
+    <string name="cart_item_removed">आइटम हटाया गया</string>
     <string name="cart_minimum_message">न्यूनतम सीमा</string>
     <string name="cart_maximum_message">अधिकतम सीमा </string>
     <string name="coupon_available">कूपन उपलब्ध</string>

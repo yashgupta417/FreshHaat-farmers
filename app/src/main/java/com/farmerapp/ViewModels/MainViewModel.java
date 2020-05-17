@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.farmerapp.Data.Banner;
 import com.farmerapp.Data.Crop;
 import com.farmerapp.Data.Farmer;
 import com.farmerapp.Data.Order;
@@ -37,5 +38,9 @@ public class MainViewModel extends AndroidViewModel {
 
     public LiveData<Farmer> getFarmer(){
         return repository.getFarmer();
+    }
+
+    public LiveData<List<Banner>> getBanners(){
+        return repository.getBanners();
     }
 }
