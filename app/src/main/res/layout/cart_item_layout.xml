@@ -53,7 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:orientation="horizontal"
-        android:layout_marginRight="80dp"
+        android:layout_marginRight="85dp"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true">
         <ImageView
@@ -64,6 +64,7 @@
             android:background="@drawable/add_crop_back"/>
         <TextView
             android:id="@+id/count"
+            android:layout_marginLeft="3dp"
             android:layout_width="25dp"
             android:layout_height="20dp"
             android:text="2"
@@ -74,6 +75,7 @@
             android:background="@drawable/count_back"/>
         <ImageView
             android:id="@+id/minus"
+            android:layout_marginLeft="3dp"
             android:layout_width="25dp"
             android:layout_height="20dp"
             android:src="@drawable/ic_remove"
