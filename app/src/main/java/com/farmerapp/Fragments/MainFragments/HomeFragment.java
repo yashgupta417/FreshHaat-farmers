@@ -102,6 +102,15 @@ public class HomeFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
         BannersAdapter adapter=new BannersAdapter(banners,getActivity());
+        adapter.setOnItemClickListener(new BannersAdapter.onItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                //temporarily directing them to fruits section
+                Intent intent=new Intent(getActivity().getApplicationContext(), SellActivity.class);
+                intent.putExtra(MainActivity.PRODUCT_TYPE,MainActivity.FRUITS);
+                getActivity().startActivity(intent);
+            }
+        });
         recyclerView.setAdapter(adapter);
 
     }
@@ -201,6 +210,5 @@ public class HomeFragment extends Fragment {
              startActivity(intent);
          }
      });
-
     }
 }

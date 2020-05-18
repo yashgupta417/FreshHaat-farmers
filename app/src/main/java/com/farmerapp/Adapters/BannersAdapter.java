@@ -35,11 +35,9 @@ public class BannersAdapter extends RecyclerView.Adapter<BannersAdapter.BannersV
     }
     public static class BannersViewHolder extends RecyclerView.ViewHolder{
         ImageView image;
-        TextView title;
         public BannersViewHolder(@NonNull View itemView,final onItemClickListener listener) {
             super(itemView);
             image=itemView.findViewById(R.id.image);
-            title=itemView.findViewById(R.id.title);
             itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
@@ -68,7 +66,6 @@ public class BannersAdapter extends RecyclerView.Adapter<BannersAdapter.BannersV
         if(banner.getImage()!=null){
             Glide.with(context).load(banner.getImage()).into(holder.image);
         }
-        holder.title.setText(banner.getTitle());
     }
     @Override
     public int getItemViewType(int position) {
